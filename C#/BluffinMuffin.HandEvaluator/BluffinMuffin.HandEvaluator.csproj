@@ -39,6 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\HandEnum.cs" />
+    <Compile Include="Enums\NominalValueEnum.cs" />
+    <Compile Include="Enums\SuitEnum.cs" />
+    <Compile Include="Exceptions\InvalidStringRepresentationException.cs" />
+    <Compile Include="Exceptions\NotInEnumScopeException.cs" />
+    <Compile Include="HandEvaluator.cs" />
+    <Compile Include="HandEvaluationResult.cs" />
+    <Compile Include="PlayingCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
