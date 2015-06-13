@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluffinMuffin.HandEvaluator
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluffinMuffin.HandEvaluator.Test", "BluffinMuffin.HandEvaluator.Test\BluffinMuffin.HandEvaluator.Test.csproj", "{8F9B4EFB-AE26-471B-BA01-AD9C00A9ED2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluffinMuffin.HandEvaluator.Demo", "BluffinMuffin.HandEvaluator.Demo\BluffinMuffin.HandEvaluator.Demo.csproj", "{58028189-BA64-484C-8C7E-0A5FF6F2047E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,11 +27,16 @@ Global
 		{8F9B4EFB-AE26-471B-BA01-AD9C00A9ED2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F9B4EFB-AE26-471B-BA01-AD9C00A9ED2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F9B4EFB-AE26-471B-BA01-AD9C00A9ED2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58028189-BA64-484C-8C7E-0A5FF6F2047E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58028189-BA64-484C-8C7E-0A5FF6F2047E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58028189-BA64-484C-8C7E-0A5FF6F2047E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58028189-BA64-484C-8C7E-0A5FF6F2047E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8F9B4EFB-AE26-471B-BA01-AD9C00A9ED2D} = {10646A39-62B0-45F4-9D1C-46252B174541}
+		{58028189-BA64-484C-8C7E-0A5FF6F2047E} = {10646A39-62B0-45F4-9D1C-46252B174541}
 	EndGlobalSection
 EndGlobal

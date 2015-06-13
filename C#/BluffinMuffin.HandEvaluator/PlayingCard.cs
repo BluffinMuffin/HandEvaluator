@@ -8,7 +8,7 @@ using BluffinMuffin.HandEvaluator.Exceptions;
 
 namespace BluffinMuffin.HandEvaluator
 {
-    public class PlayingCard
+    public class PlayingCard : IComparable<PlayingCard>
     {
         private static readonly string[] VALUES = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
         private static readonly string[] SUITS = { "H", "D", "C", "S" };
@@ -45,6 +45,11 @@ namespace BluffinMuffin.HandEvaluator
         public override string ToString()
         {
             return String.Format("{0}{1}", VALUES[(int) Value], SUITS[(int) Suit]);
+        }
+
+        public int CompareTo(PlayingCard other)
+        {
+            return ((int)Value).CompareTo((int)other.Value);
         }
     }
 }

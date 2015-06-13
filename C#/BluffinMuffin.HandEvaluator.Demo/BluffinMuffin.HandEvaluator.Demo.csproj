@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AC873F2B-DE2B-4124-909E-5A6939ADEF9C}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{58028189-BA64-484C-8C7E-0A5FF6F2047E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BluffinMuffin.HandEvaluator</RootNamespace>
-    <AssemblyName>BluffinMuffin.HandEvaluator</AssemblyName>
+    <RootNamespace>BluffinMuffin.HandEvaluator.Demo</RootNamespace>
+    <AssemblyName>BluffinMuffin.HandEvaluator.Demo</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,18 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\HandEnum.cs" />
-    <Compile Include="Enums\NominalValueEnum.cs" />
-    <Compile Include="Enums\SuitEnum.cs" />
-    <Compile Include="Exceptions\InvalidStringRepresentationException.cs" />
-    <Compile Include="Exceptions\NotInEnumScopeException.cs" />
-    <Compile Include="HandEvaluator.cs" />
-    <Compile Include="HandEvaluationResult.cs" />
-    <Compile Include="HandEvaluators\TwoPairsHandEvaluator.cs" />
-    <Compile Include="HandEvaluators\OnePairHandEvaluator.cs" />
-    <Compile Include="HandEvaluators\HighCardHandEvaluator.cs" />
-    <Compile Include="PlayingCard.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BluffinMuffin.HandEvaluator\BluffinMuffin.HandEvaluator.csproj">
+      <Project>{ac873f2b-de2b-4124-909e-5a6939adef9c}</Project>
+      <Name>BluffinMuffin.HandEvaluator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
