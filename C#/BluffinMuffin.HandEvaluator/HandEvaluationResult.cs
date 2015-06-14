@@ -31,7 +31,7 @@ namespace BluffinMuffin.HandEvaluator
             if (Hand != other.Hand)
                 return ((int) Hand).CompareTo((int) other.Hand);
 
-            for (int i = 0; i < Math.Max(Cards.Count, other.Cards.Count); ++i)
+            for (var i = 0; i < Math.Max(Cards.Count, other.Cards.Count); ++i)
             {
                 if (i >= Cards.Count)
                     return -1;
@@ -39,7 +39,7 @@ namespace BluffinMuffin.HandEvaluator
                 if (i >= other.Cards.Count)
                     return 1;
 
-                int equality = Cards[i][0].CompareTo(other.Cards[i][0]);
+                var equality = Cards[i][0].CompareTo(other.Cards[i][0]);
                 if(equality != 0)
                     return equality;
             }

@@ -17,7 +17,7 @@ namespace BluffinMuffin.HandEvaluator
             if (m_Evaluators == null)
                 m_Evaluators = typeof (HandEvaluator).Assembly.GetTypes().Where(t => t.IsSubclassOf(typeof (HandEvaluator)) && !t.IsAbstract).Select(t => (HandEvaluator) Activator.CreateInstance(t)).ToArray();
             
-            PlayingCard[] pCards = cards.Select(c => new PlayingCard(c)).ToArray();
+            var pCards = cards.Select(c => new PlayingCard(c)).ToArray();
             
             return m_Evaluators.Select(x => x.Evaluation(pCards)).Where(x => x != null).Max();
         }

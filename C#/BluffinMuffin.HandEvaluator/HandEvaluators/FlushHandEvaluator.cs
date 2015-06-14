@@ -7,26 +7,32 @@ using BluffinMuffin.HandEvaluator.Enums;
 
 namespace BluffinMuffin.HandEvaluator.HandEvaluators
 {
-    public class HighCardHandEvaluator : HandEvaluator
+    public class FlushHandEvaluator : HandEvaluator
     {
         public override HandEnum HandType
         {
-            get {return HandEnum.HighCard;}
+            get {return HandEnum.Flush;}
         }
 
         protected override HandEvaluationResult Evaluation(PlayingCard[] cards)
         {
             var res = new HandEvaluationResult(this);
 
-            foreach(var c in cards.OrderByDescending(x => x).Take(5))
-                res.Cards.Add(new []{c});
+            var groupedCards = cards.GroupBy(x => x.Suit).ToArray();
+
+            var flush = groupedCards.FirstOrDefault(x => x.Count() == 5);
+
+            if (flush == null)
+                return null;
+
+            res.Cards.Add(flush.OrderByDescending(x => x).ToArray());
 
             return res;
         }
 
         public override string ResultToString(HandEvaluationResult res)
         {
-            return String.Format("High Card with cards [{0}]", String.Join(", ",res.Cards.Select(x => x[0].ToString())));
+            return String.Format("Flush with cards [{0}]", String.Join(", ", res.Cards[0].Select(x => x.ToString())));
         }
     }
 }

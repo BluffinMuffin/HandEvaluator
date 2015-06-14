@@ -10,8 +10,8 @@ namespace BluffinMuffin.HandEvaluator
 {
     public class PlayingCard : IComparable<PlayingCard>
     {
-        private static readonly string[] VALUES = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
-        private static readonly string[] SUITS = { "H", "D", "C", "S" };
+        public static readonly string[] VALUES = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
+        public static readonly string[] SUITS = { "H", "D", "C", "S" };
 
         public NominalValueEnum Value { get; private set; }
         public SuitEnum Suit { get; set; }
@@ -32,12 +32,12 @@ namespace BluffinMuffin.HandEvaluator
         {
             if (stringRepresentation.Length < 2 || stringRepresentation.Length > 3)
                 throw new InvalidStringRepresentationException(stringRepresentation, "Length");
-            string value = stringRepresentation.Remove(stringRepresentation.Length - 1).ToUpper();
+            var value = stringRepresentation.Remove(stringRepresentation.Length - 1).ToUpper();
             if (!VALUES.Contains(value))
                 throw new InvalidStringRepresentationException(stringRepresentation,"Nominal Value");
             Value = (NominalValueEnum) Array.IndexOf(VALUES, value);
 
-            string suit = stringRepresentation.Substring(stringRepresentation.Length - 1, 1).ToUpper();
+            var suit = stringRepresentation.Substring(stringRepresentation.Length - 1, 1).ToUpper();
             if (!SUITS.Contains(suit))
                 throw new InvalidStringRepresentationException(stringRepresentation, "Suit");
             Suit = (SuitEnum)Array.IndexOf(SUITS, suit);

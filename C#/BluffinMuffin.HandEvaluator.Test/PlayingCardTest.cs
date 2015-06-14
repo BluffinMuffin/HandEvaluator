@@ -8,12 +8,9 @@ namespace BluffinMuffin.HandEvaluator.Test
     [TestClass]
     public class PlayingCardTest
     {
-        private static readonly string[] VALUES = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
-        private static readonly string[] SUITS = { "H", "D", "C", "S" };
-
         private void ValidateGoodValue(NominalValueEnum value, SuitEnum suit)
         {
-            string card =  VALUES[(int)value] + SUITS[(int)suit];
+            string card = PlayingCard.VALUES[(int)value] + PlayingCard.SUITS[(int)suit];
 
             var playingCard1 = new PlayingCard(card);
             Assert.AreEqual(card, playingCard1.ToString());

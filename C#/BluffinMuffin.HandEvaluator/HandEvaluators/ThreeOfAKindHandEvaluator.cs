@@ -7,11 +7,11 @@ using BluffinMuffin.HandEvaluator.Enums;
 
 namespace BluffinMuffin.HandEvaluator.HandEvaluators
 {
-    public class OnePairHandEvaluator : HandEvaluator
+    public class ThreeOfAKindHandEvaluator : HandEvaluator
     {
         public override HandEnum HandType
         {
-            get {return HandEnum.OnePair;}
+            get {return HandEnum.ThreeOfAKind;}
         }
 
         protected override HandEvaluationResult Evaluation(PlayingCard[] cards)
@@ -20,24 +20,23 @@ namespace BluffinMuffin.HandEvaluator.HandEvaluators
 
             var groupedCards = cards.GroupBy(x => x.Value).ToArray();
 
-            var pairs = groupedCards.Where(x => x.Count() == 2).ToArray();
+            var triplets = groupedCards.Where(x => x.Count() == 3).OrderByDescending(x => x.Key).ToArray();
 
-            if (pairs.Length != 1)
+            if (triplets.Length != 1)
                 return null;
 
-            var pair = pairs.Single();
+            var triplet = triplets.First();
 
-            res.Cards.Add(pair.ToArray());
+            res.Cards.Add(triplet.ToArray());
 
-            foreach (var c in cards.Except(pair).OrderByDescending(x => x).Take(3))
-                res.Cards.Add(new []{c});
+            res.Cards.AddRange(cards.Except(triplet).OrderByDescending(x => x).Take(2).Select(x => new []{x}));
 
             return res;
         }
 
         public override string ResultToString(HandEvaluationResult res)
         {
-            return String.Format("One Pair with cards [({0}), {1}]", String.Join(", ",res.Cards[0].Select(x => x.ToString())), String.Join(", ",res.Cards.Skip(1).Select(x => x[0].ToString())));
+            return String.Format("Three Of A Kind with cards [({0}), {1}]", String.Join(", ", res.Cards[0].Select(x => x.ToString())), String.Join(", ", res.Cards.Skip(1).Select(x => x[0].ToString())));
         }
     }
 }

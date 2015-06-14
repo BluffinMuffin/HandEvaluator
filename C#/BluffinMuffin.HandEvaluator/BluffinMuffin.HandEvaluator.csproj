@@ -46,6 +46,9 @@
     <Compile Include="Exceptions\NotInEnumScopeException.cs" />
     <Compile Include="HandEvaluator.cs" />
     <Compile Include="HandEvaluationResult.cs" />
+    <Compile Include="HandEvaluators\FlushHandEvaluator.cs" />
+    <Compile Include="HandEvaluators\FullHouseHandEvaluator.cs" />
+    <Compile Include="HandEvaluators\ThreeOfAKindHandEvaluator.cs" />
     <Compile Include="HandEvaluators\TwoPairsHandEvaluator.cs" />
     <Compile Include="HandEvaluators\OnePairHandEvaluator.cs" />
     <Compile Include="HandEvaluators\HighCardHandEvaluator.cs" />
