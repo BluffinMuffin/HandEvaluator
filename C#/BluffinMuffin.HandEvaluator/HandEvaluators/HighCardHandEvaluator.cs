@@ -14,8 +14,11 @@ namespace BluffinMuffin.HandEvaluator.HandEvaluators
             get {return HandEnum.HighCard;}
         }
 
-        protected override HandEvaluationResult Evaluation(PlayingCard[] cards)
+        public override HandEvaluationResult Evaluation(PlayingCard[] cards)
         {
+            if (cards.Length < 5)
+                return null;
+
             var res = new HandEvaluationResult(this);
 
             foreach(var c in cards.OrderByDescending(x => x).Take(5))

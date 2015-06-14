@@ -50,6 +50,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="HandEvaluators\ThreeOfAKindHandEvaluatorTest.cs" />
+    <Compile Include="HandEvaluators\FourOfAKindHandEvaluatorTest.cs" />
+    <Compile Include="HandEvaluators\FlushHandEvaluatorTest.cs" />
     <Compile Include="PlayingCardTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

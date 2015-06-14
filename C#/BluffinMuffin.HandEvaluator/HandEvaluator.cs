@@ -22,7 +22,7 @@ namespace BluffinMuffin.HandEvaluator
             return m_Evaluators.Select(x => x.Evaluation(pCards)).Where(x => x != null).Max();
         }
 
-        protected abstract HandEvaluationResult Evaluation(PlayingCard[] cards);
+        public abstract HandEvaluationResult Evaluation(PlayingCard[] cards);
 
         public abstract String ResultToString(HandEvaluationResult res);
     }
