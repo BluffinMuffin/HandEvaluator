@@ -18,18 +18,18 @@ namespace BluffinMuffin.HandEvaluator.HandEvaluators
         {
             var res = new HandEvaluationResult(this);
 
-            var groupedCards = cards.GroupBy(x => x.Value).ToArray();
+            var groupedCards = cards.OrderByDescending(x => x.Value).GroupBy(x => x.Value).ToArray();
 
             var pairs = groupedCards.Where(x => x.Count() == 2).ToArray();
 
-            if (pairs.Length != 1)
+            if (!pairs.Any())
                 return null;
 
-            var pair = pairs.Single();
+            var pair = pairs.First();
 
             res.Cards.Add(pair.ToArray());
 
-            foreach (var c in cards.Except(pair).OrderByDescending(x => x).Take(3))
+            foreach (var c in cards.Except(pair).OrderByDescending(x => x.Value).Take(3))
                 res.Cards.Add(new []{c});
 
             return res;

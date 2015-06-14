@@ -7,11 +7,11 @@ using BluffinMuffin.HandEvaluator.Enums;
 
 namespace BluffinMuffin.HandEvaluator.HandEvaluators
 {
-    public class FullHouseHandEvaluator : HandEvaluator
+    public class FourOfAKindHandEvaluator : HandEvaluator
     {
         public override HandEnum HandType
         {
-            get {return HandEnum.FullHouse;}
+            get {return HandEnum.FourOfAKind;}
         }
 
         protected override HandEvaluationResult Evaluation(PlayingCard[] cards)
@@ -20,23 +20,23 @@ namespace BluffinMuffin.HandEvaluator.HandEvaluators
 
             var groupedCards = cards.GroupBy(x => x.Value).ToArray();
 
-            var triplet = groupedCards.FirstOrDefault(x => x.Count() == 3);
+            var foursomes = groupedCards.Where(x => x.Count() == 4).OrderByDescending(x => x.Key).ToArray();
 
-            var pair = groupedCards.FirstOrDefault(x => x.Count() == 2);
-
-            if (triplet == null || pair == null)
+            if (foursomes.Length == 0)
                 return null;
 
-            res.Cards.Add(triplet.ToArray());
+            var foursome = foursomes.First();
 
-            res.Cards.Add(pair.ToArray());
+            res.Cards.Add(foursome.ToArray());
+
+            res.Cards.Add(cards.Except(foursome).OrderByDescending(x => x).Take(1).ToArray());
 
             return res;
         }
 
         public override string ResultToString(HandEvaluationResult res)
         {
-            return String.Format("Full House with cards [{0}, {1}]", String.Join(", ", res.Cards[0].Select(x => x.ToString())), String.Join(", ", res.Cards[1].Select(x => x.ToString())));
+            return String.Format("Four Of A Kind with cards [({0}), {1}]", String.Join(", ", res.Cards[0].Select(x => x.ToString())), String.Join(", ", res.Cards.Skip(1).Select(x => x[0].ToString())));
         }
     }
 }

@@ -20,12 +20,12 @@ namespace BluffinMuffin.HandEvaluator.HandEvaluators
 
             var groupedCards = cards.GroupBy(x => x.Suit).ToArray();
 
-            var flush = groupedCards.FirstOrDefault(x => x.Count() == 5);
+            var flush = groupedCards.FirstOrDefault(x => x.Count() >= 5);
 
             if (flush == null)
                 return null;
 
-            res.Cards.Add(flush.OrderByDescending(x => x).ToArray());
+            res.Cards.Add(flush.OrderByDescending(x => x).Take(5).ToArray());
 
             return res;
         }

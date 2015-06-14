@@ -22,7 +22,7 @@ namespace BluffinMuffin.HandEvaluator.HandEvaluators
 
             var triplets = groupedCards.Where(x => x.Count() == 3).OrderByDescending(x => x.Key).ToArray();
 
-            if (triplets.Length != 1)
+            if (triplets.Length == 0)
                 return null;
 
             var triplet = triplets.First();
