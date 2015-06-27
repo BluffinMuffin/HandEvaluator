@@ -96,11 +96,11 @@ namespace BluffinMuffin.HandEvaluator.Test
             Assert.AreEqual(res.Hand, HandEnum.Flush);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Ace);
             Assert.AreEqual(res.Cards.First().First().Suit, SuitEnum.Spades);
-            Assert.AreEqual(res.Cards.First().Skip(1).First().Value, NominalValueEnum.King);
-            Assert.AreEqual(res.Cards.First().Skip(2).First().Value, NominalValueEnum.Queen);
-            Assert.AreEqual(res.Cards.First().Skip(3).First().Value, NominalValueEnum.Ten);
-            Assert.AreEqual(res.Cards.First().Skip(4).First().Value, NominalValueEnum.Five);
-            Assert.AreEqual(res.Cards.Count, 1);
+            Assert.AreEqual(res.Cards.Skip(1).First().First().Value, NominalValueEnum.King);
+            Assert.AreEqual(res.Cards.Skip(2).First().First().Value, NominalValueEnum.Queen);
+            Assert.AreEqual(res.Cards.Skip(3).First().First().Value, NominalValueEnum.Ten);
+            Assert.AreEqual(res.Cards.Skip(4).First().First().Value, NominalValueEnum.Five);
+            Assert.AreEqual(res.Cards.Count, 5);
         }
 
 

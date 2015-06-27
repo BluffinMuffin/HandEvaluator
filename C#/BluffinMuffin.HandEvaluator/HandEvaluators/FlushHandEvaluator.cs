@@ -28,7 +28,8 @@ namespace BluffinMuffin.HandEvaluator.HandEvaluators
             if (flush == null)
                 return null;
 
-            res.Cards.Add(flush.OrderByDescending(x => x).Take(5).ToArray());
+            foreach (var c in flush.OrderByDescending(x => x).Take(5))
+                res.Cards.Add(new[] { c });
 
             return res;
         }
