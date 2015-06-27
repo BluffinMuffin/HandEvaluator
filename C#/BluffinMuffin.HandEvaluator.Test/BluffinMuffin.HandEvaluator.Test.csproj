@@ -50,6 +50,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="HandEvaluators\FullHouseHandEvaluatorTest.cs" />
+    <Compile Include="HandEvaluators\HighCardHandEvaluatorTest.cs" />
+    <Compile Include="HandEvaluators\TwoPairsHandEvaluatorTest.cs" />
+    <Compile Include="HandEvaluators\StraightFlushHandEvaluatorTest.cs" />
+    <Compile Include="HandEvaluators\StraightHandEvaluatorTest.cs" />
+    <Compile Include="HandEvaluators\OnePairHandEvaluatorTest.cs" />
     <Compile Include="HandEvaluators\ThreeOfAKindHandEvaluatorTest.cs" />
     <Compile Include="HandEvaluators\FourOfAKindHandEvaluatorTest.cs" />
     <Compile Include="HandEvaluators\FlushHandEvaluatorTest.cs" />

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
-using BluffinMuffin.HandEvaluator.Exceptions;
 using BluffinMuffin.HandEvaluator.HandEvaluators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,7 +8,7 @@ namespace BluffinMuffin.HandEvaluator.Test.HandEvaluators
     [TestClass]
     public class ThreeOfAKindHandEvaluatorTest
     {
-        private HandEvaluator m_Evaluator = new ThreeOfAKindHandEvaluator();
+        private readonly HandEvaluator m_Evaluator = new ThreeOfAKindHandEvaluator();
 
         private HandEvaluationResult Evaluate(params string[] cards)
         {
@@ -43,6 +41,7 @@ namespace BluffinMuffin.HandEvaluator.Test.HandEvaluators
         {
             var res = Evaluate("4c", "4s", "5d", "4h", "3c");
             Assert.IsNotNull(res);
+            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Four);
         }
 
         [TestMethod]
@@ -57,6 +56,7 @@ namespace BluffinMuffin.HandEvaluator.Test.HandEvaluators
         {
             var res = Evaluate("4c", "4s", "5d", "4h", "3c", "2h");
             Assert.IsNotNull(res);
+            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Four);
         }
 
         [TestMethod]
@@ -71,6 +71,7 @@ namespace BluffinMuffin.HandEvaluator.Test.HandEvaluators
         {
             var res = Evaluate("4c", "4s", "5d", "4h", "3c", "2h", "2c");
             Assert.IsNotNull(res);
+            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Four);
         }
 
         [TestMethod]
@@ -85,6 +86,7 @@ namespace BluffinMuffin.HandEvaluator.Test.HandEvaluators
         {
             var res = Evaluate("4c", "4s", "5d", "4h", "3c", "2h", "2c", "ah", "ac", "kh");
             Assert.IsNotNull(res);
+            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Four);
         }
     }
 }
