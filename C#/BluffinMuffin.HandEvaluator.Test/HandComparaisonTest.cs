@@ -193,5 +193,72 @@ namespace BluffinMuffin.HandEvaluator.Test
             Assert.AreEqual(1, normal1.CompareTo(smallest));
             Assert.AreEqual(1, normal2.CompareTo(smallest));
         }
+        [TestMethod]
+        public void TestOrdering()
+        {
+            var straightFlush = HandEvaluator.Evaluate(new[] { "Ad", "Kd", "Qd", "Jd", "10d", "5h", "2s" });
+            Assert.AreEqual(HandEnum.StraightFlush, straightFlush.Hand);
+
+            var fourOfAKind = HandEvaluator.Evaluate(new[] { "10d", "Ac", "8d", "10c", "7s", "10h", "10s" });
+            Assert.AreEqual(HandEnum.FourOfAKind, fourOfAKind.Hand);
+
+            var fullHouse = HandEvaluator.Evaluate(new[] { "10d", "Ac", "8d", "10c", "7s", "10h", "As" });
+            Assert.AreEqual(HandEnum.FullHouse, fullHouse.Hand);
+
+            var flush = HandEvaluator.Evaluate(new[] { "Kc", "Ac", "8c", "3c", "7c", "10c", "2s" });
+            Assert.AreEqual(HandEnum.Flush, flush.Hand);
+
+            var straight = HandEvaluator.Evaluate(new[] { "Ad", "Ks", "Qh", "Jc", "10d", "5h", "2s" });
+            Assert.AreEqual(HandEnum.Straight, straight.Hand);
+
+            var threeOfAKind = HandEvaluator.Evaluate(new[] { "10d", "Ac", "8d", "10c", "7s", "10h", "2s" });
+            Assert.AreEqual(HandEnum.ThreeOfAKind, threeOfAKind.Hand);
+
+            var twoPairs = HandEvaluator.Evaluate(new[] { "10s", "8c", "8d", "3c", "7s", "10h", "2s" });
+            Assert.AreEqual(HandEnum.TwoPairs, twoPairs.Hand);
+
+            var onePair = HandEvaluator.Evaluate(new[] { "10s", "Ac", "8d", "3c", "7s", "10h", "2s" });
+            Assert.AreEqual(HandEnum.OnePair, onePair.Hand);
+
+            var highCard = HandEvaluator.Evaluate(new[] { "Ks", "Ac", "8d", "3c", "7s", "10h", "2s" });
+            Assert.AreEqual(HandEnum.HighCard, highCard.Hand);
+
+            Assert.AreEqual(1, straightFlush.CompareTo(fourOfAKind));
+            Assert.AreEqual(1, straightFlush.CompareTo(fullHouse));
+            Assert.AreEqual(1, straightFlush.CompareTo(flush));
+            Assert.AreEqual(1, straightFlush.CompareTo(straight));
+            Assert.AreEqual(1, straightFlush.CompareTo(threeOfAKind));
+            Assert.AreEqual(1, straightFlush.CompareTo(twoPairs));
+            Assert.AreEqual(1, straightFlush.CompareTo(onePair));
+            Assert.AreEqual(1, straightFlush.CompareTo(highCard));
+            Assert.AreEqual(1, fourOfAKind.CompareTo(fullHouse));
+            Assert.AreEqual(1, fourOfAKind.CompareTo(flush));
+            Assert.AreEqual(1, fourOfAKind.CompareTo(straight));
+            Assert.AreEqual(1, fourOfAKind.CompareTo(threeOfAKind));
+            Assert.AreEqual(1, fourOfAKind.CompareTo(twoPairs));
+            Assert.AreEqual(1, fourOfAKind.CompareTo(onePair));
+            Assert.AreEqual(1, fourOfAKind.CompareTo(highCard));
+            Assert.AreEqual(1, fullHouse.CompareTo(flush));
+            Assert.AreEqual(1, fullHouse.CompareTo(straight));
+            Assert.AreEqual(1, fullHouse.CompareTo(threeOfAKind));
+            Assert.AreEqual(1, fullHouse.CompareTo(twoPairs));
+            Assert.AreEqual(1, fullHouse.CompareTo(onePair));
+            Assert.AreEqual(1, fullHouse.CompareTo(highCard));
+            Assert.AreEqual(1, flush.CompareTo(straight));
+            Assert.AreEqual(1, flush.CompareTo(threeOfAKind));
+            Assert.AreEqual(1, flush.CompareTo(twoPairs));
+            Assert.AreEqual(1, flush.CompareTo(onePair));
+            Assert.AreEqual(1, flush.CompareTo(highCard));
+            Assert.AreEqual(1, straight.CompareTo(threeOfAKind));
+            Assert.AreEqual(1, straight.CompareTo(twoPairs));
+            Assert.AreEqual(1, straight.CompareTo(onePair));
+            Assert.AreEqual(1, straight.CompareTo(highCard));
+            Assert.AreEqual(1, threeOfAKind.CompareTo(twoPairs));
+            Assert.AreEqual(1, threeOfAKind.CompareTo(onePair));
+            Assert.AreEqual(1, threeOfAKind.CompareTo(highCard));
+            Assert.AreEqual(1, twoPairs.CompareTo(onePair));
+            Assert.AreEqual(1, twoPairs.CompareTo(highCard));
+            Assert.AreEqual(1, onePair.CompareTo(highCard));
+        }
     }
 }
