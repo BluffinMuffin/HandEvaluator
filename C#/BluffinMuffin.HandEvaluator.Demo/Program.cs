@@ -13,13 +13,11 @@ namespace BluffinMuffin.HandEvaluator.Demo
         {
             public string Name { get; private set; }
             public string[] Cards { get; private set; }
-            public HandEvaluationResult Evaluation { get; private set; }
 
             public Player(string name, params string[] cards)
             {
                 Name = name;
                 Cards = cards;
-                Evaluation = HandEvaluator.Evaluate(cards);
             }
 
             public override string ToString()
@@ -58,18 +56,8 @@ namespace BluffinMuffin.HandEvaluator.Demo
             Console.WriteLine();
             Console.WriteLine();
 
-
-            Player[] orderedPlayers = players.OrderByDescending(p => p.Evaluation).ToArray();
-
-            for (int i = 0; i < orderedPlayers.Count(); ++i)
-            {
-                var pos = i;
-                for(int last = i - 1; last >= 0; --last)
-                    if (orderedPlayers[i].Evaluation != null && orderedPlayers[i].Evaluation.CompareTo(orderedPlayers[last].Evaluation) == 0)
-                        pos = last;
-
-                Console.WriteLine("{0}: {1} -> {2}", pos + 1, orderedPlayers[i].Name, orderedPlayers[i].Evaluation);
-            }
+            foreach (var p in HandEvaluator.Evaluate(players).SelectMany(x => x))
+                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player)p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();
             Console.ReadLine();

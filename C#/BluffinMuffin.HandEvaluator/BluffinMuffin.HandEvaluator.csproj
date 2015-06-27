@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EvaluatedCardHolder.cs" />
     <Compile Include="Enums\HandEnum.cs" />
     <Compile Include="Enums\NominalValueEnum.cs" />
     <Compile Include="Enums\SuitEnum.cs" />
