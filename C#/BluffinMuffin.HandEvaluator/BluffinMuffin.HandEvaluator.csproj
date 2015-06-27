@@ -55,6 +55,7 @@
     <Compile Include="HandEvaluators\TwoPairsHandEvaluator.cs" />
     <Compile Include="HandEvaluators\OnePairHandEvaluator.cs" />
     <Compile Include="HandEvaluators\HighCardHandEvaluator.cs" />
+    <Compile Include="IStringCardsHolder.cs" />
     <Compile Include="PlayingCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

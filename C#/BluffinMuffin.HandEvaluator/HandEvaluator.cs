@@ -12,7 +12,7 @@ namespace BluffinMuffin.HandEvaluator
         public abstract HandEnum HandType { get; }
 
         private static HandEvaluator[] m_Evaluators;
-        public static HandEvaluationResult Evaluate(string[] cards)
+        public static HandEvaluationResult Evaluate(params string[] cards)
         {
             if (m_Evaluators == null)
                 m_Evaluators = typeof (HandEvaluator).Assembly.GetTypes().Where(t => t.IsSubclassOf(typeof (HandEvaluator)) && !t.IsAbstract).Select(t => (HandEvaluator) Activator.CreateInstance(t)).ToArray();
