@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluffinMuffin.HandEvaluator
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluffinMuffin.HandEvaluator.Demo", "BluffinMuffin.HandEvaluator.Demo\BluffinMuffin.HandEvaluator.Demo.csproj", "{58028189-BA64-484C-8C7E-0A5FF6F2047E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{DD737344-B720-48A1-BC1B-EB50651FD79C}"
+	ProjectSection(SolutionItems) = preProject
+		..\Documentation\hands_strength.png = ..\Documentation\hands_strength.png
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
