@@ -38,6 +38,16 @@ namespace BluffinMuffin.HandEvaluator.Demo
                 new Player("P4", new[] {"2s", "2c", "2d", "3c", "5d", "9c", "3h"}),
                 new Player("P5", new[] {"2s", "2c", "5d", "3c", "3d", "9c", "3h"}),
                 new Player("P6", new[] {"4s", "4c", "4d", "3c", "3d", "9c", "4h"}),
+                new Player("P7", new[] {"4s", "4c", "4d", "3c"}),
+                new Player("P8", new[] {"Ks", "5h", "8d", "Ac", "7s", "10h", "2s"}),
+                new Player("P9", new[] {"Ks", "5h", "8d", "Ac", "7s", "10h", "Kh"}),
+                new Player("PA", new[] {"Ks", "5h", "8d", "7c", "7s", "10h", "Kh"}),
+                new Player("PB", new[] {"Ks", "5h", "8d", "Kc", "7s", "10h", "Kh"}),
+                new Player("PC", new[] {"Ks", "5h", "Ad", "Kc", "Qs", "10h", "Jh"}),
+                new Player("PD", new[] {"Ks", "5s", "As", "Kc", "Qs", "10s", "Jh"}),
+                new Player("PE", new[] {"Ks", "5h", "8d", "7c", "5s", "5h", "Kh"}),
+                new Player("PF", new[] {"Ks", "5h", "5d", "7c", "5s", "5h", "Kh"}),
+                new Player("PG", new[] {"Ks", "5h", "Ah", "Kh", "Qh", "10h", "Jh"}),
             };
 
             foreach (Player p in players)
@@ -50,7 +60,14 @@ namespace BluffinMuffin.HandEvaluator.Demo
             Player[] orderedPlayers = players.OrderByDescending(p => p.Evaluation).ToArray();
 
             for (int i = 0; i < orderedPlayers.Count(); ++i)
-                Console.WriteLine("{0}: {1} -> {2}", i + 1, orderedPlayers[i].Name, orderedPlayers[i].Evaluation);
+            {
+                var pos = i;
+                for(int last = i - 1; last >= 0; --last)
+                    if (orderedPlayers[i].Evaluation != null && orderedPlayers[i].Evaluation.CompareTo(orderedPlayers[last].Evaluation) == 0)
+                        pos = last;
+
+                Console.WriteLine("{0}: {1} -> {2}", pos + 1, orderedPlayers[i].Name, orderedPlayers[i].Evaluation);
+            }
 
             Console.WriteLine();
             Console.ReadLine();
