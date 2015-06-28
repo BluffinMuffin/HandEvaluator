@@ -46,14 +46,84 @@
 </ul>
 
 <h4>
-<a id="current-version-000" class="anchor" href="#current-version-000" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Version: <strong>[0.0.0]</strong>
-</h4>
+<a id="current-version-100--2015-06-28" class="anchor" href="#current-version-100--2015-06-28" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Version: <strong><a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v1.0.0">1.0.0</a></strong>  (2015-06-28)</h4>
 
 <ul>
-<li>No releases yet</li>
+<li>First version.</li>
+<li><em><a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/CHANGELOG.md">Full changelog ...</a></em></li>
 </ul>
 
 <p align="center"><img src="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/Documentation/hands_strength.png?raw=true" alt="Hand Strengths"></p>
+
+<h1></h1>
+
+<h1></h1>
+
+<h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p>The class "HandEvaluator" exposes 2 static "Evaluate" methods that you can use.</p>
+
+<ul>
+<li>
+<p><strong><code>HandEvaluationResult Evaluate(params string[] cards)</code></strong></p>
+
+<p>This method evaluates the best hand found with the given cards. Cards are given in the 'vs' format where <code>v = [2,3,4,5,6,7,8,9,10,J,Q,K,A]</code> and <code>s = [S,D,H,C]</code>. Example: '3S','4C' means a three of spades and a four of clubs. A minimum of 5 cards must be given to be evaluated. In texas hold'em, you would send the 2 cards of the player, and the five cards on the board. See <strong>HandEvaluationResult</strong> below for more information on the output.</p>
+</li>
+<li>
+<p><strong><code>IEnumerable&lt;IGrouping&lt;int, EvaluatedCardHolder&gt;&gt; Evaluate(params IStringCardsHolder[] cardHolders)</code></strong></p>
+
+<p>This method evaluates and ranks the different CardHolders. CardHolders implements IStringCardsHolder who simply have a <code>string[] StringCards</code> property. The cards of the CardHolder includes pocket cards and board cards. They will come back grouped by rank (where 1 is the best rank). See <strong>EvaluatedCardHolder</strong> below for more information on the output.</p>
+</li>
+</ul>
+
+<h4>
+<a id="handevaluationresult" class="anchor" href="#handevaluationresult" aria-hidden="true"><span class="octicon octicon-link"></span></a>HandEvaluationResult</h4>
+
+<p>The class "HandEvaluationResult" contains the result of the evaluation of a set of cards. This class implements <code>IComparable</code> and the best result will be greater than the worst.</p>
+
+<ul>
+<li>
+<p><strong><code>HandEnum Hand</code></strong></p>
+
+<p>This property contains the type of the best Hand found with the given cards (Examples: StraightFlush, FullHouse, HighCard).</p>
+</li>
+<li>
+<p><strong><code>List&lt;PlayingCard[]&gt; Cards</code></strong></p>
+
+<p>This property contains the 5 cards that were used in the best hand. Each item of the list is a group of card, and the first card of the group will be evaluated when similar hands are compared.</p>
+
+<ul>
+<li>Example 1: {3s, 5h, 7d, 9c, Js, Qh, Ad} will return <strong>HighCard</strong> with <code>Cards = {[Ad],[Qh],[Js],[9c],[7d]}</code>. When comparing against another hand, the evaluator will compare Hand type. If equal, it will compare the first card of the first group (Ad). If the nominal value (A) is equal, it will compare the first card of the next group (Qh). And so on. If all the evaluated cards are equal, the 2 hands are equal.</li>
+<li>Example 2: {3s, 5h, 7d, 9c, Js, 3h, 5d} will return <strong>TwoPairs</strong> with <code>Cards = {[5h,5d],[3s,3h],[Js]}</code>. When comparing against another hand, the evaluator will compare Hand type. If equal, it will compare the first card of the first group (5h). If the nominal value (5) is equal, it will compare the first card of the next group (3s). And so on. If all the evaluated cards are equal, the 2 hands are equal.</li>
+<li>Example 3: {3s, 5h, 7d, 9c, Js, 4h, 6d} will return <strong>Straight</strong> with <code>Cards = {[7d,6d,5h,4h,3s]}</code>. When comparing against another hand, the evaluator will compare Hand type. If equal, it will compare the first card of the first group (7d). If the nominal value (7) is equal, the 2 hands are equal.</li>
+<li>Example 4: {3c, 5c, 7c, 9c, Jc, Qc, Ac} will return <strong>Flush</strong> with <code>Cards = {[Ac],[Qc],[Jc],[9c],[7c]}</code>. When comparing against another hand, the evaluator will compare Hand type. If equal, it will compare the first card of the first group (Ac). If the nominal value (A) is equal, it will compare the first card of the next group (Qc). And so on. If all the evaluated cards are equal, the 2 hands are equal.</li>
+</ul>
+</li>
+</ul>
+
+<h4>
+<a id="evaluatedcardholder" class="anchor" href="#evaluatedcardholder" aria-hidden="true"><span class="octicon octicon-link"></span></a>EvaluatedCardHolder</h4>
+
+<p>The class "EvaluatedCardHolder" contains the result of the evaluation of a CardHolder.</p>
+
+<ul>
+<li>
+<p><strong><code>IStringCardsHolder CardsHolder</code></strong></p>
+
+<p>This property contains the original CardsHolder that was evaluated.</p>
+</li>
+<li>
+<p><strong><code>HandEvaluationResult Evaluation</code></strong></p>
+
+<p>This property contains the best Hand found with the cards of the CardHolder.</p>
+</li>
+<li>
+<p><strong><code>int Rank</code></strong></p>
+
+<p>This property contains the rank of the CardsHolder when compared to others. 1 is the best rank.</p>
+</li>
+</ul>
         </section>
 
         <footer>
