@@ -5,7 +5,7 @@ BluffinMuffin HandEvaluator is a .Net PokerHand Evaluator that supports [standar
 The project will be released using [Semantic Versioning](http://semver.org) and developped using [Vincent Driessen's Git Model](http://nvie.com/posts/a-successful-git-branching-model/).
     
 ####Known Implementations
- * Nom implementations yet
+ * **[BluffinMuffin.Server](http://ericmas001.github.io/BluffinMuffin.Server)** *(Evaluator v1.0.0)*
 
 
 ####Current Version: **[1.0.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v1.0.0)**  (2015-06-28)
