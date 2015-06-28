@@ -8,7 +8,7 @@ The project will be released using [Semantic Versioning](http://semver.org) and 
  * Nom implementations yet
 
 
-####Current Version: **[1.0.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v1.0.1)**  (2015-06-28)
+####Current Version: **[1.0.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v1.0.0)**  (2015-06-28)
  * First version.
  * *[Full changelog ...](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/CHANGELOG.md)*
 
