@@ -27,9 +27,27 @@ namespace BluffinMuffin.HandEvaluator
 
             if(m_Factories.ContainsKey(type))
             {
-                var pCards = playerCards.Union(communityCards).Select(c => new PlayingCard(c)).ToArray();
-
-                return m_Factories[type].Evaluators.Select(x => x.Evaluation(pCards)).Where(x => x != null).Max();
+                if (type == EvaluatorTypeEnum.OmahaHoldEm)
+                {
+                    var pc = playerCards.ToArray();
+                    var cc = communityCards.ToArray();
+                    var results = new List<HandEvaluationResult>();
+                    for (int i = 0; i < pc.Length; ++i)
+                        for (int j = i + 1; j < pc.Length; ++j)
+                            for (int a = 0; a < cc.Length; ++a)
+                                for (int b = a + 1; b < cc.Length; ++b)
+                                    for (int c = b + 1; c < cc.Length; ++c)
+                                    {
+                                        var pCards = new[] { pc[i], pc[j], cc[a], cc[b], cc[c] }.Select(x => new PlayingCard(x)).ToArray();
+                                        results.Add(m_Factories[type].Evaluators.Select(x => x.Evaluation(pCards)).Where(x => x != null).Max());
+                                    }
+                    return results.Max();
+                }
+                else
+                {
+                    var pCards = playerCards.Union(communityCards).Select(c => new PlayingCard(c)).ToArray();
+                    return m_Factories[type].Evaluators.Select(x => x.Evaluation(pCards)).Where(x => x != null).Max();
+                }
             }
             return null;
         }

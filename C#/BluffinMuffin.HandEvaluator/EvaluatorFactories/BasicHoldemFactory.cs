@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BluffinMuffin.HandEvaluator.Enums;
 using BluffinMuffin.HandEvaluator.Attributes;
 using BluffinMuffin.HandEvaluator.Evaluators;
 
 namespace BluffinMuffin.HandEvaluator.EvaluatorFactories
 {
-    [EvaluatorTypes(EvaluatorTypeEnum.TexasHoldEm)]
+    [EvaluatorTypes(EvaluatorTypeEnum.TexasHoldEm, EvaluatorTypeEnum.OmahaHoldEm)]
     public class BasicHoldemFactory : AbstractEvaluatorFactory
     {
         public override IEnumerable<AbstractHandEvaluator> Evaluators
