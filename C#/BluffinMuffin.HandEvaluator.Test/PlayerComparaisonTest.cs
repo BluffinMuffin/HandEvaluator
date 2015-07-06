@@ -7,11 +7,13 @@ namespace BluffinMuffin.HandEvaluator.Test
 {
     class Player : IStringCardsHolder
     {
-        public string[] StringCards { get; private set; }
+        public IEnumerable<string> PlayerCards { get; private set; }
+        public IEnumerable<string> CommunityCards { get; private set; }
 
         public Player(params string[] cards)
         {
-            StringCards = cards;
+            PlayerCards = cards.Take(2);
+            CommunityCards = cards.Skip(2);
         }
     }
     static class ResultExtensions
@@ -33,7 +35,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("Kd", "5d", "8d", "3c", "7s", "10h", "2s");
             var smallest = new Player("Qs", "5c", "8d", "3c", "7s", "10h", "2s");
 
-            var result = HandEvaluator.Evaluate(biggest, normal1, normal2, smallest).ToArray();
+            var result = HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm, biggest, normal1, normal2, smallest).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(normal1));
@@ -50,7 +52,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8c", "5d", "8d", "3c", "7s", "10h", "2s");
             var smallest = new Player("3s", "5h", "8d", "3c", "7s", "10h", "2s");
 
-            var result = HandEvaluator.Evaluate(biggest, big, normal1, normal2, smallest).ToArray();
+            var result = HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm, biggest, big, normal1, normal2, smallest).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -65,10 +67,10 @@ namespace BluffinMuffin.HandEvaluator.Test
             var biggest = new Player("10s", "8c", "8d", "3c", "7s", "10h", "2s");
             var big = new Player("10c", "3s", "8d", "3c", "7s", "10h", "2s");
             var normal1 = new Player("8h", "3d", "8d", "3c", "7s", "10h", "2s");
-            var normal2 = new Player("8d", "3h", "8d", "3c", "7s", "10h", "2s");
+            var normal2 = new Player("8s", "3h", "8d", "3c", "7s", "10h", "2s");
             var smallest = new Player("7h", "2h", "8d", "3c", "7s", "10h", "2s");
 
-            var result = HandEvaluator.Evaluate(biggest, big, normal1, normal2, smallest).ToArray();
+            var result = HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm, biggest, big, normal1, normal2, smallest).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -86,7 +88,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8s", "9d", "8d", "8c", "7s", "10h", "2s");
             var smallest = new Player("8s", "3h", "8d", "8c", "7s", "10h", "2s");
 
-            var result = HandEvaluator.Evaluate(biggest, big, normal1, normal2, smallest).ToArray();
+            var result = HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm, biggest, big, normal1, normal2, smallest).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -104,7 +106,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8h", "9c", "Qh", "Jc", "10d", "5h", "2s");
             var smallest = new Player("3d", "4s", "Ah", "Jc", "10d", "5h", "2s");
 
-            var result = HandEvaluator.Evaluate(biggest, big, normal1, normal2, smallest).ToArray();
+            var result = HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm, biggest, big, normal1, normal2, smallest).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -122,7 +124,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("Kd", "Ac", "8d", "3c", "7d", "10d", "2d");
             var smallest = new Player("Ks", "Ac", "8d", "3d", "7d", "10d", "2d");
 
-            var result = HandEvaluator.Evaluate(biggest, big, normal1, normal2, smallest).ToArray();
+            var result = HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm, biggest, big, normal1, normal2, smallest).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -140,7 +142,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8s", "9d", "8d", "8c", "7s", "10h", "9c");
             var smallest = new Player("8s", "3h", "8d", "8c", "7s", "10h", "3s");
 
-            var result = HandEvaluator.Evaluate(biggest, big, normal1, normal2, smallest).ToArray();
+            var result = HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm, biggest, big, normal1, normal2, smallest).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -158,7 +160,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8s", "4d", "8d", "8c", "5s", "10h", "8h");
             var smallest = new Player("7h", "3h", "7d", "7c", "7s", "10h", "3s");
 
-            var result = HandEvaluator.Evaluate(biggest, big, normal1, normal2, smallest).ToArray();
+            var result = HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm, biggest, big, normal1, normal2, smallest).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -176,7 +178,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8h", "9h", "Qh", "Jh", "10h", "5h", "2s");
             var smallest = new Player("3d", "4d", "Ad", "Jc", "10d", "5d", "2d");
 
-            var result = HandEvaluator.Evaluate(biggest, big, normal1, normal2, smallest).ToArray();
+            var result = HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm, biggest, big, normal1, normal2, smallest).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -189,33 +191,33 @@ namespace BluffinMuffin.HandEvaluator.Test
         public void TestOrdering()
         {
             var straightFlush = new Player("Ad", "Kd", "Qd", "Jd", "10d", "5h", "2s");
-            Assert.AreEqual(HandEnum.StraightFlush, HandEvaluator.Evaluate(straightFlush.StringCards).Hand);
+            Assert.AreEqual(HandEnum.StraightFlush, HandEvaluators.Evaluate(straightFlush.PlayerCards, straightFlush.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);
 
             var fourOfAKind = new Player("10d", "Ac", "8d", "10c", "7s", "10h", "10s");
-            Assert.AreEqual(HandEnum.FourOfAKind,  HandEvaluator.Evaluate(fourOfAKind.StringCards).Hand);
+            Assert.AreEqual(HandEnum.FourOfAKind, HandEvaluators.Evaluate(fourOfAKind.PlayerCards, fourOfAKind.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);
 
             var fullHouse = new Player("10d", "Ac", "8d", "10c", "7s", "10h", "As");
-            Assert.AreEqual(HandEnum.FullHouse,  HandEvaluator.Evaluate(fullHouse.StringCards).Hand);
+            Assert.AreEqual(HandEnum.FullHouse, HandEvaluators.Evaluate(fullHouse.PlayerCards, fullHouse.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);
 
             var flush = new Player("Kc", "Ac", "8c", "3c", "7c", "10c", "2s");
-            Assert.AreEqual(HandEnum.Flush,  HandEvaluator.Evaluate(flush.StringCards).Hand);
+            Assert.AreEqual(HandEnum.Flush, HandEvaluators.Evaluate(flush.PlayerCards, flush.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);
 
             var straight = new Player("Ad", "Ks", "Qh", "Jc", "10d", "5h", "2s");
-            Assert.AreEqual(HandEnum.Straight,  HandEvaluator.Evaluate(straight.StringCards).Hand);
+            Assert.AreEqual(HandEnum.Straight, HandEvaluators.Evaluate(straight.PlayerCards, straight.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);
 
             var threeOfAKind = new Player("10d", "Ac", "8d", "10c", "7s", "10h", "2s");
-            Assert.AreEqual(HandEnum.ThreeOfAKind,  HandEvaluator.Evaluate(threeOfAKind.StringCards).Hand);
+            Assert.AreEqual(HandEnum.ThreeOfAKind, HandEvaluators.Evaluate(threeOfAKind.PlayerCards, threeOfAKind.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);
 
             var twoPairs = new Player("10s", "8c", "8d", "3c", "7s", "10h", "2s");
-            Assert.AreEqual(HandEnum.TwoPairs,  HandEvaluator.Evaluate(twoPairs.StringCards).Hand);
+            Assert.AreEqual(HandEnum.TwoPairs, HandEvaluators.Evaluate( twoPairs.PlayerCards, twoPairs.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);
 
             var onePair = new Player("10s", "Ac", "8d", "3c", "7s", "10h", "2s");
-            Assert.AreEqual(HandEnum.OnePair,  HandEvaluator.Evaluate(onePair.StringCards).Hand);
+            Assert.AreEqual(HandEnum.OnePair, HandEvaluators.Evaluate(onePair.PlayerCards, onePair.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);
 
             var highCard = new Player("Ks", "Ac", "8d", "3c", "7s", "10h", "2s");
-            Assert.AreEqual(HandEnum.HighCard, HandEvaluator.Evaluate(highCard.StringCards).Hand);
+            Assert.AreEqual(HandEnum.HighCard, HandEvaluators.Evaluate(highCard.PlayerCards, highCard.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);
 
-            var result = HandEvaluator.Evaluate(straightFlush, fourOfAKind, fullHouse, flush, straight, threeOfAKind, twoPairs, onePair, highCard).ToArray();
+            var result = HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm, straightFlush, fourOfAKind, fullHouse, flush, straight, threeOfAKind, twoPairs, onePair, highCard).ToArray();
 
             Assert.AreEqual(1, result.RankOf(straightFlush));
             Assert.AreEqual(2, result.RankOf(fourOfAKind));

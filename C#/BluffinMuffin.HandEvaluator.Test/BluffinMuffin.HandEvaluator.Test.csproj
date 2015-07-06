@@ -52,15 +52,15 @@
   <ItemGroup>
     <Compile Include="PlayerComparaisonTest.cs" />
     <Compile Include="HandComparaisonTest.cs" />
-    <Compile Include="HandEvaluators\FullHouseHandEvaluatorTest.cs" />
-    <Compile Include="HandEvaluators\HighCardHandEvaluatorTest.cs" />
-    <Compile Include="HandEvaluators\TwoPairsHandEvaluatorTest.cs" />
-    <Compile Include="HandEvaluators\StraightFlushHandEvaluatorTest.cs" />
-    <Compile Include="HandEvaluators\StraightHandEvaluatorTest.cs" />
-    <Compile Include="HandEvaluators\OnePairHandEvaluatorTest.cs" />
-    <Compile Include="HandEvaluators\ThreeOfAKindHandEvaluatorTest.cs" />
-    <Compile Include="HandEvaluators\FourOfAKindHandEvaluatorTest.cs" />
-    <Compile Include="HandEvaluators\FlushHandEvaluatorTest.cs" />
+    <Compile Include="Evaluators\FullHouseHandEvaluatorTest.cs" />
+    <Compile Include="Evaluators\HighCardHandEvaluatorTest.cs" />
+    <Compile Include="Evaluators\TwoPairsHandEvaluatorTest.cs" />
+    <Compile Include="Evaluators\StraightFlushHandEvaluatorTest.cs" />
+    <Compile Include="Evaluators\StraightHandEvaluatorTest.cs" />
+    <Compile Include="Evaluators\OnePairHandEvaluatorTest.cs" />
+    <Compile Include="Evaluators\ThreeOfAKindHandEvaluatorTest.cs" />
+    <Compile Include="Evaluators\FourOfAKindHandEvaluatorTest.cs" />
+    <Compile Include="Evaluators\FlushHandEvaluatorTest.cs" />
     <Compile Include="BestHandTest.cs" />
     <Compile Include="PlayingCardTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

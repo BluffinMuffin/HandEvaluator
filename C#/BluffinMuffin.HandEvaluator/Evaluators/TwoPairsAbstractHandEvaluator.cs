@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using BluffinMuffin.HandEvaluator.Enums;
 
-namespace BluffinMuffin.HandEvaluator.HandEvaluators
+namespace BluffinMuffin.HandEvaluator.Evaluators
 {
-    public class TwoPairsHandEvaluator : HandEvaluator
+    public class TwoPairsAbstractHandEvaluator : AbstractHandEvaluator
     {
         public override HandEnum HandType
         {

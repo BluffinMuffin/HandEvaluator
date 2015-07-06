@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BluffinMuffin.HandEvaluator.Enums;
 
 namespace BluffinMuffin.HandEvaluator.Demo
 {
@@ -24,8 +25,8 @@ namespace BluffinMuffin.HandEvaluator.Demo
             {
                 return String.Format("{0}: [{1}]", Name, String.Join(",", Cards));
             }
-
-            public string[] StringCards { get { return Cards; } }
+            public IEnumerable<string> PlayerCards { get { return Cards.Take(2); } }
+            public IEnumerable<string> CommunityCards { get { return Cards.Skip(2); } }
         }
 
         static void Main(string[] args)
@@ -56,7 +57,7 @@ namespace BluffinMuffin.HandEvaluator.Demo
             Console.WriteLine();
             Console.WriteLine();
 
-            foreach (var p in HandEvaluator.Evaluate(players).SelectMany(x => x))
+            foreach (var p in HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm,players).SelectMany(x => x))
                 Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player)p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();

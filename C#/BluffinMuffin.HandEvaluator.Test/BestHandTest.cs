@@ -11,7 +11,7 @@ namespace BluffinMuffin.HandEvaluator.Test
         [TestMethod]
         public void LessThanFiveCardsShouldBeNull()
         {
-            var res = HandEvaluator.Evaluate("Ks", "5s", "8d", "As");
+            var res = HandEvaluators.Evaluate(new[]{"Ks", "5s"}, new[]{"8d", "As"},EvaluatorTypeEnum.TexasHoldEm);
             Assert.IsNull(res);
         }
 
@@ -19,7 +19,7 @@ namespace BluffinMuffin.HandEvaluator.Test
         [TestMethod]
         public void ShouldReturnHighCard()
         {
-            var res = HandEvaluator.Evaluate("Ks", "5h", "8d", "Ac", "7s", "10h", "2s");
+            var res = HandEvaluators.Evaluate(new[] { "Ks", "5h" }, new[] { "8d", "Ac", "7s", "10h", "2s" }, EvaluatorTypeEnum.TexasHoldEm);
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Hand, HandEnum.HighCard);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Ace);
@@ -34,7 +34,7 @@ namespace BluffinMuffin.HandEvaluator.Test
         [TestMethod]
         public void ShouldReturnOnePair()
         {
-            var res = HandEvaluator.Evaluate("Ks", "5h", "8d", "Ac", "7s", "10h", "Kh");
+            var res = HandEvaluators.Evaluate(new[] { "Ks", "5h" }, new[] { "8d", "Ac", "7s", "10h", "Kh" }, EvaluatorTypeEnum.TexasHoldEm);
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Hand, HandEnum.OnePair);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.King);
@@ -48,7 +48,7 @@ namespace BluffinMuffin.HandEvaluator.Test
         [TestMethod]
         public void ShouldReturnTwoPairs()
         {
-            var res = HandEvaluator.Evaluate("Ks", "5h", "8d", "7c", "7s", "10h", "Kh");
+            var res = HandEvaluators.Evaluate(new[] { "Ks", "5h" }, new[] { "8d", "7c", "7s", "10h", "Kh" }, EvaluatorTypeEnum.TexasHoldEm);
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Hand, HandEnum.TwoPairs);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.King);
@@ -61,7 +61,7 @@ namespace BluffinMuffin.HandEvaluator.Test
         [TestMethod]
         public void ShouldReturnThreeOfAKind()
         {
-            var res = HandEvaluator.Evaluate("Ks", "5h", "8d", "Kc", "7s", "10h", "Kh");
+            var res = HandEvaluators.Evaluate(new[] { "Ks", "5h" }, new[] { "8d", "Kc", "7s", "10h", "Kh" }, EvaluatorTypeEnum.TexasHoldEm);
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Hand, HandEnum.ThreeOfAKind);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.King);
@@ -74,7 +74,7 @@ namespace BluffinMuffin.HandEvaluator.Test
         [TestMethod]
         public void ShouldReturnStraight()
         {
-            var res = HandEvaluator.Evaluate("Ks", "5h", "Ad", "Kc", "Qs", "10h", "Jh");
+            var res = HandEvaluators.Evaluate(new[] { "Ks", "5h" }, new[] { "Ad", "Kc", "Qs", "10h", "Jh" }, EvaluatorTypeEnum.TexasHoldEm);
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Hand, HandEnum.Straight);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Ace);
@@ -89,7 +89,7 @@ namespace BluffinMuffin.HandEvaluator.Test
         [TestMethod]
         public void ShouldReturnFlush()
         {
-            var res = HandEvaluator.Evaluate("Ks", "5s", "As", "Kc", "Qs", "10s", "Jh");
+            var res = HandEvaluators.Evaluate(new[] { "Ks", "5s" }, new[] { "As", "Kc", "Qs", "10s", "Jh" }, EvaluatorTypeEnum.TexasHoldEm);
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Hand, HandEnum.Flush);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Ace);
@@ -105,7 +105,7 @@ namespace BluffinMuffin.HandEvaluator.Test
         [TestMethod]
         public void ShouldReturnFullHouse()
         {
-            var res = HandEvaluator.Evaluate("Ks", "5h", "8d", "7c", "5s", "5h", "Kh");
+            var res = HandEvaluators.Evaluate(new[] { "Ks", "5c" }, new[] { "8d", "7c", "5s", "5h", "Kh" }, EvaluatorTypeEnum.TexasHoldEm);
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Hand, HandEnum.FullHouse);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Five);
@@ -116,7 +116,7 @@ namespace BluffinMuffin.HandEvaluator.Test
         [TestMethod]
         public void ShouldReturnFourOfAKind()
         {
-            var res = HandEvaluator.Evaluate("Ks", "5h", "5d", "7c", "5s", "5h", "Kh");
+            var res = HandEvaluators.Evaluate(new[] { "Ks", "5c" }, new[] { "5d", "7c", "5s", "5h", "Kh" }, EvaluatorTypeEnum.TexasHoldEm);
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Hand, HandEnum.FourOfAKind);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Five);
@@ -128,7 +128,7 @@ namespace BluffinMuffin.HandEvaluator.Test
         [TestMethod]
         public void ShouldReturnStraightFlush()
         {
-            var res = HandEvaluator.Evaluate("Ks", "5h", "Ah", "Kh", "Qh", "10h", "Jh");
+            var res = HandEvaluators.Evaluate(new[] { "Ks", "5h" }, new[] { "Ah", "Kh", "Qh", "10h", "Jh" }, EvaluatorTypeEnum.TexasHoldEm);
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Hand, HandEnum.StraightFlush);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Ace);

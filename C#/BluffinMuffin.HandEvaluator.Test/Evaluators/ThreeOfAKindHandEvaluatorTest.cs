@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
-using BluffinMuffin.HandEvaluator.HandEvaluators;
+using BluffinMuffin.HandEvaluator.Evaluators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BluffinMuffin.HandEvaluator.Test.HandEvaluators
+namespace BluffinMuffin.HandEvaluator.Test.Evaluators
 {
     [TestClass]
-    public class FourOfAKindHandEvaluatorTest
+    public class ThreeOfAKindHandEvaluatorTest
     {
-        private readonly HandEvaluator m_Evaluator = new FourOfAKindHandEvaluator();
+        private readonly AbstractHandEvaluator m_Evaluator = new ThreeOfAKindAbstractHandEvaluator();
 
         private HandEvaluationResult Evaluate(params string[] cards)
         {
@@ -25,66 +25,66 @@ namespace BluffinMuffin.HandEvaluator.Test.HandEvaluators
         [TestMethod]
         public void LessThan5CardsShouldBeNull()
         {
-            var res = Evaluate("4c", "4h", "4s", "4d");
+            var res = Evaluate("4c", "4h", "4s");
             Assert.IsNull(res);
         }
 
         [TestMethod]
-        public void FiveCardsWithoutFourOfAKindShouldBeNull()
+        public void FiveCardsWithoutThreeOfAKindShouldBeNull()
         {
-            var res = Evaluate("4c", "4s", "4d", "3h", "3c");
+            var res = Evaluate("4c", "4s", "5d", "3h", "3c");
             Assert.IsNull(res);
         }
 
         [TestMethod]
-        public void FiveCardsWithFourOfAKindShouldNotBeNull()
+        public void FiveCardsWithThreeOfAKindShouldNotBeNull()
         {
-            var res = Evaluate("4c", "4s", "4d", "4h", "3c");
+            var res = Evaluate("4c", "4s", "5d", "4h", "3c");
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Four);
         }
 
         [TestMethod]
-        public void SixCardsWithoutFourOfAKindShouldBeNull()
+        public void SixCardsWithoutThreeOfAKindShouldBeNull()
         {
-            var res = Evaluate("4c", "4s", "4d", "3h", "3c", "2h");
+            var res = Evaluate("4c", "4s", "5d", "3h", "3c", "2h");
             Assert.IsNull(res);
         }
 
         [TestMethod]
-        public void SixCardsWithFourOfAKindShouldNotBeNull()
+        public void SixCardsWithThreeOfAKindShouldNotBeNull()
         {
-            var res = Evaluate("4c", "4s", "4d", "4h", "3c", "2h");
+            var res = Evaluate("4c", "4s", "5d", "4h", "3c", "2h");
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Four);
         }
 
         [TestMethod]
-        public void SevenCardsWithoutFourOfAKindShouldBeNull()
+        public void SevenCardsWithoutThreeOfAKindShouldBeNull()
         {
-            var res = Evaluate("4c", "4s", "4d", "3h", "3c", "2h", "2c");
+            var res = Evaluate("4c", "4s", "5d", "3h", "3c", "2h", "2c");
             Assert.IsNull(res);
         }
 
         [TestMethod]
-        public void SevenCardsWithFourOfAKindShouldNotBeNull()
+        public void SevenCardsWithThreeOfAKindShouldNotBeNull()
         {
-            var res = Evaluate("4c", "4s", "4d", "4h", "3c", "2h", "2c");
+            var res = Evaluate("4c", "4s", "5d", "4h", "3c", "2h", "2c");
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Four);
         }
 
         [TestMethod]
-        public void TenCardsWithoutFourOfAKindShouldBeNull()
+        public void TenCardsWithoutThreeOfAKindShouldBeNull()
         {
-            var res = Evaluate("4c", "4s", "4d", "3h", "3c", "2h", "2c", "ah", "ac", "kh");
+            var res = Evaluate("4c", "4s", "5d", "3h", "3c", "2h", "2c", "ah", "ac", "kh");
             Assert.IsNull(res);
         }
 
         [TestMethod]
-        public void TenCardsWithFourOfAKindShouldNotBeNull()
+        public void TenCardsWithThreeOfAKindShouldNotBeNull()
         {
-            var res = Evaluate("4c", "4s", "4d", "4h", "3c", "2h", "2c", "ah", "ac", "kh");
+            var res = Evaluate("4c", "4s", "5d", "4h", "3c", "2h", "2c", "ah", "ac", "kh");
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Four);
         }

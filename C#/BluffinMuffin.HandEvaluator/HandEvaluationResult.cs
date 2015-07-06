@@ -14,7 +14,7 @@ namespace BluffinMuffin.HandEvaluator
 
         public Func<HandEvaluationResult,String> ToStringFunc { get; private set; } 
 
-        public HandEvaluationResult(HandEvaluator evaluator)
+        public HandEvaluationResult(AbstractHandEvaluator evaluator)
         {
             Hand = evaluator.HandType;
             Cards = new List<PlayingCard[]>();

@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
-using BluffinMuffin.HandEvaluator.HandEvaluators;
+using BluffinMuffin.HandEvaluator.Evaluators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BluffinMuffin.HandEvaluator.Test.HandEvaluators
+namespace BluffinMuffin.HandEvaluator.Test.Evaluators
 {
     [TestClass]
     public class HighCardHandEvaluatorTest
     {
-        private readonly HandEvaluator m_Evaluator = new HighCardHandEvaluator();
+        private readonly AbstractHandEvaluator m_Evaluator = new HighCardAbstractHandEvaluator();
 
         private HandEvaluationResult Evaluate(params string[] cards)
         {

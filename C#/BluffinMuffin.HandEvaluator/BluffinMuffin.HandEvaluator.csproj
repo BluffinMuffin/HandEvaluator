@@ -39,23 +39,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\EvaluatorTypeEnum.cs" />
     <Compile Include="EvaluatedCardHolder.cs" />
     <Compile Include="Enums\HandEnum.cs" />
     <Compile Include="Enums\NominalValueEnum.cs" />
     <Compile Include="Enums\SuitEnum.cs" />
     <Compile Include="Exceptions\InvalidStringRepresentationException.cs" />
     <Compile Include="Exceptions\NotInEnumScopeException.cs" />
-    <Compile Include="HandEvaluator.cs" />
+    <Compile Include="AbstractHandEvaluator.cs" />
     <Compile Include="HandEvaluationResult.cs" />
-    <Compile Include="HandEvaluators\StraightFlushHandEvaluator.cs" />
-    <Compile Include="HandEvaluators\StraightHandEvaluator.cs" />
-    <Compile Include="HandEvaluators\FlushHandEvaluator.cs" />
-    <Compile Include="HandEvaluators\FullHouseHandEvaluator.cs" />
-    <Compile Include="HandEvaluators\FourOfAKindHandEvaluator.cs" />
-    <Compile Include="HandEvaluators\ThreeOfAKindHandEvaluator.cs" />
-    <Compile Include="HandEvaluators\TwoPairsHandEvaluator.cs" />
-    <Compile Include="HandEvaluators\OnePairHandEvaluator.cs" />
-    <Compile Include="HandEvaluators\HighCardHandEvaluator.cs" />
+    <Compile Include="HandEvaluators.cs" />
+    <Compile Include="Evaluators\StraightFlushAbstractHandEvaluator.cs" />
+    <Compile Include="Evaluators\StraightAbstractHandEvaluator.cs" />
+    <Compile Include="Evaluators\FlushAbstractHandEvaluator.cs" />
+    <Compile Include="Evaluators\FullHouseAbstractHandEvaluator.cs" />
+    <Compile Include="Evaluators\FourOfAKindAbstractHandEvaluator.cs" />
+    <Compile Include="Evaluators\ThreeOfAKindAbstractHandEvaluator.cs" />
+    <Compile Include="Evaluators\TwoPairsAbstractHandEvaluator.cs" />
+    <Compile Include="Evaluators\OnePairAbstractHandEvaluator.cs" />
+    <Compile Include="Evaluators\HighCardAbstractHandEvaluator.cs" />
     <Compile Include="IStringCardsHolder.cs" />
     <Compile Include="PlayingCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
