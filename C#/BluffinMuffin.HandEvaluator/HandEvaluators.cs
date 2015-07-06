@@ -1,23 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using BluffinMuffin.HandEvaluator.Attributes;
 using BluffinMuffin.HandEvaluator.Enums;
+using BluffinMuffin.HandEvaluator.EvaluatorFactories;
 
 namespace BluffinMuffin.HandEvaluator
 {
     public static class HandEvaluators
     {
-        private static AbstractHandEvaluator[] m_Evaluators;
+        private static Dictionary<EvaluatorTypeEnum, AbstractEvaluatorFactory> m_Factories;
         public static HandEvaluationResult Evaluate(IEnumerable<string> playerCards, IEnumerable<string> communityCards, EvaluatorTypeEnum type)
         {
-            if (type == EvaluatorTypeEnum.TexasHoldEm)
+            if (m_Factories == null)
             {
-                if (m_Evaluators == null)
-                    m_Evaluators = typeof (AbstractHandEvaluator).Assembly.GetTypes().Where(t => t.IsSubclassOf(typeof (AbstractHandEvaluator)) && !t.IsAbstract).Select(t => (AbstractHandEvaluator) Activator.CreateInstance(t)).ToArray();
+                m_Factories = new Dictionary<EvaluatorTypeEnum, AbstractEvaluatorFactory>();
+                foreach (Type t in typeof(AbstractEvaluatorFactory).Assembly.GetTypes().Where(x => x.IsSubclassOf(typeof(AbstractEvaluatorFactory)) && !x.IsAbstract))
+                {
+                    var att = t.GetCustomAttribute<EvaluatorTypesAttribute>();
+                    if(att != null && att.Evaluators != null && att.Evaluators.Any())
+                        foreach(var ev in att.Evaluators)
+                            m_Factories.Add(ev, (AbstractEvaluatorFactory)Activator.CreateInstance(t));
+                }
+            }
 
+            if(m_Factories.ContainsKey(type))
+            {
                 var pCards = playerCards.Union(communityCards).Select(c => new PlayingCard(c)).ToArray();
 
-                return m_Evaluators.Select(x => x.Evaluation(pCards)).Where(x => x != null).Max();
+                return m_Factories[type].Evaluators.Select(x => x.Evaluation(pCards)).Where(x => x != null).Max();
             }
             return null;
         }

@@ -39,11 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\EvaluatorTypesAttribute.cs" />
     <Compile Include="Enums\EvaluatorTypeEnum.cs" />
     <Compile Include="EvaluatedCardHolder.cs" />
     <Compile Include="Enums\HandEnum.cs" />
     <Compile Include="Enums\NominalValueEnum.cs" />
     <Compile Include="Enums\SuitEnum.cs" />
+    <Compile Include="EvaluatorFactories\AbstractEvaluatorFactory.cs" />
+    <Compile Include="EvaluatorFactories\BasicHoldemFactory.cs" />
     <Compile Include="Exceptions\InvalidStringRepresentationException.cs" />
     <Compile Include="Exceptions\NotInEnumScopeException.cs" />
     <Compile Include="AbstractHandEvaluator.cs" />
