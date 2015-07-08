@@ -8,8 +8,10 @@ The project will be released using [Semantic Versioning](http://semver.org) and 
  * **[BluffinMuffin.Server](http://ericmas001.github.io/BluffinMuffin.Server)** *(Evaluator v1.0.0)*
 
 
-####Current Version: **[1.0.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v1.0.0)**  (2015-06-28)
- * First version.
+####Current Version: **[2.0.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v2.0.0) *(2015-07-08)*
+ * Making distinction between PlayerCards and ComunityCards
+ * Asking for Evaluation Type
+ * Adding Supports for Omaha Poker Evaluation
  * *[Full changelog ...](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/CHANGELOG.md)*
 
 <p align=center><img src="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/Documentation/hands_strength.png?raw=true" alt="Hand Strengths"></p>
