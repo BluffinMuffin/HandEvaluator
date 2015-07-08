@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BluffinMuffin.HandEvaluator.Enums;
 
 namespace BluffinMuffin.HandEvaluator.Demo
 {
-    class Program
+    internal class Program
     {
         private class Player : IStringCardsHolder
         {
@@ -25,13 +22,21 @@ namespace BluffinMuffin.HandEvaluator.Demo
             {
                 return String.Format("{0}: [{1}]", Name, String.Join(",", Cards));
             }
-            public IEnumerable<string> PlayerCards { get { return Cards.Take(2); } }
-            public IEnumerable<string> CommunityCards { get { return Cards.Skip(2); } }
+
+            public IEnumerable<string> PlayerCards
+            {
+                get { return Cards.Take(2); }
+            }
+
+            public IEnumerable<string> CommunityCards
+            {
+                get { return Cards.Skip(2); }
+            }
         }
 
-        static void Main(string[] args)
+        private static void Main()
         {
-            Player[] players = new[]
+            Player[] players =
             {
                 new Player("P1", "Ks", "5s", "8d", "As", "10s", "2s", "8s"),
                 new Player("P2", "2h", "5h", "4h", "Ah", "10s", "3h", "4c"),
@@ -48,7 +53,7 @@ namespace BluffinMuffin.HandEvaluator.Demo
                 new Player("PD", "Ks", "5s", "As", "Kc", "Qs", "10s", "Jh"),
                 new Player("PE", "Ks", "5h", "8d", "7c", "5s", "5h", "Kh"),
                 new Player("PF", "Ks", "5h", "5d", "7c", "5s", "5h", "Kh"),
-                new Player("PG", "Ks", "5h", "Ah", "Kh", "Qh", "10h", "Jh"),
+                new Player("PG", "Ks", "5h", "Ah", "Kh", "Qh", "10h", "Jh")
             };
 
             foreach (Player p in players)
@@ -57,8 +62,8 @@ namespace BluffinMuffin.HandEvaluator.Demo
             Console.WriteLine();
             Console.WriteLine();
 
-            foreach (var p in HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm,players).SelectMany(x => x))
-                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player)p.CardsHolder).Name, p.Evaluation);
+            foreach (var p in HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm, players).SelectMany(x => x))
+                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player) p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();
             Console.ReadLine();

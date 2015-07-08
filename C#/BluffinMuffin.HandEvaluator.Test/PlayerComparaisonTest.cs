@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BluffinMuffin.HandEvaluator.Test
 {
-    class Player : IStringCardsHolder
+    internal class Player : IStringCardsHolder
     {
         public IEnumerable<string> PlayerCards { get; private set; }
         public IEnumerable<string> CommunityCards { get; private set; }
@@ -16,13 +16,15 @@ namespace BluffinMuffin.HandEvaluator.Test
             CommunityCards = cards.Skip(2);
         }
     }
-    static class ResultExtensions
+
+    internal static class ResultExtensions
     {
         public static int RankOf(this IEnumerable<IGrouping<int, EvaluatedCardHolder>> result, Player p)
         {
             return result.SelectMany(x => x).First(x => x.CardsHolder == p).Rank;
         }
     }
+
     [TestClass]
     public class PlayerComparaisonTest
     {
@@ -209,7 +211,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             Assert.AreEqual(HandEnum.ThreeOfAKind, HandEvaluators.Evaluate(threeOfAKind.PlayerCards, threeOfAKind.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);
 
             var twoPairs = new Player("10s", "8c", "8d", "3c", "7s", "10h", "2s");
-            Assert.AreEqual(HandEnum.TwoPairs, HandEvaluators.Evaluate( twoPairs.PlayerCards, twoPairs.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);
+            Assert.AreEqual(HandEnum.TwoPairs, HandEvaluators.Evaluate(twoPairs.PlayerCards, twoPairs.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);
 
             var onePair = new Player("10s", "Ac", "8d", "3c", "7s", "10h", "2s");
             Assert.AreEqual(HandEnum.OnePair, HandEvaluators.Evaluate(onePair.PlayerCards, onePair.CommunityCards, EvaluatorTypeEnum.TexasHoldEm).Hand);

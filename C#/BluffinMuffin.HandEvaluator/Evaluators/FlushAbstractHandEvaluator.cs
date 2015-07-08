@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BluffinMuffin.HandEvaluator.Enums;
 
 namespace BluffinMuffin.HandEvaluator.Evaluators
@@ -11,7 +8,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
     {
         public override HandEnum HandType
         {
-            get {return HandEnum.Flush;}
+            get { return HandEnum.Flush; }
         }
 
         public override HandEvaluationResult Evaluation(PlayingCard[] cards)
@@ -29,7 +26,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
                 return null;
 
             foreach (var c in flush.OrderByDescending(x => x).Take(5))
-                res.Cards.Add(new[] { c });
+                res.Cards.Add(new[] {c});
 
             return res;
         }

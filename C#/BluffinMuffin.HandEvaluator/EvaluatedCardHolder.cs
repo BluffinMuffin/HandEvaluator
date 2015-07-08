@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BluffinMuffin.HandEvaluator.Enums;
+﻿using BluffinMuffin.HandEvaluator.Enums;
 
 namespace BluffinMuffin.HandEvaluator
 {

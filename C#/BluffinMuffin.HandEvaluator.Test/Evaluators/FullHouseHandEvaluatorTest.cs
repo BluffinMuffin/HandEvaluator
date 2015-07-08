@@ -41,8 +41,8 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         {
             var res = Evaluate("5c", "5d", "6d", "6s", "6c");
             Assert.IsNotNull(res);
-            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Six);
-            Assert.AreEqual(res.Cards.Last().First().Value, NominalValueEnum.Five);
+            Assert.AreEqual(NominalValueEnum.Six, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Five, res.Cards.Last().First().Value);
         }
 
         [TestMethod]
@@ -57,8 +57,8 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         {
             var res = Evaluate("6c", "6d", "5d", "5s", "5c", "7c");
             Assert.IsNotNull(res);
-            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Five);
-            Assert.AreEqual(res.Cards.Last().First().Value, NominalValueEnum.Six);
+            Assert.AreEqual(NominalValueEnum.Five, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Six, res.Cards.Last().First().Value);
         }
 
         [TestMethod]
@@ -73,8 +73,8 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         {
             var res = Evaluate("5c", "5d", "6d", "6s", "6c", "7c", "8c");
             Assert.IsNotNull(res);
-            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Six);
-            Assert.AreEqual(res.Cards.Last().First().Value, NominalValueEnum.Five);
+            Assert.AreEqual(NominalValueEnum.Six, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Five, res.Cards.Last().First().Value);
         }
 
         [TestMethod]
@@ -89,8 +89,8 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         {
             var res = Evaluate("5c", "5d", "6d", "6s", "6c", "7c", "8c", "9c", "10c", "Jc");
             Assert.IsNotNull(res);
-            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Six);
-            Assert.AreEqual(res.Cards.Last().First().Value, NominalValueEnum.Five);
+            Assert.AreEqual(NominalValueEnum.Six, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Five, res.Cards.Last().First().Value);
         }
     }
 }

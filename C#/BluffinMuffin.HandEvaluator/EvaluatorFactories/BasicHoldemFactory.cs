@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using BluffinMuffin.HandEvaluator.Enums;
 using BluffinMuffin.HandEvaluator.Attributes;
 using BluffinMuffin.HandEvaluator.Evaluators;
@@ -17,14 +15,14 @@ namespace BluffinMuffin.HandEvaluator.EvaluatorFactories
                 return new AbstractHandEvaluator[]
                 {
                     new HighCardAbstractHandEvaluator(),
-                    new OnePairAbstractHandEvaluator(), 
+                    new OnePairAbstractHandEvaluator(),
                     new TwoPairsAbstractHandEvaluator(),
-                    new ThreeOfAKindAbstractHandEvaluator(), 
-                    new StraightAbstractHandEvaluator(), 
+                    new ThreeOfAKindAbstractHandEvaluator(),
+                    new StraightAbstractHandEvaluator(),
                     new FlushAbstractHandEvaluator(),
                     new FullHouseAbstractHandEvaluator(),
                     new FourOfAKindAbstractHandEvaluator(),
-                    new StraightFlushAbstractHandEvaluator(), 
+                    new StraightFlushAbstractHandEvaluator(),
                 };
             }
         }

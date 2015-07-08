@@ -41,9 +41,9 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         {
             var res = Evaluate("5c", "4c", "3c", "2c", "6c");
             Assert.IsNotNull(res);
-            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Six);
-            Assert.AreEqual(res.Cards.First().Last().Value, NominalValueEnum.Two);
-            Assert.AreEqual(res.Cards.First().First().Suit, SuitEnum.Clubs);
+            Assert.AreEqual(NominalValueEnum.Six, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Two, res.Cards.First().Last().Value);
+            Assert.AreEqual(SuitEnum.Clubs, res.Cards.First().First().Suit);
         }
 
         [TestMethod]
@@ -59,14 +59,15 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
             var res = Evaluate("5c", "4c", "3c", "2c", "7c");
             Assert.IsNull(res);
         }
+
         [TestMethod]
         public void FiveCardsWithLowestFlushStraightShouldNotBeNull()
         {
             var res = Evaluate("5c", "4c", "3c", "2c", "Ac");
             Assert.IsNotNull(res);
-            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Five);
-            Assert.AreEqual(res.Cards.First().Last().Value, NominalValueEnum.Ace);
-            Assert.AreEqual(res.Cards.First().First().Suit, SuitEnum.Clubs);
+            Assert.AreEqual(NominalValueEnum.Five, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Ace, res.Cards.First().Last().Value);
+            Assert.AreEqual(SuitEnum.Clubs, res.Cards.First().First().Suit);
         }
 
         [TestMethod]
@@ -81,9 +82,9 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         {
             var res = Evaluate("5c", "4c", "3c", "2c", "6c", "9h");
             Assert.IsNotNull(res);
-            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Six);
-            Assert.AreEqual(res.Cards.First().Last().Value, NominalValueEnum.Two);
-            Assert.AreEqual(res.Cards.First().First().Suit, SuitEnum.Clubs);
+            Assert.AreEqual(NominalValueEnum.Six, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Two, res.Cards.First().Last().Value);
+            Assert.AreEqual(SuitEnum.Clubs, res.Cards.First().First().Suit);
         }
 
         [TestMethod]
@@ -91,9 +92,9 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         {
             var res = Evaluate("5c", "4c", "3c", "2c", "6c", "7c");
             Assert.IsNotNull(res);
-            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Seven);
-            Assert.AreEqual(res.Cards.First().Last().Value, NominalValueEnum.Three);
-            Assert.AreEqual(res.Cards.First().First().Suit, SuitEnum.Clubs);
+            Assert.AreEqual(NominalValueEnum.Seven, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Three, res.Cards.First().Last().Value);
+            Assert.AreEqual(SuitEnum.Clubs, res.Cards.First().First().Suit);
         }
 
         [TestMethod]
@@ -108,9 +109,9 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         {
             var res = Evaluate("5c", "4c", "3c", "2c", "6c", "9h", "10h");
             Assert.IsNotNull(res);
-            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Six);
-            Assert.AreEqual(res.Cards.First().Last().Value, NominalValueEnum.Two);
-            Assert.AreEqual(res.Cards.First().First().Suit, SuitEnum.Clubs);
+            Assert.AreEqual(NominalValueEnum.Six, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Two, res.Cards.First().Last().Value);
+            Assert.AreEqual(SuitEnum.Clubs, res.Cards.First().First().Suit);
         }
 
         [TestMethod]
@@ -118,9 +119,9 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         {
             var res = Evaluate("5c", "4c", "3c", "2c", "6c", "7c", "8c");
             Assert.IsNotNull(res);
-            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Eight);
-            Assert.AreEqual(res.Cards.First().Last().Value, NominalValueEnum.Four);
-            Assert.AreEqual(res.Cards.First().First().Suit, SuitEnum.Clubs);
+            Assert.AreEqual(NominalValueEnum.Eight, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Four, res.Cards.First().Last().Value);
+            Assert.AreEqual(SuitEnum.Clubs, res.Cards.First().First().Suit);
         }
 
         [TestMethod]
@@ -135,9 +136,9 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         {
             var res = Evaluate("5c", "4c", "3c", "2c", "6c", "9h", "10h", "2s", "Kd", "Jd");
             Assert.IsNotNull(res);
-            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Six);
-            Assert.AreEqual(res.Cards.First().Last().Value, NominalValueEnum.Two);
-            Assert.AreEqual(res.Cards.First().First().Suit, SuitEnum.Clubs);
+            Assert.AreEqual(NominalValueEnum.Six, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Two, res.Cards.First().Last().Value);
+            Assert.AreEqual(SuitEnum.Clubs, res.Cards.First().First().Suit);
         }
 
         [TestMethod]
@@ -145,9 +146,9 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         {
             var res = Evaluate("5c", "4c", "3c", "2c", "6c", "7c", "8c", "9c", "10c", "Jc");
             Assert.IsNotNull(res);
-            Assert.AreEqual(res.Cards.First().First().Value, NominalValueEnum.Jack);
-            Assert.AreEqual(res.Cards.First().Last().Value, NominalValueEnum.Seven);
-            Assert.AreEqual(res.Cards.First().First().Suit, SuitEnum.Clubs);
+            Assert.AreEqual(NominalValueEnum.Jack, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Seven, res.Cards.First().Last().Value);
+            Assert.AreEqual(SuitEnum.Clubs, res.Cards.First().First().Suit);
         }
     }
 }
