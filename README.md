@@ -19,14 +19,38 @@ The project will be released using [Semantic Versioning](http://semver.org) and 
 =====================================================
 ##Documentation
 
-The class "HandEvaluator" exposes 2 static "Evaluate" methods that you can use.
- * **`HandEvaluationResult Evaluate(params string[] cards)`**
+The class `HandEvaluators` exposes 2 static "Evaluate" methods that you can use.
+ * **`HandEvaluationResult Evaluate(IEnumerable<string> playerCards, IEnumerable<string> communityCards, EvaluatorTypeEnum type)`**
+   
+   This method evaluates the best hand found with the given player cards and the given community cards. Cards are given in the 'vs' format where `v = [2,3,4,5,6,7,8,9,10,J,Q,K,A]` and `s = [S,D,H,C]`. Example: '3S','4C' means a three of spades and a four of clubs. 
+   
+   A total minimum of 5 cards must be given to be evaluated. 
+   
+   In texas hold'em, you would send the 2 cards of the player, and the five cards on the board. 
+   
+   In omaha hold'em, you would send the 4 cards of the player, and the five cards on the board. 
+   
+   The *type* parameter define what type of hand evaluation will be applied.
+   Supported type are:
+   * TexasHoldEm
+   * OmahaHoldEm 
 
-   This method evaluates the best hand found with the given cards. Cards are given in the 'vs' format where `v = [2,3,4,5,6,7,8,9,10,J,Q,K,A]` and `s = [S,D,H,C]`. Example: '3S','4C' means a three of spades and a four of clubs. A minimum of 5 cards must be given to be evaluated. In texas hold'em, you would send the 2 cards of the player, and the five cards on the board. See **HandEvaluationResult** below for more information on the output.
+   See **HandEvaluationResult** below for more information on the output.
  
- * **`IEnumerable<IGrouping<int, EvaluatedCardHolder>> Evaluate(params IStringCardsHolder[] cardHolders)`**
+ * **`IEnumerable<IGrouping<int, EvaluatedCardHolder>> Evaluate(EvaluatorTypeEnum type, params IStringCardsHolder[] cardHolders)`**
 
-   This method evaluates and ranks the different CardHolders. CardHolders implements IStringCardsHolder who simply have a `string[] StringCards` property. The cards of the CardHolder includes pocket cards and board cards. They will come back grouped by rank (where 1 is the best rank). See **EvaluatedCardHolder** below for more information on the output.
+   This method evaluates and ranks the different CardHolders. CardHolders implements IStringCardsHolder who simply have a `IEnumerable<string> PlayerCards` property and a `IEnumerable<string> CommunityCards` property. 
+   
+   The cards of the CardHolder includes player cards and community cards. 
+   
+   CardHolders will come back grouped by rank (where 1 is the best rank). 
+   
+   The *type* parameter define what type of hand evaluation will be applied.
+   Supported type are:
+   * TexasHoldEm
+   * OmahaHoldEm 
+   
+   See **EvaluatedCardHolder** below for more information on the output.
    
 ####HandEvaluationResult
 
@@ -37,12 +61,12 @@ The class "HandEvaluationResult" contains the result of the evaluation of a set 
 
  * **`List<PlayingCard[]> Cards`**
 
-   This property contains the 5 cards that were used in the best hand. Each item of the list is a group of card, and the first card of the group will be evaluated when similar hands are compared.
+   This property contains the 5 cards that were used in the best hand. Each item of the list is a group of card, and the first card of the group will be evaluated when similar hands are compared. The following examples are based on the "TexasHoldem" evaluation
    
-    * Example 1: {3s, 5h, 7d, 9c, Js, Qh, Ad} will return **HighCard** with `Cards = {[Ad],[Qh],[Js],[9c],[7d]}`. When comparing against another hand, the evaluator will compare Hand type. If equal, it will compare the first card of the first group (Ad). If the nominal value (A) is equal, it will compare the first card of the next group (Qh). And so on. If all the evaluated cards are equal, the 2 hands are equal.
-    * Example 2: {3s, 5h, 7d, 9c, Js, 3h, 5d} will return **TwoPairs** with `Cards = {[5h,5d],[3s,3h],[Js]}`. When comparing against another hand, the evaluator will compare Hand type. If equal, it will compare the first card of the first group (5h). If the nominal value (5) is equal, it will compare the first card of the next group (3s). And so on. If all the evaluated cards are equal, the 2 hands are equal.
-    * Example 3: {3s, 5h, 7d, 9c, Js, 4h, 6d} will return **Straight** with `Cards = {[7d,6d,5h,4h,3s]}`. When comparing against another hand, the evaluator will compare Hand type. If equal, it will compare the first card of the first group (7d). If the nominal value (7) is equal, the 2 hands are equal.
-    * Example 4: {3c, 5c, 7c, 9c, Jc, Qc, Ac} will return **Flush** with `Cards = {[Ac],[Qc],[Jc],[9c],[7c]}`. When comparing against another hand, the evaluator will compare Hand type. If equal, it will compare the first card of the first group (Ac). If the nominal value (A) is equal, it will compare the first card of the next group (Qc). And so on. If all the evaluated cards are equal, the 2 hands are equal.
+    * Example 1: {3s, 5h}, {7d, 9c, Js, Qh, Ad} will return **HighCard** with `Cards = {[Ad],[Qh],[Js],[9c],[7d]}`. When comparing against another hand, the evaluator will compare Hand type. If equal, it will compare the first card of the first group (Ad). If the nominal value (A) is equal, it will compare the first card of the next group (Qh). And so on. If all the evaluated cards are equal, the 2 hands are equal.
+    * Example 2: {3s, 5h}, { 7d, 9c, Js, 3h, 5d} will return **TwoPairs** with `Cards = {[5h,5d],[3s,3h],[Js]}`. When comparing against another hand, the evaluator will compare Hand type. If equal, it will compare the first card of the first group (5h). If the nominal value (5) is equal, it will compare the first card of the next group (3s). And so on. If all the evaluated cards are equal, the 2 hands are equal.
+    * Example 3: {3s, 5h}, { 7d, 9c, Js, 4h, 6d} will return **Straight** with `Cards = {[7d,6d,5h,4h,3s]}`. When comparing against another hand, the evaluator will compare Hand type. If equal, it will compare the first card of the first group (7d). If the nominal value (7) is equal, the 2 hands are equal.
+    * Example 4: {3c, 5c}, { 7c, 9c, Jc, Qc, Ac} will return **Flush** with `Cards = {[Ac],[Qc],[Jc],[9c],[7c]}`. When comparing against another hand, the evaluator will compare Hand type. If equal, it will compare the first card of the first group (Ac). If the nominal value (A) is equal, it will compare the first card of the next group (Qc). And so on. If all the evaluated cards are equal, the 2 hands are equal.
 
 
 ####EvaluatedCardHolder
