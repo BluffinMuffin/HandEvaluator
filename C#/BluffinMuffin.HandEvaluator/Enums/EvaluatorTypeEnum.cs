@@ -1,5 +1,8 @@
-﻿namespace BluffinMuffin.HandEvaluator.Enums
+﻿using System;
+
+namespace BluffinMuffin.HandEvaluator.Enums
 {
+    [Obsolete]
     public enum EvaluatorTypeEnum
     {
         TexasHoldEm,

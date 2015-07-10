@@ -62,7 +62,7 @@ namespace BluffinMuffin.HandEvaluator.Demo
             Console.WriteLine();
             Console.WriteLine();
 
-            foreach (var p in HandEvaluators.Evaluate(EvaluatorTypeEnum.TexasHoldEm, players).SelectMany(x => x))
+            foreach (var p in HandEvaluators.Evaluate(CardSelectionEnum.AllPlayerAndAllCommunity, players).SelectMany(x => x))
                 Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player) p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();

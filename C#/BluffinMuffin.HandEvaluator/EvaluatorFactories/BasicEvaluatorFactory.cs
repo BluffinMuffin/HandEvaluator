@@ -5,8 +5,7 @@ using BluffinMuffin.HandEvaluator.Evaluators;
 
 namespace BluffinMuffin.HandEvaluator.EvaluatorFactories
 {
-    [EvaluatorTypes(EvaluatorTypeEnum.TexasHoldEm, EvaluatorTypeEnum.OmahaHoldEm)]
-    public class BasicHoldemFactory : AbstractEvaluatorFactory
+    public class BasicEvaluatorFactory : AbstractEvaluatorFactory
     {
         public override IEnumerable<AbstractHandEvaluator> Evaluators
         {

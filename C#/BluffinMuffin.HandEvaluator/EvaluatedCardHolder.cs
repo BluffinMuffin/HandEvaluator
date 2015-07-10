@@ -8,10 +8,10 @@ namespace BluffinMuffin.HandEvaluator
         public HandEvaluationResult Evaluation { get; private set; }
         public int Rank { get; internal set; }
 
-        public EvaluatedCardHolder(IStringCardsHolder holder, EvaluatorTypeEnum type)
+        public EvaluatedCardHolder(IStringCardsHolder holder, CardSelectionEnum selection)
         {
             CardsHolder = holder;
-            Evaluation = HandEvaluators.Evaluate(holder.PlayerCards,holder.CommunityCards,type);
+            Evaluation = HandEvaluators.Evaluate(selection, holder.PlayerCards, holder.CommunityCards);
             Rank = int.MaxValue;
         }
     }
