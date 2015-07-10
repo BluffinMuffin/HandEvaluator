@@ -8,10 +8,10 @@ The project will be released using [Semantic Versioning](http://semver.org) and 
  * **[BluffinMuffin.Server](http://ericmas001.github.io/BluffinMuffin.Server)** *(Evaluator v1.0.0)*
 
 
-####Current Version: **[2.0.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v2.0.0) *(2015-07-08)*
- * Making distinction between PlayerCards and ComunityCards
- * Asking for Evaluation Type
- * Adding Supports for Omaha Poker Evaluation
+####Current Version: ** [2.1.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v2.1.0)** *(2015-07-09)*
+ * EvaluationType is now obsolete, it was a mistake
+ * Asking for CardSelectionType is way better
+ * Signatures of HandEvaluators have changed to reflect above changes. Old signatures are obsolete.
  * *[Full changelog ...](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/CHANGELOG.md)*
 
 <p align=center><img src="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/Documentation/hands_strength.png?raw=true" alt="Hand Strengths"></p>
@@ -22,24 +22,23 @@ The project will be released using [Semantic Versioning](http://semver.org) and 
 ##Documentation
 
 The class `HandEvaluators` exposes 2 static "Evaluate" methods that you can use.
- * **`HandEvaluationResult Evaluate(IEnumerable<string> playerCards, IEnumerable<string> communityCards, EvaluatorTypeEnum type)`**
+ * **`HandEvaluationResult Evaluate(CardSelectionEnum selection, IEnumerable<string> playerCards, IEnumerable<string> communityCards)`**
    
    This method evaluates the best hand found with the given player cards and the given community cards. Cards are given in the 'vs' format where `v = [2,3,4,5,6,7,8,9,10,J,Q,K,A]` and `s = [S,D,H,C]`. Example: '3S','4C' means a three of spades and a four of clubs. 
    
    A total minimum of 5 cards must be given to be evaluated. 
    
-   In texas hold'em, you would send the 2 cards of the player, and the five cards on the board. 
+   * In texas hold'em, you would send the 2 cards of the player, and the five cards on the board. 
+   * In omaha hold'em, you would send the 4 cards of the player, and the five cards on the board. 
    
-   In omaha hold'em, you would send the 4 cards of the player, and the five cards on the board. 
-   
-   The *type* parameter define what type of hand evaluation will be applied.
+   The *selection* parameter define what type of hand evaluation will be applied.
    Supported type are:
-   * TexasHoldEm
-   * OmahaHoldEm 
+   * AllPlayerAndAllCommunity
+   * TwoPlayersAndThreeCommunity 
 
    See **HandEvaluationResult** below for more information on the output.
  
- * **`IEnumerable<IGrouping<int, EvaluatedCardHolder>> Evaluate(EvaluatorTypeEnum type, params IStringCardsHolder[] cardHolders)`**
+ * **`IEnumerable<IGrouping<int, EvaluatedCardHolder>> Evaluate(CardSelectionEnum selection, params IStringCardsHolder[] cardHolders)`**
 
    This method evaluates and ranks the different CardHolders. CardHolders implements IStringCardsHolder who simply have a `IEnumerable<string> PlayerCards` property and a `IEnumerable<string> CommunityCards` property. 
    
@@ -47,10 +46,10 @@ The class `HandEvaluators` exposes 2 static "Evaluate" methods that you can use.
    
    CardHolders will come back grouped by rank (where 1 is the best rank). 
    
-   The *type* parameter define what type of hand evaluation will be applied.
+   The *selection* parameter define what type of hand evaluation will be applied.
    Supported type are:
-   * TexasHoldEm
-   * OmahaHoldEm 
+   * AllPlayerAndAllCommunity
+   * TwoPlayersAndThreeCommunity
    
    See **EvaluatedCardHolder** below for more information on the output.
    
