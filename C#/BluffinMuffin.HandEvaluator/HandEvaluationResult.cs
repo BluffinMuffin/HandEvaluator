@@ -9,13 +9,15 @@ namespace BluffinMuffin.HandEvaluator
     public class HandEvaluationResult : IComparable<HandEvaluationResult>
     {
         public HandEnum Hand { get; }
+        public EvaluationParams Parms { get; }
 
         public List<PlayingCard[]> Cards { get; }
 
         public Func<HandEvaluationResult, string> ToStringFunc { get; } 
 
-        public HandEvaluationResult(AbstractHandEvaluator evaluator)
+        public HandEvaluationResult(AbstractHandEvaluator evaluator, EvaluationParams parms)
         {
+            Parms = parms;
             Hand = evaluator.HandType;
             Cards = new List<PlayingCard[]>();
             ToStringFunc = evaluator.ResultToString;

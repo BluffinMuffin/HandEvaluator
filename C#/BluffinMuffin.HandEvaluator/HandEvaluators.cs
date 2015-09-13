@@ -14,7 +14,7 @@ namespace BluffinMuffin.HandEvaluator
         public static HandEvaluationResult Evaluate(IEnumerable<string> playerCards, IEnumerable<string> communityCards, EvaluationParams parms = null)
         {
             var myParms = parms ?? new EvaluationParams();
-            return myParms.Selector.SelectCards(playerCards, communityCards, myParms).Select(cards => myParms.EvaluatorFactory.Evaluators.Select(x => x.Evaluation(cards.ToArray())).Where(x => x != null).Max()).Max();
+            return myParms.Selector.SelectCards(playerCards, communityCards, myParms).Select(cards => myParms.EvaluatorFactory.Evaluators.Select(x => x.Evaluation(cards.ToArray(),myParms)).Where(x => x != null).Max()).Max();
         }
 
         public static IEnumerable<IGrouping<int, EvaluatedCardHolder>> Evaluate(IStringCardsHolder[] cardHolders, EvaluationParams parms = null)

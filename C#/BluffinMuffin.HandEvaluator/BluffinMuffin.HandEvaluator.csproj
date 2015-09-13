@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandRankers\BasicHandRanker.cs" />
+    <Compile Include="HandRankers\AbstractHandRanker.cs" />
     <Compile Include="Selectors\AbstractCardsSelector.cs" />
     <Compile Include="Evaluators\AbstractHandEvaluator.cs" />
     <Compile Include="EvaluatedCardHolder.cs" />

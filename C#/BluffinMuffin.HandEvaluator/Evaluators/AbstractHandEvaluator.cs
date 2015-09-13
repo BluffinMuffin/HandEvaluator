@@ -7,7 +7,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
     {
         public abstract HandEnum HandType { get; }
 
-        internal abstract HandEvaluationResult Evaluation(PlayingCard[] cards);
+        internal abstract HandEvaluationResult Evaluation(PlayingCard[] cards, EvaluationParams parms);
 
         public abstract String ResultToString(HandEvaluationResult res);
     }

@@ -9,12 +9,12 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
     {
         public override HandEnum HandType => HandEnum.OnePair;
 
-        internal override HandEvaluationResult Evaluation(PlayingCard[] cards)
+        internal override HandEvaluationResult Evaluation(PlayingCard[] cards, EvaluationParams parms)
         {
             if (cards.Length < 2)
                 return null;
 
-            var res = new HandEvaluationResult(this);
+            var res = new HandEvaluationResult(this, parms);
 
             var groupedCards = cards.OrderByDescending(x => x).GroupBy(x => x.Value).ToArray();
 
