@@ -31,7 +31,7 @@ namespace BluffinMuffin.HandEvaluator
                 return 1;
 
             if (Hand != other.Hand)
-                return ((int) Hand).CompareTo((int) other.Hand);
+                return (Parms.HandRanker.Rank(Hand)).CompareTo(Parms.HandRanker.Rank(other.Hand));
 
             for (var i = 0; i < Math.Max(Cards.Count, other.Cards.Count); ++i)
             {

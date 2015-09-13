@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
+using BluffinMuffin.HandEvaluator.HandRankers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BluffinMuffin.HandEvaluator.Test
@@ -230,6 +231,18 @@ namespace BluffinMuffin.HandEvaluator.Test
             Assert.AreEqual(7, result.RankOf(twoPairs));
             Assert.AreEqual(8, result.RankOf(onePair));
             Assert.AreEqual(9, result.RankOf(highCard));
+
+            var resultFlushBeatsFullHouse = HandEvaluators.Evaluate(new IStringCardsHolder[] { straightFlush, fourOfAKind, fullHouse, flush, straight, threeOfAKind, twoPairs, onePair, highCard }, new EvaluationParams {HandRanker = new FlushBeatsFullHouseHandRanker()}).ToArray();
+
+            Assert.AreEqual(1, resultFlushBeatsFullHouse.RankOf(straightFlush));
+            Assert.AreEqual(2, resultFlushBeatsFullHouse.RankOf(fourOfAKind));
+            Assert.AreEqual(3, resultFlushBeatsFullHouse.RankOf(flush));
+            Assert.AreEqual(4, resultFlushBeatsFullHouse.RankOf(fullHouse));
+            Assert.AreEqual(5, resultFlushBeatsFullHouse.RankOf(straight));
+            Assert.AreEqual(6, resultFlushBeatsFullHouse.RankOf(threeOfAKind));
+            Assert.AreEqual(7, resultFlushBeatsFullHouse.RankOf(twoPairs));
+            Assert.AreEqual(8, resultFlushBeatsFullHouse.RankOf(onePair));
+            Assert.AreEqual(9, resultFlushBeatsFullHouse.RankOf(highCard));
         }
     }
 }
