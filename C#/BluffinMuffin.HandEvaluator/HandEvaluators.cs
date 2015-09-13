@@ -11,19 +11,7 @@ namespace BluffinMuffin.HandEvaluator
     public static class HandEvaluators
     {
         private static Dictionary<CardSelectionEnum, AbstractCardsSelector> m_Selectors;
-
-        [Obsolete()]
-        public static HandEvaluationResult Evaluate(IEnumerable<string> playerCards, IEnumerable<string> communityCards, EvaluatorTypeEnum type)
-        {
-            return Evaluate(type == EvaluatorTypeEnum.OmahaHoldEm ? CardSelectionEnum.TwoPlayersAndThreeCommunity : CardSelectionEnum.AllPlayerAndAllCommunity, playerCards, communityCards);
-        }
-
-        [Obsolete()]
-        public static IEnumerable<IGrouping<int, EvaluatedCardHolder>> Evaluate(EvaluatorTypeEnum type, params IStringCardsHolder[] cardHolders)
-        {
-            return Evaluate(type == EvaluatorTypeEnum.OmahaHoldEm ? CardSelectionEnum.TwoPlayersAndThreeCommunity : CardSelectionEnum.AllPlayerAndAllCommunity, cardHolders);
-        }
-
+        
         public static HandEvaluationResult Evaluate(CardSelectionEnum selection, IEnumerable<string> playerCards, IEnumerable<string> communityCards)
         {
             if (m_Selectors == null)

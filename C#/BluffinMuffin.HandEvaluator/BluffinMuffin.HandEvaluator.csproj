@@ -43,11 +43,11 @@
     <Compile Include="AbstractHandEvaluator.cs" />
     <Compile Include="Attributes\CardSelectionAttribute.cs" />
     <Compile Include="Enums\CardSelectionEnum.cs" />
-    <Compile Include="Enums\EvaluatorTypeEnum.cs" />
     <Compile Include="EvaluatedCardHolder.cs" />
     <Compile Include="Enums\HandEnum.cs" />
     <Compile Include="Enums\NominalValueEnum.cs" />
     <Compile Include="Enums\SuitEnum.cs" />
+    <Compile Include="EvaluationParams.cs" />
     <Compile Include="EvaluatorFactories\AbstractEvaluatorFactory.cs" />
     <Compile Include="EvaluatorFactories\BasicEvaluatorFactory.cs" />
     <Compile Include="Exceptions\InvalidStringRepresentationException.cs" />
