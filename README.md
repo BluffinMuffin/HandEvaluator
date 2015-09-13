@@ -8,14 +8,10 @@ The project will be released using [Semantic Versioning](http://semver.org) and 
  * **[BluffinMuffin.Server 0.10.0](http://ericmas001.github.io/BluffinMuffin.Server)** *(Evaluator v2.1.0)*
 
 
-####Current Version: [2.2.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v2.2.0) *(2015-09-13)*
- * Adding 2 CardSelectionType: OnlyHoleCards and OnlyHoleCardsWithSuitRanking
- * Making evalutation of partial hand possible. Not all HandEvaluator requires 5 cards. 
-   * HighCard only needs 1 card
-   * OnePair only needs 2 cards
-   * ThreeOfAKinbd only needs 3 cards
-   * TwoPairs only needs 4 cards
-   * FourOfAKind only needs 4 cards
+####Current Version: [3.0.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.0.0) *(2015-09-13)*
+ * Changing signature in HandEvaluators with parameters as a way to reduce incompatibilities every versions
+ * Adding the FlushBeatsFullHouse support so games with stripped deck can be evaluated correctly
+ * Adding the NoStraightNoFlush as a first step to be able to support Ace-to-five lowball poker
  * *[Full changelog ...](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/CHANGELOG.md)*
 
 <p align=center><img src="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/Documentation/hands_strength.png?raw=true" alt="Hand Strengths"></p>
