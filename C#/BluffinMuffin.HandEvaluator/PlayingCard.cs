@@ -12,8 +12,9 @@ namespace BluffinMuffin.HandEvaluator
 
         public NominalValueEnum Value { get; }
         public SuitEnum Suit { get; set; }
+        private EvaluationParams Parms { get; }
 
-        public PlayingCard(NominalValueEnum value, SuitEnum suit)
+        public PlayingCard(NominalValueEnum value, SuitEnum suit, EvaluationParams parms = null)
         {
             if (!Enum.IsDefined(typeof(NominalValueEnum), value))
                 throw new NotInEnumScopeException<NominalValueEnum>(value);
@@ -23,9 +24,10 @@ namespace BluffinMuffin.HandEvaluator
 
             Value = value;
             Suit = suit;
+            Parms = parms ?? new EvaluationParams();
         }
 
-        public PlayingCard(string stringRepresentation)
+        public PlayingCard(string stringRepresentation, EvaluationParams parms = null)
         {
             if (stringRepresentation.Length < 2 || stringRepresentation.Length > 3)
                 throw new InvalidStringRepresentationException(stringRepresentation, "Length");
@@ -38,6 +40,7 @@ namespace BluffinMuffin.HandEvaluator
             if (!SUITS.Contains(suit))
                 throw new InvalidStringRepresentationException(stringRepresentation, "Suit");
             Suit = (SuitEnum)Array.IndexOf(SUITS, suit);
+            Parms = parms ?? new EvaluationParams();
         }
         public override string ToString()
         {
@@ -46,7 +49,8 @@ namespace BluffinMuffin.HandEvaluator
 
         public virtual int CompareTo(PlayingCard other)
         {
-            return ((int)Value).CompareTo((int)other.Value);
+            int valueCompare = ((int) Value).CompareTo((int) other.Value);
+            return valueCompare == 0 && Parms.UseSuitRanking ? ((int) Suit).CompareTo((int) other.Suit) : valueCompare;
         }
     }
 }

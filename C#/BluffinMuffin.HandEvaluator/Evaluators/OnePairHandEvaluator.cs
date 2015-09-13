@@ -5,16 +5,16 @@ using static System.String;
 
 namespace BluffinMuffin.HandEvaluator.Evaluators
 {
-    public class OnePairAbstractHandEvaluator : AbstractHandEvaluator
+    public class OnePairHandEvaluator : AbstractHandEvaluator
     {
         public override HandEnum HandType => HandEnum.OnePair;
 
-        public override HandEvaluationResult Evaluation(PlayingCard[] cards)
+        internal override HandEvaluationResult Evaluation(PlayingCard[] cards, EvaluationParams parms)
         {
             if (cards.Length < 2)
                 return null;
 
-            var res = new HandEvaluationResult(this);
+            var res = new HandEvaluationResult(this, parms);
 
             var groupedCards = cards.OrderByDescending(x => x).GroupBy(x => x.Value).ToArray();
 

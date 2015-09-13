@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
+using BluffinMuffin.HandEvaluator.Selectors;
 using static System.String;
 
 namespace BluffinMuffin.HandEvaluator.Demo
@@ -59,20 +60,20 @@ namespace BluffinMuffin.HandEvaluator.Demo
             Console.WriteLine();
             Console.WriteLine("=============NORMAL=============");
 
-            foreach (var p in HandEvaluators.Evaluate(CardSelectionEnum.AllPlayerAndAllCommunity, players).SelectMany(x => x))
-                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player)p.CardsHolder).Name, p.Evaluation);
+            foreach (var p in HandEvaluators.Evaluate(players).SelectMany(x => x))
+                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player) p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();
             Console.WriteLine("=============ONLY HAND=============");
 
-            foreach (var p in HandEvaluators.Evaluate(CardSelectionEnum.OnlyHoleCards, players).SelectMany(x => x))
-                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player)p.CardsHolder).Name, p.Evaluation);
+            foreach (var p in HandEvaluators.Evaluate(players, new EvaluationParams { Selector = new OnlyHoleCardsSelector() }).SelectMany(x => x))
+                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player) p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();
             Console.WriteLine("=============ONLY HAND WITH SUIT=============");
 
-            foreach (var p in HandEvaluators.Evaluate(CardSelectionEnum.OnlyHoleCardsWithSuitRanking, players).SelectMany(x => x))
-                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player)p.CardsHolder).Name, p.Evaluation);
+            foreach (var p in HandEvaluators.Evaluate(players, new EvaluationParams { Selector = new OnlyHoleCardsSelector(), UseSuitRanking = true}).SelectMany(x => x))
+                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player) p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();
             Console.ReadLine();

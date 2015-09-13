@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BluffinMuffin.HandEvaluator.Evaluators;
 
 namespace BluffinMuffin.HandEvaluator.EvaluatorFactories
 {

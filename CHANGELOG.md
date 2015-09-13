@@ -1,3 +1,12 @@
+# 3.*
+
+## 3.0.*
+
+### [3.0.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.0.0) *(2015-09-13)*
+ * Changing signature in HandEvaluators with parameters as a way to reduce incompatibilities every versions
+ * Adding the FlushBeatsFullHouse support so games with stripped deck can be evaluated correctly
+ * Adding the NoStraightNoFlush as a first step to be able to support Ace-to-five lowball poker
+
 # 2.*
 
 ## 2.2.*
