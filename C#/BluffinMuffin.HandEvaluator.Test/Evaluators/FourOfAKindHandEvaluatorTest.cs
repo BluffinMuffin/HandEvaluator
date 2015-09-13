@@ -23,9 +23,24 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         }
 
         [TestMethod]
-        public void LessThan5CardsShouldBeNull()
+        public void LessThan4CardsShouldBeNull()
+        {
+            var res = Evaluate("4c", "4h", "4s");
+            Assert.IsNull(res);
+        }
+
+        [TestMethod]
+        public void Only4CardsWithFourOfAKindShouldNotBeNull()
         {
             var res = Evaluate("4c", "4h", "4s", "4d");
+            Assert.IsNotNull(res);
+            Assert.AreEqual(NominalValueEnum.Four, res.Cards.First().First().Value);
+        }
+
+        [TestMethod]
+        public void Only4CardsWithoutFourOfAKindShouldBeNull()
+        {
+            var res = Evaluate("4c", "4h", "4s", "3h");
             Assert.IsNull(res);
         }
 

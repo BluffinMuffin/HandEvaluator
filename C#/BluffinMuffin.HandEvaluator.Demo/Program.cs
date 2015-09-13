@@ -53,7 +53,9 @@ namespace BluffinMuffin.HandEvaluator.Demo
                 new Player("PD", "Ks", "5s", "As", "Kc", "Qs", "10s", "Jh"),
                 new Player("PE", "Ks", "5h", "8d", "7c", "5s", "5h", "Kh"),
                 new Player("PF", "Ks", "5h", "5d", "7c", "5s", "5h", "Kh"),
-                new Player("PG", "Ks", "5h", "Ah", "Kh", "Qh", "10h", "Jh")
+                new Player("PG", "Ks", "5h", "Ah", "Kh", "Qh", "10h", "Jh"),
+                new Player("PH", "4s"),
+                new Player("PI", "2s", "3h"),
             };
 
             foreach (Player p in players)

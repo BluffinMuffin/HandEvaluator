@@ -1,19 +1,17 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
+using static System.Math;
+using static System.String;
 
 namespace BluffinMuffin.HandEvaluator.Evaluators
 {
     public class OnePairAbstractHandEvaluator : AbstractHandEvaluator
     {
-        public override HandEnum HandType
-        {
-            get {return HandEnum.OnePair;}
-        }
+        public override HandEnum HandType => HandEnum.OnePair;
 
         public override HandEvaluationResult Evaluation(PlayingCard[] cards)
         {
-            if (cards.Length < 5)
+            if (cards.Length < 2)
                 return null;
 
             var res = new HandEvaluationResult(this);
@@ -29,15 +27,17 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
             res.Cards.Add(pair.ToArray());
 
-            foreach (var c in cards.Except(pair).OrderByDescending(x => x.Value).Take(3))
-                res.Cards.Add(new []{c});
+            var remaining = cards.Except(pair).OrderByDescending(x => x);
+
+            if (remaining.Any())
+                remaining.Take(Min(3,remaining.Count())).ToList().ForEach(c => res.Cards.Add(new[] { c }));
 
             return res;
         }
 
         public override string ResultToString(HandEvaluationResult res)
         {
-            return String.Format("One Pair with cards [({0}), {1}]", String.Join(", ",res.Cards[0].Select(x => x.ToString())), String.Join(", ",res.Cards.Skip(1).Select(x => x[0].ToString())));
+            return $"One Pair with cards [{Join(", ", res.Cards.Select(x => x.Length > 1 ? $"({Join(", ", x.Select(c => c.ToString()))})" : x[0].ToString()))}]";
         }
     }
 }

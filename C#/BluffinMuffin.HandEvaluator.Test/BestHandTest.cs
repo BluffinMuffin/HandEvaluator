@@ -9,10 +9,16 @@ namespace BluffinMuffin.HandEvaluator.Test
     {
 
         [TestMethod]
-        public void LessThanFiveCardsShouldBeNull()
+        public void LessThanFiveCardsShouldBeWorking()
         {
             var res = HandEvaluators.Evaluate( CardSelectionEnum.AllPlayerAndAllCommunity,new[] {"Ks", "5s"}, new[] {"8d", "As"});
-            Assert.IsNull(res);
+            Assert.IsNotNull(res);
+            Assert.AreEqual(HandEnum.HighCard, res.Hand);
+            Assert.AreEqual(NominalValueEnum.Ace, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.King, res.Cards.Skip(1).First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Eight, res.Cards.Skip(2).First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Five, res.Cards.Skip(3).First().First().Value);
+            Assert.AreEqual(4, res.Cards.Count);
         }
 
 
