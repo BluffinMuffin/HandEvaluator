@@ -8,7 +8,7 @@ The project will be released using [Semantic Versioning](http://semver.org) and 
  * **[BluffinMuffin.Server 0.10.0](http://ericmas001.github.io/BluffinMuffin.Server)** *(Evaluator v2.1.0)*
 
 
-####Current Version: ** [2.2.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v2.2.0) *(2015-09-13)*
+####Current Version: [2.2.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v2.2.0) *(2015-09-13)*
  * Adding 2 CardSelectionType: OnlyHoleCards and OnlyHoleCardsWithSuitRanking
  * Making evalutation of partial hand possible. Not all HandEvaluator requires 5 cards. 
    * HighCard only needs 1 card
