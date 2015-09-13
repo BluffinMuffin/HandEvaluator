@@ -5,13 +5,17 @@ BluffinMuffin HandEvaluator is a .Net PokerHand Evaluator that supports [standar
 The project will be released using [Semantic Versioning](http://semver.org) and developped using [Vincent Driessen's Git Model](http://nvie.com/posts/a-successful-git-branching-model/).
     
 ####Known Implementations
- * **[BluffinMuffin.Server](http://ericmas001.github.io/BluffinMuffin.Server)** *(Evaluator v1.0.0)*
+ * **[BluffinMuffin.Server 0.10.0](http://ericmas001.github.io/BluffinMuffin.Server)** *(Protocol v2.1.0)*
 
 
-####Current Version: ** [2.1.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v2.1.0)** *(2015-07-09)*
- * EvaluationType is now obsolete, it was a mistake
- * Asking for CardSelectionType is way better
- * Signatures of HandEvaluators have changed to reflect above changes. Old signatures are obsolete.
+####Current Version: ** [2.2.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v2.2.0) *(2015-09-13)*
+ * Adding 2 CardSelectionType: OnlyHoleCards and OnlyHoleCardsWithSuitRanking
+ * Making evalutation of partial hand possible. Not all HandEvaluator requires 5 cards. 
+   * HighCard only needs 1 card
+   * OnePair only needs 2 cards
+   * ThreeOfAKinbd only needs 3 cards
+   * TwoPairs only needs 4 cards
+   * FourOfAKind only needs 4 cards
  * *[Full changelog ...](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/CHANGELOG.md)*
 
 <p align=center><img src="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/Documentation/hands_strength.png?raw=true" alt="Hand Strengths"></p>
