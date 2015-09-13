@@ -43,18 +43,26 @@
 
 <ul>
 <li>
-<strong><a href="http://ericmas001.github.io/BluffinMuffin.Server">BluffinMuffin.Server</a></strong> <em>(Evaluator v1.0.0)</em>
+<strong><a href="http://ericmas001.github.io/BluffinMuffin.Server">BluffinMuffin.Server 0.10.0</a></strong> <em>(Evaluator v2.1.0)</em>
 </li>
 </ul>
 
 <h4>
-<a id="current-version-200-2015-07-08" class="anchor" href="#current-version-200-2015-07-08" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Version: *<em><a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v2.0.0">2.0.0</a> *(2015-07-08)</em>
+<a id="current-version-220-2015-09-13" class="anchor" href="#current-version-220-2015-09-13" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Version: <a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v2.2.0">2.2.0</a> <em>(2015-09-13)</em>
 </h4>
 
 <ul>
-<li>Making distinction between PlayerCards and ComunityCards</li>
-<li>Asking for Evaluation Type</li>
-<li>Adding Supports for Omaha Poker Evaluation</li>
+<li>Adding 2 CardSelectionType: OnlyHoleCards and OnlyHoleCardsWithSuitRanking</li>
+<li>Making evalutation of partial hand possible. Not all HandEvaluator requires 5 cards. 
+
+<ul>
+<li>HighCard only needs 1 card</li>
+<li>OnePair only needs 2 cards</li>
+<li>ThreeOfAKinbd only needs 3 cards</li>
+<li>TwoPairs only needs 4 cards</li>
+<li>FourOfAKind only needs 4 cards</li>
+</ul>
+</li>
 <li><em><a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/CHANGELOG.md">Full changelog ...</a></em></li>
 </ul>
 
@@ -71,28 +79,29 @@
 
 <ul>
 <li>
-<p><strong><code>HandEvaluationResult Evaluate(IEnumerable&lt;string&gt; playerCards, IEnumerable&lt;string&gt; communityCards, EvaluatorTypeEnum type)</code></strong></p>
+<p><strong><code>HandEvaluationResult Evaluate(CardSelectionEnum selection, IEnumerable&lt;string&gt; playerCards, IEnumerable&lt;string&gt; communityCards)</code></strong></p>
 
 <p>This method evaluates the best hand found with the given player cards and the given community cards. Cards are given in the 'vs' format where <code>v = [2,3,4,5,6,7,8,9,10,J,Q,K,A]</code> and <code>s = [S,D,H,C]</code>. Example: '3S','4C' means a three of spades and a four of clubs. </p>
 
 <p>A total minimum of 5 cards must be given to be evaluated. </p>
 
-<p>In texas hold'em, you would send the 2 cards of the player, and the five cards on the board. </p>
+<ul>
+<li>In texas hold'em, you would send the 2 cards of the player, and the five cards on the board. </li>
+<li>In omaha hold'em, you would send the 4 cards of the player, and the five cards on the board. </li>
+</ul>
 
-<p>In omaha hold'em, you would send the 4 cards of the player, and the five cards on the board. </p>
-
-<p>The <em>type</em> parameter define what type of hand evaluation will be applied.
+<p>The <em>selection</em> parameter define what type of hand evaluation will be applied.
 Supported type are:</p>
 
 <ul>
-<li>TexasHoldEm</li>
-<li>OmahaHoldEm </li>
+<li>AllPlayerAndAllCommunity</li>
+<li>TwoPlayersAndThreeCommunity </li>
 </ul>
 
 <p>See <strong>HandEvaluationResult</strong> below for more information on the output.</p>
 </li>
 <li>
-<p><strong><code>IEnumerable&lt;IGrouping&lt;int, EvaluatedCardHolder&gt;&gt; Evaluate(EvaluatorTypeEnum type, params IStringCardsHolder[] cardHolders)</code></strong></p>
+<p><strong><code>IEnumerable&lt;IGrouping&lt;int, EvaluatedCardHolder&gt;&gt; Evaluate(CardSelectionEnum selection, params IStringCardsHolder[] cardHolders)</code></strong></p>
 
 <p>This method evaluates and ranks the different CardHolders. CardHolders implements IStringCardsHolder who simply have a <code>IEnumerable&lt;string&gt; PlayerCards</code> property and a <code>IEnumerable&lt;string&gt; CommunityCards</code> property. </p>
 
@@ -100,12 +109,12 @@ Supported type are:</p>
 
 <p>CardHolders will come back grouped by rank (where 1 is the best rank). </p>
 
-<p>The <em>type</em> parameter define what type of hand evaluation will be applied.
+<p>The <em>selection</em> parameter define what type of hand evaluation will be applied.
 Supported type are:</p>
 
 <ul>
-<li>TexasHoldEm</li>
-<li>OmahaHoldEm </li>
+<li>AllPlayerAndAllCommunity</li>
+<li>TwoPlayersAndThreeCommunity</li>
 </ul>
 
 <p>See <strong>EvaluatedCardHolder</strong> below for more information on the output.</p>
