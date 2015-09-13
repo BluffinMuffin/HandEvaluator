@@ -4,7 +4,6 @@
     {
         AllPlayerAndAllCommunity,
         TwoPlayersAndThreeCommunity,
-        OnlyHoleCards,
-        OnlyHoleCardsWithSuitRanking,
+        OnlyHoleCards
     }
 }

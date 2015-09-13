@@ -12,8 +12,9 @@ namespace BluffinMuffin.HandEvaluator
     {
         private static Dictionary<CardSelectionEnum, AbstractCardsSelector> m_Selectors;
         
-        public static HandEvaluationResult Evaluate(CardSelectionEnum selection, IEnumerable<string> playerCards, IEnumerable<string> communityCards)
+        public static HandEvaluationResult Evaluate(IEnumerable<string> playerCards, IEnumerable<string> communityCards, EvaluationParams parms = null)
         {
+            var myParms = parms ?? new EvaluationParams();
             if (m_Selectors == null)
             {
                 m_Selectors = new Dictionary<CardSelectionEnum, AbstractCardsSelector>();
@@ -24,12 +25,12 @@ namespace BluffinMuffin.HandEvaluator
                         m_Selectors.Add(att.Selector, (AbstractCardsSelector)Activator.CreateInstance(t));
                 }
             }
-            return !m_Selectors.ContainsKey(selection) ? null : m_Selectors[selection].SelectCards(playerCards, communityCards).Select(cards => new BasicEvaluatorFactory().Evaluators.Select(x => x.Evaluation(cards.ToArray())).Where(x => x != null).Max()).Max();
+            return !m_Selectors.ContainsKey(myParms.CardSelection) ? null : m_Selectors[myParms.CardSelection].SelectCards(playerCards, communityCards, myParms).Select(cards => new BasicEvaluatorFactory().Evaluators.Select(x => x.Evaluation(cards.ToArray())).Where(x => x != null).Max()).Max();
         }
 
-        public static IEnumerable<IGrouping<int, EvaluatedCardHolder>> Evaluate(CardSelectionEnum selection, params IStringCardsHolder[] cardHolders)
+        public static IEnumerable<IGrouping<int, EvaluatedCardHolder>> Evaluate(IStringCardsHolder[] cardHolders, EvaluationParams parms = null)
         {
-            var holders = cardHolders.Select(x => new EvaluatedCardHolder(x, selection));
+            var holders = cardHolders.Select(x => new EvaluatedCardHolder(x, parms));
             var orderedHolders = holders.OrderByDescending(p => p.Evaluation).ToArray();
             var currentRank = 0;
             EvaluatedCardHolder lastHolder = null;

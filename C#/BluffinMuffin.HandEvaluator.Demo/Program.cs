@@ -59,20 +59,20 @@ namespace BluffinMuffin.HandEvaluator.Demo
             Console.WriteLine();
             Console.WriteLine("=============NORMAL=============");
 
-            foreach (var p in HandEvaluators.Evaluate(CardSelectionEnum.AllPlayerAndAllCommunity, players).SelectMany(x => x))
-                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player)p.CardsHolder).Name, p.Evaluation);
+            foreach (var p in HandEvaluators.Evaluate(players).SelectMany(x => x))
+                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player) p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();
             Console.WriteLine("=============ONLY HAND=============");
 
-            foreach (var p in HandEvaluators.Evaluate(CardSelectionEnum.OnlyHoleCards, players).SelectMany(x => x))
-                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player)p.CardsHolder).Name, p.Evaluation);
+            foreach (var p in HandEvaluators.Evaluate(players, new EvaluationParams {CardSelection = CardSelectionEnum.OnlyHoleCards}).SelectMany(x => x))
+                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player) p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();
             Console.WriteLine("=============ONLY HAND WITH SUIT=============");
 
-            foreach (var p in HandEvaluators.Evaluate(CardSelectionEnum.OnlyHoleCardsWithSuitRanking, players).SelectMany(x => x))
-                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player)p.CardsHolder).Name, p.Evaluation);
+            foreach (var p in HandEvaluators.Evaluate(players, new EvaluationParams { CardSelection = CardSelectionEnum.OnlyHoleCards, UseSuitRanking = true}).SelectMany(x => x))
+                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player) p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();
             Console.ReadLine();
