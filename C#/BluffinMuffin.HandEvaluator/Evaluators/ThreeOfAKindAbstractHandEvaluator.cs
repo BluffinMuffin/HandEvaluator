@@ -1,19 +1,17 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
+using static System.String;
+using static System.Math;
 
 namespace BluffinMuffin.HandEvaluator.Evaluators
 {
     public class ThreeOfAKindAbstractHandEvaluator : AbstractHandEvaluator
     {
-        public override HandEnum HandType
-        {
-            get {return HandEnum.ThreeOfAKind;}
-        }
+        public override HandEnum HandType => HandEnum.ThreeOfAKind;
 
         public override HandEvaluationResult Evaluation(PlayingCard[] cards)
         {
-            if (cards.Length < 5)
+            if (cards.Length < 3)
                 return null;
 
             var res = new HandEvaluationResult(this);
@@ -27,16 +25,19 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
             var triplet = triplets.First();
 
-            res.Cards.Add(triplet.ToArray());
+            res.Cards.Add(triplet.OrderByDescending(x => x).ToArray());
 
-            res.Cards.AddRange(cards.Except(triplet).OrderByDescending(x => x).Take(2).Select(x => new []{x}));
+            var remaining = cards.Except(triplet).OrderByDescending(x => x);
+
+            if (remaining.Any())
+                remaining.Take(Min(2, remaining.Count())).ToList().ForEach(c => res.Cards.Add(new[] { c }));
 
             return res;
         }
 
         public override string ResultToString(HandEvaluationResult res)
         {
-            return String.Format("Three Of A Kind with cards [({0}), {1}]", String.Join(", ", res.Cards[0].Select(x => x.ToString())), String.Join(", ", res.Cards.Skip(1).Select(x => x[0].ToString())));
+            return $"Three Of A Kind with cards [{Join(", ", res.Cards.Select(x => x.Length > 1 ? $"({Join(", ", x.Select(c => c.ToString()))})" : x[0].ToString()))}]";
         }
     }
 }

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
+using static System.String;
 
 namespace BluffinMuffin.HandEvaluator.Evaluators
 {
     public class StraightAbstractHandEvaluator : AbstractHandEvaluator
     {
-        public override HandEnum HandType
-        {
-            get {return HandEnum.Straight;}
-        }
+        public override HandEnum HandType => HandEnum.Straight;
 
         public override HandEvaluationResult Evaluation(PlayingCard[] cards)
         {
@@ -18,7 +15,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
             var res = new HandEvaluationResult(this);
 
-            var distinctCards = cards.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x.Value).ToArray();
+            var distinctCards = cards.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x).ToArray();
 
             if (distinctCards.Length < 5)
                 return null;
@@ -49,7 +46,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
         public override string ResultToString(HandEvaluationResult res)
         {
-            return String.Format("Straight with cards [{0}]", String.Join(", ", res.Cards[0].Select(x => x.ToString())));
+            return $"Straight with cards [{Join(", ", res.Cards[0].Select(x => x.ToString()))}]";
         }
     }
 }

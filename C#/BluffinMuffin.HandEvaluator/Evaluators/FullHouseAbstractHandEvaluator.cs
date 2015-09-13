@@ -1,15 +1,12 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
+using static System.String;
 
 namespace BluffinMuffin.HandEvaluator.Evaluators
 {
     public class FullHouseAbstractHandEvaluator : AbstractHandEvaluator
     {
-        public override HandEnum HandType
-        {
-            get {return HandEnum.FullHouse;}
-        }
+        public override HandEnum HandType => HandEnum.FullHouse;
 
         public override HandEvaluationResult Evaluation(PlayingCard[] cards)
         {
@@ -27,16 +24,16 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
             if (triplet == null || pair == null)
                 return null;
 
-            res.Cards.Add(triplet.ToArray());
+            res.Cards.Add(triplet.OrderByDescending(x => x).ToArray());
 
-            res.Cards.Add(pair.ToArray());
+            res.Cards.Add(pair.OrderByDescending(x => x).ToArray());
 
             return res;
         }
 
         public override string ResultToString(HandEvaluationResult res)
         {
-            return String.Format("Full House with cards [{0}, {1}]", String.Join(", ", res.Cards[0].Select(x => x.ToString())), String.Join(", ", res.Cards[1].Select(x => x.ToString())));
+            return $"Full House with cards [{Join(", ", res.Cards[0].Select(x => x.ToString()))}, {Join(", ", res.Cards[1].Select(x => x.ToString()))}]";
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
+using static System.String;
 
 namespace BluffinMuffin.HandEvaluator.Demo
 {
@@ -9,8 +10,8 @@ namespace BluffinMuffin.HandEvaluator.Demo
     {
         private class Player : IStringCardsHolder
         {
-            public string Name { get; private set; }
-            public string[] Cards { get; private set; }
+            public string Name { get; }
+            private string[] Cards { get; }
 
             public Player(string name, params string[] cards)
             {
@@ -20,31 +21,25 @@ namespace BluffinMuffin.HandEvaluator.Demo
 
             public override string ToString()
             {
-                return String.Format("{0}: [{1}]", Name, String.Join(",", Cards));
+                return $"{Name}: [{Join(",", Cards)}]";
             }
 
-            public IEnumerable<string> PlayerCards
-            {
-                get { return Cards.Take(2); }
-            }
+            public IEnumerable<string> PlayerCards => Cards.Take(2);
 
-            public IEnumerable<string> CommunityCards
-            {
-                get { return Cards.Skip(2); }
-            }
+            public IEnumerable<string> CommunityCards => Cards.Skip(2);
         }
 
         private static void Main()
         {
-            Player[] players =
+            IStringCardsHolder[] players =
             {
                 new Player("P1", "Ks", "5s", "8d", "As", "10s", "2s", "8s"),
                 new Player("P2", "2h", "5h", "4h", "Ah", "10s", "3h", "4c"),
                 new Player("P3", "Ks", "5c", "Qd", "Ac", "10c", "2c", "Js"),
                 new Player("P4", "2s", "2c", "2d", "3c", "5d", "9c", "3h"),
                 new Player("P5", "2s", "2c", "5d", "3c", "3d", "9c", "3h"),
-                new Player("P6", "4s", "4c", "4d", "3c", "3d", "9c", "4h"),
-                new Player("P7", "4s", "4c", "4d", "3c"),
+                new Player("P6", "4c", "4s", "4d", "3c", "3d", "9c", "4h"),
+                new Player("P7", "4c", "4d", "4c", "3c"),
                 new Player("P8", "Ks", "5h", "8d", "Ac", "7s", "10h", "2s"),
                 new Player("P9", "Ks", "5h", "8d", "Ac", "7s", "10h", "Kh"),
                 new Player("PA", "Ks", "5h", "8d", "7c", "7s", "10h", "Kh"),
@@ -53,17 +48,31 @@ namespace BluffinMuffin.HandEvaluator.Demo
                 new Player("PD", "Ks", "5s", "As", "Kc", "Qs", "10s", "Jh"),
                 new Player("PE", "Ks", "5h", "8d", "7c", "5s", "5h", "Kh"),
                 new Player("PF", "Ks", "5h", "5d", "7c", "5s", "5h", "Kh"),
-                new Player("PG", "Ks", "5h", "Ah", "Kh", "Qh", "10h", "Jh")
+                new Player("PG", "Ks", "5h", "Ah", "Kh", "Qh", "10h", "Jh"),
+                new Player("PH", "4s"),
+                new Player("PI", "2s", "3h"),
             };
 
-            foreach (Player p in players)
+            foreach (IStringCardsHolder p in players)
                 Console.WriteLine(p);
 
             Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine("=============NORMAL=============");
 
             foreach (var p in HandEvaluators.Evaluate(CardSelectionEnum.AllPlayerAndAllCommunity, players).SelectMany(x => x))
-                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player) p.CardsHolder).Name, p.Evaluation);
+                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player)p.CardsHolder).Name, p.Evaluation);
+
+            Console.WriteLine();
+            Console.WriteLine("=============ONLY HAND=============");
+
+            foreach (var p in HandEvaluators.Evaluate(CardSelectionEnum.OnlyHoleCards, players).SelectMany(x => x))
+                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player)p.CardsHolder).Name, p.Evaluation);
+
+            Console.WriteLine();
+            Console.WriteLine("=============ONLY HAND WITH SUIT=============");
+
+            foreach (var p in HandEvaluators.Evaluate(CardSelectionEnum.OnlyHoleCardsWithSuitRanking, players).SelectMany(x => x))
+                Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player)p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();
             Console.ReadLine();

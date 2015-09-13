@@ -2,6 +2,7 @@
 using BluffinMuffin.HandEvaluator.Enums;
 using BluffinMuffin.HandEvaluator.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static System.String;
 
 namespace BluffinMuffin.HandEvaluator.Test
 {
@@ -38,8 +39,8 @@ namespace BluffinMuffin.HandEvaluator.Test
         {
             try
             {
-                new PlayingCard(String.Empty);
-                Assert.Fail(); // If it gets to this line, no exception was thrown
+                var c = new PlayingCard(Empty);
+                Assert.Fail(c.ToString()); // If it gets to this line, no exception was thrown
             }
             catch (InvalidStringRepresentationException)
             {
@@ -52,8 +53,8 @@ namespace BluffinMuffin.HandEvaluator.Test
         {
             try
             {
-                new PlayingCard("X");
-                Assert.Fail(); // If it gets to this line, no exception was thrown
+                var c = new PlayingCard("X");
+                Assert.Fail(c.ToString()); // If it gets to this line, no exception was thrown
             }
             catch (InvalidStringRepresentationException)
             {
@@ -66,8 +67,8 @@ namespace BluffinMuffin.HandEvaluator.Test
         {
             try
             {
-                new PlayingCard("XXXX");
-                Assert.Fail(); // If it gets to this line, no exception was thrown
+                var c = new PlayingCard("XXXX");
+                Assert.Fail(c.ToString()); // If it gets to this line, no exception was thrown
             }
             catch (InvalidStringRepresentationException)
             {
@@ -80,8 +81,8 @@ namespace BluffinMuffin.HandEvaluator.Test
         {
             try
             {
-                new PlayingCard("3X");
-                Assert.Fail(); // If it gets to this line, no exception was thrown
+                var c = new PlayingCard("3X");
+                Assert.Fail(c.ToString()); // If it gets to this line, no exception was thrown
             }
             catch (InvalidStringRepresentationException)
             {

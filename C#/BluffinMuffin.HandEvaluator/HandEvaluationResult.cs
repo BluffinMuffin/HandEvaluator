@@ -7,11 +7,11 @@ namespace BluffinMuffin.HandEvaluator
 {
     public class HandEvaluationResult : IComparable<HandEvaluationResult>
     {
-        public HandEnum Hand { get; private set; }
+        public HandEnum Hand { get; }
 
-        public List<PlayingCard[]> Cards { get; private set; }
+        public List<PlayingCard[]> Cards { get; }
 
-        public Func<HandEvaluationResult,String> ToStringFunc { get; private set; } 
+        public Func<HandEvaluationResult, string> ToStringFunc { get; } 
 
         public HandEvaluationResult(AbstractHandEvaluator evaluator)
         {
@@ -24,7 +24,7 @@ namespace BluffinMuffin.HandEvaluator
             if (Cards == null || !Cards.Any())
                 return -1;
 
-            if (other == null || other.Cards == null || !other.Cards.Any())
+            if (other?.Cards == null || !other.Cards.Any())
                 return 1;
 
             if (Hand != other.Hand)

@@ -23,10 +23,11 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         }
 
         [TestMethod]
-        public void LessThan5CardsShouldBeNull()
+        public void LessThan5CardsShouldNotBeNull()
         {
             var res = Evaluate("4c", "4h", "4s");
-            Assert.IsNull(res);
+            Assert.IsNotNull(res);
+            Assert.AreEqual(NominalValueEnum.Four, res.Cards.First().First().Value);
         }
 
         [TestMethod]

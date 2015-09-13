@@ -64,9 +64,12 @@
     <Compile Include="Evaluators\OnePairAbstractHandEvaluator.cs" />
     <Compile Include="Evaluators\HighCardAbstractHandEvaluator.cs" />
     <Compile Include="IStringCardsHolder.cs" />
+    <Compile Include="SuitRankedPlayingCard.cs" />
     <Compile Include="PlayingCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Selectors\OnlyHoleCardsWithSuitRankingSelector.cs" />
     <Compile Include="Selectors\Use2Player3CommunitySelector.cs" />
+    <Compile Include="Selectors\OnlyHoleCardsSelector.cs" />
     <Compile Include="Selectors\UseAllCardsSelector.cs" />
   </ItemGroup>
   <ItemGroup />

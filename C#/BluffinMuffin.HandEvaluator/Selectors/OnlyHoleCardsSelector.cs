@@ -5,12 +5,12 @@ using BluffinMuffin.HandEvaluator.Enums;
 
 namespace BluffinMuffin.HandEvaluator.Selectors
 {
-    [CardSelection(CardSelectionEnum.AllPlayerAndAllCommunity)]
-    class UseAllCardsSelector : AbstractCardsSelector
+    [CardSelection(CardSelectionEnum.OnlyHoleCards)]
+    class OnlyHoleCardsSelector : AbstractCardsSelector
     {
         public override IEnumerable<IEnumerable<PlayingCard>> SelectCards(IEnumerable<string> playerCards, IEnumerable<string> communityCards)
         {
-            yield return playerCards.Union(communityCards).Select(c => new PlayingCard(c));
+            yield return playerCards.Select(c => new PlayingCard(c));
         }
     }
 }
