@@ -5,7 +5,7 @@ using static System.Math;
 
 namespace BluffinMuffin.HandEvaluator.Evaluators
 {
-    public class ThreeOfAKindAbstractHandEvaluator : AbstractHandEvaluator
+    public class ThreeOfAKindHandEvaluator : AbstractHandEvaluator
     {
         public override HandEnum HandType => HandEnum.ThreeOfAKind;
 

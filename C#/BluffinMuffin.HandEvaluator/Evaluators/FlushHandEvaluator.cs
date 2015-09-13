@@ -4,7 +4,7 @@ using static System.String;
 
 namespace BluffinMuffin.HandEvaluator.Evaluators
 {
-    public class FlushAbstractHandEvaluator : AbstractHandEvaluator
+    public class FlushHandEvaluator : AbstractHandEvaluator
     {
         public override HandEnum HandType => HandEnum.Flush;
 

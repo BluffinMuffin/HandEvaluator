@@ -1,7 +1,7 @@
 ﻿using System;
 using BluffinMuffin.HandEvaluator.Enums;
 
-namespace BluffinMuffin.HandEvaluator
+namespace BluffinMuffin.HandEvaluator.Evaluators
 {
     public abstract class AbstractHandEvaluator
     {

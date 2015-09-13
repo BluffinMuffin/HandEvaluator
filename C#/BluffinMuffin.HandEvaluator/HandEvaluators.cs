@@ -5,6 +5,7 @@ using System.Reflection;
 using BluffinMuffin.HandEvaluator.Attributes;
 using BluffinMuffin.HandEvaluator.Enums;
 using BluffinMuffin.HandEvaluator.EvaluatorFactories;
+using BluffinMuffin.HandEvaluator.Selectors;
 
 namespace BluffinMuffin.HandEvaluator
 {

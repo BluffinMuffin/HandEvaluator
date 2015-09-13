@@ -9,7 +9,7 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
     [TestClass]
     public class FlushHandEvaluatorTest
     {
-        private readonly AbstractEvaluatorFactory m_Evaluator = new SingleEvaluatorFactory<FlushAbstractHandEvaluator>();
+        private readonly AbstractEvaluatorFactory m_Evaluator = new SingleEvaluatorFactory<FlushHandEvaluator>();
 
         private HandEvaluationResult Evaluate(params string[] cards)
         {

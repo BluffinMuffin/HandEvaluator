@@ -5,7 +5,7 @@ using static System.String;
 
 namespace BluffinMuffin.HandEvaluator.Evaluators
 {
-    public class HighCardAbstractHandEvaluator : AbstractHandEvaluator
+    public class HighCardHandEvaluator : AbstractHandEvaluator
     {
         public override HandEnum HandType => HandEnum.HighCard;
 

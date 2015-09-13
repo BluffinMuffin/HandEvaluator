@@ -39,8 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractCardsSelector.cs" />
-    <Compile Include="AbstractHandEvaluator.cs" />
+    <Compile Include="Selectors\AbstractCardsSelector.cs" />
+    <Compile Include="Evaluators\AbstractHandEvaluator.cs" />
     <Compile Include="Attributes\CardSelectionAttribute.cs" />
     <Compile Include="Enums\CardSelectionEnum.cs" />
     <Compile Include="EvaluatedCardHolder.cs" />
@@ -56,15 +56,15 @@
     <Compile Include="Exceptions\NotInEnumScopeException.cs" />
     <Compile Include="HandEvaluationResult.cs" />
     <Compile Include="HandEvaluators.cs" />
-    <Compile Include="Evaluators\StraightFlushAbstractHandEvaluator.cs" />
-    <Compile Include="Evaluators\StraightAbstractHandEvaluator.cs" />
-    <Compile Include="Evaluators\FlushAbstractHandEvaluator.cs" />
-    <Compile Include="Evaluators\FullHouseAbstractHandEvaluator.cs" />
-    <Compile Include="Evaluators\FourOfAKindAbstractHandEvaluator.cs" />
-    <Compile Include="Evaluators\ThreeOfAKindAbstractHandEvaluator.cs" />
-    <Compile Include="Evaluators\TwoPairsAbstractHandEvaluator.cs" />
-    <Compile Include="Evaluators\OnePairAbstractHandEvaluator.cs" />
-    <Compile Include="Evaluators\HighCardAbstractHandEvaluator.cs" />
+    <Compile Include="Evaluators\StraightFlushHandEvaluator.cs" />
+    <Compile Include="Evaluators\StraightHandEvaluator.cs" />
+    <Compile Include="Evaluators\FlushHandEvaluator.cs" />
+    <Compile Include="Evaluators\FullHouseHandEvaluator.cs" />
+    <Compile Include="Evaluators\FourOfAKindHandEvaluator.cs" />
+    <Compile Include="Evaluators\ThreeOfAKindHandEvaluator.cs" />
+    <Compile Include="Evaluators\TwoPairsHandEvaluator.cs" />
+    <Compile Include="Evaluators\OnePairHandEvaluator.cs" />
+    <Compile Include="Evaluators\HighCardHandEvaluator.cs" />
     <Compile Include="IStringCardsHolder.cs" />
     <Compile Include="PlayingCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

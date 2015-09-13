@@ -7,12 +7,12 @@ namespace BluffinMuffin.HandEvaluator.EvaluatorFactories
     {
         public override IEnumerable<AbstractHandEvaluator> Evaluators => new AbstractHandEvaluator[]
         {
-            new HighCardAbstractHandEvaluator(),
-            new OnePairAbstractHandEvaluator(),
-            new TwoPairsAbstractHandEvaluator(),
-            new ThreeOfAKindAbstractHandEvaluator(),
-            new FullHouseAbstractHandEvaluator(),
-            new FourOfAKindAbstractHandEvaluator(),
+            new HighCardHandEvaluator(),
+            new OnePairHandEvaluator(),
+            new TwoPairsHandEvaluator(),
+            new ThreeOfAKindHandEvaluator(),
+            new FullHouseHandEvaluator(),
+            new FourOfAKindHandEvaluator(),
         };
     }
 }

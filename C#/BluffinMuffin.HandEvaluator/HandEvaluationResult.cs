@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
+using BluffinMuffin.HandEvaluator.Evaluators;
 
 namespace BluffinMuffin.HandEvaluator
 {

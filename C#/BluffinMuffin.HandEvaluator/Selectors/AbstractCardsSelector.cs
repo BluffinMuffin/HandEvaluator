@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BluffinMuffin.HandEvaluator
+namespace BluffinMuffin.HandEvaluator.Selectors
 {
     public abstract class AbstractCardsSelector
     {
