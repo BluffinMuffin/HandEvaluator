@@ -41,8 +41,6 @@
   <ItemGroup>
     <Compile Include="Selectors\AbstractCardsSelector.cs" />
     <Compile Include="Evaluators\AbstractHandEvaluator.cs" />
-    <Compile Include="Attributes\CardSelectionAttribute.cs" />
-    <Compile Include="Enums\CardSelectionEnum.cs" />
     <Compile Include="EvaluatedCardHolder.cs" />
     <Compile Include="Enums\HandEnum.cs" />
     <Compile Include="Enums\NominalValueEnum.cs" />

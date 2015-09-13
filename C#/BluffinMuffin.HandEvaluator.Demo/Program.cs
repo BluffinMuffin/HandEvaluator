@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
+using BluffinMuffin.HandEvaluator.Selectors;
 using static System.String;
 
 namespace BluffinMuffin.HandEvaluator.Demo
@@ -65,13 +66,13 @@ namespace BluffinMuffin.HandEvaluator.Demo
             Console.WriteLine();
             Console.WriteLine("=============ONLY HAND=============");
 
-            foreach (var p in HandEvaluators.Evaluate(players, new EvaluationParams {CardSelection = CardSelectionEnum.OnlyHoleCards}).SelectMany(x => x))
+            foreach (var p in HandEvaluators.Evaluate(players, new EvaluationParams { Selector = new OnlyHoleCardsSelector() }).SelectMany(x => x))
                 Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player) p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();
             Console.WriteLine("=============ONLY HAND WITH SUIT=============");
 
-            foreach (var p in HandEvaluators.Evaluate(players, new EvaluationParams { CardSelection = CardSelectionEnum.OnlyHoleCards, UseSuitRanking = true}).SelectMany(x => x))
+            foreach (var p in HandEvaluators.Evaluate(players, new EvaluationParams { Selector = new OnlyHoleCardsSelector(), UseSuitRanking = true}).SelectMany(x => x))
                 Console.WriteLine("{0}: {1} -> {2}", p.Rank == int.MaxValue ? "  " : p.Rank.ToString(), ((Player) p.CardsHolder).Name, p.Evaluation);
 
             Console.WriteLine();

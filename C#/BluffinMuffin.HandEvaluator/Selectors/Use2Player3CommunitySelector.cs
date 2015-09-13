@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BluffinMuffin.HandEvaluator.Attributes;
-using BluffinMuffin.HandEvaluator.Enums;
 
 namespace BluffinMuffin.HandEvaluator.Selectors
 {
-    [CardSelection(CardSelectionEnum.TwoPlayersAndThreeCommunity)]
     public class Use2Player3CommunitySelector : AbstractCardsSelector
     {
         public override IEnumerable<IEnumerable<PlayingCard>> SelectCards(IEnumerable<string> playerCards, IEnumerable<string> communityCards, EvaluationParams parms)

@@ -2,6 +2,7 @@
 using BluffinMuffin.HandEvaluator.Enums;
 using BluffinMuffin.HandEvaluator.EvaluatorFactories;
 using BluffinMuffin.HandEvaluator.Evaluators;
+using BluffinMuffin.HandEvaluator.Selectors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BluffinMuffin.HandEvaluator.Test.Evaluators
@@ -13,7 +14,7 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
 
         private HandEvaluationResult Evaluate(params string[] cards)
         {
-            return HandEvaluators.Evaluate(cards, null,new EvaluationParams{CardSelection = CardSelectionEnum.OnlyHoleCards, EvaluatorFactory = m_Evaluator});
+            return HandEvaluators.Evaluate(cards, null,new EvaluationParams{ Selector = new OnlyHoleCardsSelector(), EvaluatorFactory = m_Evaluator});
         }
 
         [TestMethod]
