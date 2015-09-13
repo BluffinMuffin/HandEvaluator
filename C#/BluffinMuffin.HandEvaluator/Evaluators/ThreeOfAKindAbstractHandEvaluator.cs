@@ -9,7 +9,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
     {
         public override HandEnum HandType => HandEnum.ThreeOfAKind;
 
-        public override HandEvaluationResult Evaluation(PlayingCard[] cards)
+        internal override HandEvaluationResult Evaluation(PlayingCard[] cards)
         {
             if (cards.Length < 3)
                 return null;

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
+using BluffinMuffin.HandEvaluator.EvaluatorFactories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BluffinMuffin.HandEvaluator.Test
@@ -93,6 +94,20 @@ namespace BluffinMuffin.HandEvaluator.Test
 
 
         [TestMethod]
+        public void ShouldReturnOnePairIfNoStraight()
+        {
+            var res = HandEvaluators.Evaluate(new[] { "Ks", "5h" }, new[] { "Ad", "Kc", "Qs", "10h", "Jh" }, new EvaluationParams{EvaluatorFactory = new NoStraightNoFlushEvaluatorFactory()});
+            Assert.IsNotNull(res);
+            Assert.AreEqual(HandEnum.OnePair, res.Hand);
+            Assert.AreEqual(NominalValueEnum.King, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Ace, res.Cards.Skip(1).First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Queen, res.Cards.Skip(2).First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Jack, res.Cards.Skip(3).First().First().Value);
+            Assert.AreEqual(4, res.Cards.Count);
+        }
+
+
+        [TestMethod]
         public void ShouldReturnFlush()
         {
             var res = HandEvaluators.Evaluate(new[] {"Ks", "5s"}, new[] {"As", "Kc", "Qs", "10s", "Jh"});
@@ -105,6 +120,20 @@ namespace BluffinMuffin.HandEvaluator.Test
             Assert.AreEqual(NominalValueEnum.Ten, res.Cards.Skip(3).First().First().Value);
             Assert.AreEqual(NominalValueEnum.Five, res.Cards.Skip(4).First().First().Value);
             Assert.AreEqual(5, res.Cards.Count);
+        }
+
+
+        [TestMethod]
+        public void ShouldReturnOnePairIfNoStraightNoFlush()
+        {
+            var res = HandEvaluators.Evaluate(new[] { "Ks", "5s" }, new[] { "As", "Kc", "Qs", "10s", "Jh" }, new EvaluationParams { EvaluatorFactory = new NoStraightNoFlushEvaluatorFactory() });
+            Assert.IsNotNull(res);
+            Assert.AreEqual(HandEnum.OnePair, res.Hand);
+            Assert.AreEqual(NominalValueEnum.King, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Ace, res.Cards.Skip(1).First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Queen, res.Cards.Skip(2).First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Jack, res.Cards.Skip(3).First().First().Value);
+            Assert.AreEqual(4, res.Cards.Count);
         }
 
 
@@ -144,6 +173,20 @@ namespace BluffinMuffin.HandEvaluator.Test
             Assert.AreEqual(NominalValueEnum.Jack, res.Cards.First().Skip(3).First().Value);
             Assert.AreEqual(NominalValueEnum.Ten, res.Cards.First().Skip(4).First().Value);
             Assert.AreEqual(1, res.Cards.Count);
+        }
+
+
+        [TestMethod]
+        public void ShouldReturnOnePairIfNoStraightFlush()
+        {
+            var res = HandEvaluators.Evaluate(new[] { "Ks", "5h" }, new[] { "Ah", "Kh", "Qh", "10h", "Jh" }, new EvaluationParams { EvaluatorFactory = new NoStraightNoFlushEvaluatorFactory() });
+            Assert.IsNotNull(res);
+            Assert.AreEqual(HandEnum.OnePair, res.Hand);
+            Assert.AreEqual(NominalValueEnum.King, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Ace, res.Cards.Skip(1).First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Queen, res.Cards.Skip(2).First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Jack, res.Cards.Skip(3).First().First().Value);
+            Assert.AreEqual(4, res.Cards.Count);
         }
 
     }

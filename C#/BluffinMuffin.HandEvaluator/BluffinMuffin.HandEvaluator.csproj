@@ -49,6 +49,8 @@
     <Compile Include="Enums\SuitEnum.cs" />
     <Compile Include="EvaluationParams.cs" />
     <Compile Include="EvaluatorFactories\AbstractEvaluatorFactory.cs" />
+    <Compile Include="EvaluatorFactories\SingleEvaluatorFactory.cs" />
+    <Compile Include="EvaluatorFactories\NoStraightNoFlushEvaluatorFactory.cs" />
     <Compile Include="EvaluatorFactories\BasicEvaluatorFactory.cs" />
     <Compile Include="Exceptions\InvalidStringRepresentationException.cs" />
     <Compile Include="Exceptions\NotInEnumScopeException.cs" />

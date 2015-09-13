@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
+using BluffinMuffin.HandEvaluator.EvaluatorFactories;
 using BluffinMuffin.HandEvaluator.Evaluators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,11 +9,11 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
     [TestClass]
     public class FourOfAKindHandEvaluatorTest
     {
-        private readonly AbstractHandEvaluator m_Evaluator = new FourOfAKindAbstractHandEvaluator();
+        private readonly AbstractEvaluatorFactory m_Evaluator = new SingleEvaluatorFactory<FourOfAKindAbstractHandEvaluator>();
 
         private HandEvaluationResult Evaluate(params string[] cards)
         {
-            return m_Evaluator.Evaluation(cards.Select(x => new PlayingCard(x)).ToArray());
+            return HandEvaluators.Evaluate(cards, null, new EvaluationParams { CardSelection = CardSelectionEnum.OnlyHoleCards, EvaluatorFactory = m_Evaluator });
         }
 
         [TestMethod]

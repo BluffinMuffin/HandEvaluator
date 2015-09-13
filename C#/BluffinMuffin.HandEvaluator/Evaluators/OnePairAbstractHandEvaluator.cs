@@ -9,7 +9,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
     {
         public override HandEnum HandType => HandEnum.OnePair;
 
-        public override HandEvaluationResult Evaluation(PlayingCard[] cards)
+        internal override HandEvaluationResult Evaluation(PlayingCard[] cards)
         {
             if (cards.Length < 2)
                 return null;
