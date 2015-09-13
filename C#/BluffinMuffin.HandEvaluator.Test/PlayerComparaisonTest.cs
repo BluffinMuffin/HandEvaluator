@@ -7,8 +7,8 @@ namespace BluffinMuffin.HandEvaluator.Test
 {
     internal class Player : IStringCardsHolder
     {
-        public IEnumerable<string> PlayerCards { get; private set; }
-        public IEnumerable<string> CommunityCards { get; private set; }
+        public IEnumerable<string> PlayerCards { get; }
+        public IEnumerable<string> CommunityCards { get; }
 
         public Player(params string[] cards)
         {

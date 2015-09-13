@@ -10,7 +10,7 @@ namespace BluffinMuffin.HandEvaluator
         public static readonly string[] VALUES = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
         public static readonly string[] SUITS = { "C", "D", "H", "S" };
 
-        public NominalValueEnum Value { get; private set; }
+        public NominalValueEnum Value { get; }
         public SuitEnum Suit { get; set; }
 
         public PlayingCard(NominalValueEnum value, SuitEnum suit)
@@ -41,7 +41,7 @@ namespace BluffinMuffin.HandEvaluator
         }
         public override string ToString()
         {
-            return String.Format("{0}{1}", VALUES[(int) Value], SUITS[(int) Suit]);
+            return $"{VALUES[(int) Value]}{SUITS[(int) Suit]}";
         }
 
         public virtual int CompareTo(PlayingCard other)

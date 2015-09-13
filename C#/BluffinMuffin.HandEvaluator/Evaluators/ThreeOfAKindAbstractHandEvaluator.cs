@@ -7,10 +7,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 {
     public class ThreeOfAKindAbstractHandEvaluator : AbstractHandEvaluator
     {
-        public override HandEnum HandType
-        {
-            get {return HandEnum.ThreeOfAKind;}
-        }
+        public override HandEnum HandType => HandEnum.ThreeOfAKind;
 
         public override HandEvaluationResult Evaluation(PlayingCard[] cards)
         {

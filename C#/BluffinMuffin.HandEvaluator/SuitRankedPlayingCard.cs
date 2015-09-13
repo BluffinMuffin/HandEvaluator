@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using BluffinMuffin.HandEvaluator.Enums;
-using BluffinMuffin.HandEvaluator.Exceptions;
+﻿using BluffinMuffin.HandEvaluator.Enums;
 
 namespace BluffinMuffin.HandEvaluator
 {
