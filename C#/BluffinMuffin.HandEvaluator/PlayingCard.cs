@@ -8,7 +8,7 @@ namespace BluffinMuffin.HandEvaluator
     public class PlayingCard : IComparable<PlayingCard>
     {
         public static readonly string[] VALUES = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
-        public static readonly string[] SUITS = { "H", "D", "C", "S" };
+        public static readonly string[] SUITS = { "C", "D", "H", "S" };
 
         public NominalValueEnum Value { get; private set; }
         public SuitEnum Suit { get; set; }
@@ -44,7 +44,7 @@ namespace BluffinMuffin.HandEvaluator
             return String.Format("{0}{1}", VALUES[(int) Value], SUITS[(int) Suit]);
         }
 
-        public int CompareTo(PlayingCard other)
+        public virtual int CompareTo(PlayingCard other)
         {
             return ((int)Value).CompareTo((int)other.Value);
         }

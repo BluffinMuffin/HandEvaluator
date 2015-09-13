@@ -15,7 +15,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
             var res = new HandEvaluationResult(this);
 
-            var distinctCards = cards.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x.Value).ToArray();
+            var distinctCards = cards.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x).ToArray();
 
             if (distinctCards.Length < 5)
                 return null;

@@ -22,7 +22,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
             if (flush == null)
                 return null;
 
-            var distinctCards = flush.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x.Value).ToArray();
+            var distinctCards = flush.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x).ToArray();
 
             if (distinctCards.Length < 5)
                 return null;

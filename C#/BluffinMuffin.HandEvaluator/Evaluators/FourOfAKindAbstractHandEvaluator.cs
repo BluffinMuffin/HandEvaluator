@@ -24,7 +24,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
             var foursome = foursomes.First();
 
-            res.Cards.Add(foursome.ToArray());
+            res.Cards.Add(foursome.OrderByDescending(x => x).ToArray());
 
             var remaining = cards.Except(foursome).OrderByDescending(x => x);
 

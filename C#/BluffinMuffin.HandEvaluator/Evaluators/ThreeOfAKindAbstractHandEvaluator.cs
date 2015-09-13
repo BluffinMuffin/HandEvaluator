@@ -28,7 +28,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
             var triplet = triplets.First();
 
-            res.Cards.Add(triplet.ToArray());
+            res.Cards.Add(triplet.OrderByDescending(x => x).ToArray());
 
             var remaining = cards.Except(triplet).OrderByDescending(x => x);
 

@@ -16,7 +16,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
             var res = new HandEvaluationResult(this);
 
-            var groupedCards = cards.OrderByDescending(x => x.Value).GroupBy(x => x.Value).ToArray();
+            var groupedCards = cards.OrderByDescending(x => x).GroupBy(x => x.Value).ToArray();
 
             var pairs = groupedCards.Where(x => x.Count() == 2).ToArray();
 
@@ -25,11 +25,11 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
             var higherPair = pairs.First();
 
-            res.Cards.Add(higherPair.ToArray());
+            res.Cards.Add(higherPair.OrderByDescending(x => x).ToArray());
 
             var lowerPair = pairs.Skip(1).First();
 
-            res.Cards.Add(lowerPair.ToArray());
+            res.Cards.Add(lowerPair.OrderByDescending(x => x).ToArray());
 
             var remaining = cards.Except(higherPair).Except(lowerPair).OrderByDescending(x => x);
 

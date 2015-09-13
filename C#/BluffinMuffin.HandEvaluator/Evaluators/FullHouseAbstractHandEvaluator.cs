@@ -24,9 +24,9 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
             if (triplet == null || pair == null)
                 return null;
 
-            res.Cards.Add(triplet.ToArray());
+            res.Cards.Add(triplet.OrderByDescending(x => x).ToArray());
 
-            res.Cards.Add(pair.ToArray());
+            res.Cards.Add(pair.OrderByDescending(x => x).ToArray());
 
             return res;
         }
