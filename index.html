@@ -48,21 +48,13 @@
 </ul>
 
 <h4>
-<a id="current-version-220-2015-09-13" class="anchor" href="#current-version-220-2015-09-13" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Version: <a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v2.2.0">2.2.0</a> <em>(2015-09-13)</em>
+<a id="current-version-300-2015-09-13" class="anchor" href="#current-version-300-2015-09-13" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Version: <a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.0.0">3.0.0</a> <em>(2015-09-13)</em>
 </h4>
 
 <ul>
-<li>Adding 2 CardSelectionType: OnlyHoleCards and OnlyHoleCardsWithSuitRanking</li>
-<li>Making evalutation of partial hand possible. Not all HandEvaluator requires 5 cards. 
-
-<ul>
-<li>HighCard only needs 1 card</li>
-<li>OnePair only needs 2 cards</li>
-<li>ThreeOfAKinbd only needs 3 cards</li>
-<li>TwoPairs only needs 4 cards</li>
-<li>FourOfAKind only needs 4 cards</li>
-</ul>
-</li>
+<li>Changing signature in HandEvaluators with parameters as a way to reduce incompatibilities every versions</li>
+<li>Adding the FlushBeatsFullHouse support so games with stripped deck can be evaluated correctly</li>
+<li>Adding the NoStraightNoFlush as a first step to be able to support Ace-to-five lowball poker</li>
 <li><em><a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/CHANGELOG.md">Full changelog ...</a></em></li>
 </ul>
 
@@ -79,43 +71,28 @@
 
 <ul>
 <li>
-<p><strong><code>HandEvaluationResult Evaluate(CardSelectionEnum selection, IEnumerable&lt;string&gt; playerCards, IEnumerable&lt;string&gt; communityCards)</code></strong></p>
+<p><strong><code>HandEvaluationResult Evaluate(IEnumerable&lt;string&gt; playerCards, IEnumerable&lt;string&gt; communityCards, EvaluationParams parms = null)</code></strong></p>
 
 <p>This method evaluates the best hand found with the given player cards and the given community cards. Cards are given in the 'vs' format where <code>v = [2,3,4,5,6,7,8,9,10,J,Q,K,A]</code> and <code>s = [S,D,H,C]</code>. Example: '3S','4C' means a three of spades and a four of clubs. </p>
 
-<p>A total minimum of 5 cards must be given to be evaluated. </p>
+<p>If there is no community cards, this parameter can be null, but don't forget to set the "Selector" property to "new OnlyHoleCardsSelector()"</p>
 
-<ul>
-<li>In texas hold'em, you would send the 2 cards of the player, and the five cards on the board. </li>
-<li>In omaha hold'em, you would send the 4 cards of the player, and the five cards on the board. </li>
-</ul>
-
-<p>The <em>selection</em> parameter define what type of hand evaluation will be applied.
-Supported type are:</p>
-
-<ul>
-<li>AllPlayerAndAllCommunity</li>
-<li>TwoPlayersAndThreeCommunity </li>
-</ul>
+<p>See <strong>EvaluationParams</strong> below for more information on the parameters.</p>
 
 <p>See <strong>HandEvaluationResult</strong> below for more information on the output.</p>
 </li>
 <li>
-<p><strong><code>IEnumerable&lt;IGrouping&lt;int, EvaluatedCardHolder&gt;&gt; Evaluate(CardSelectionEnum selection, params IStringCardsHolder[] cardHolders)</code></strong></p>
+<p><strong><code>IEnumerable&lt;IGrouping&lt;int, EvaluatedCardHolder&gt;&gt; Evaluate(IStringCardsHolder[] cardHolders, EvaluationParams parms = null)</code></strong></p>
 
 <p>This method evaluates and ranks the different CardHolders. CardHolders implements IStringCardsHolder who simply have a <code>IEnumerable&lt;string&gt; PlayerCards</code> property and a <code>IEnumerable&lt;string&gt; CommunityCards</code> property. </p>
 
-<p>The cards of the CardHolder includes player cards and community cards. </p>
+<p>The cards of the CardHolder includes player cards and community cards.    </p>
+
+<p>If there is no community cards, this parameter can be null, but don't forget to set the "Selector" property to "new OnlyHoleCardsSelector()"</p>
 
 <p>CardHolders will come back grouped by rank (where 1 is the best rank). </p>
 
-<p>The <em>selection</em> parameter define what type of hand evaluation will be applied.
-Supported type are:</p>
-
-<ul>
-<li>AllPlayerAndAllCommunity</li>
-<li>TwoPlayersAndThreeCommunity</li>
-</ul>
+<p>See <strong>EvaluationParams</strong> below for more information on the parameters.</p>
 
 <p>See <strong>EvaluatedCardHolder</strong> below for more information on the output.</p>
 </li>
@@ -166,6 +143,48 @@ Supported type are:</p>
 <p><strong><code>int Rank</code></strong></p>
 
 <p>This property contains the rank of the CardsHolder when compared to others. 1 is the best rank.</p>
+</li>
+</ul>
+
+<h4>
+<a id="evaluationparams" class="anchor" href="#evaluationparams" aria-hidden="true"><span class="octicon octicon-link"></span></a>EvaluationParams</h4>
+
+<p>The class "EvaluationParams" contains the parameters that you can give to alter the result of the evaluation</p>
+
+<ul>
+<li>
+<p><strong><code>bool UseSuitRanking</code></strong></p>
+
+<ul>
+<li>(default) False: Suits don't affect ranking. 3 of clubs and 3 of hearts are exactly the same during evaluation</li>
+<li>True: <a href="https://en.wikipedia.org/wiki/High_card_by_suit#Poker">Suits affect ranking</a>. Spades &gt; Hearts &gt; Diamond &gt; Clubs.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>AbstractCardsSelector Selector</code></strong></p>
+
+<ul>
+<li>(default) UseAllCardsSelector: Use all player cards and comunnity cards and make the best hand out of it.</li>
+<li>Use2Player3CommunitySelector: Use any 2 cards of player cards and any 3 cards of comunnity cards and make the best hand out of it.</li>
+<li>OnlyHoleCardsSelector: Use only player cards to make the best hand out of it.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>AbstractEvaluatorFactory EvaluatorFactory</code></strong></p>
+
+<ul>
+<li>(default) BasicEvaluatorFactory: Evaluates for HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind and StraightFlush</li>
+<li>NoStraightNoFlushEvaluatorFactory: Evaluates for HighCard, OnePair, TwoPair, ThreeOfAKind, FullHouse and FourOfAKind</li>
+<li>SingleEvaluatorFactory: Evaluates for T, where T is any Evaluator (Ex: OnePair)</li>
+</ul>
+</li>
+<li>
+<p><strong><code>AbstractHandRanker HandRanker</code></strong></p>
+
+<ul>
+<li>(default) BasicHandRanker: Rank hands is this order, lower to higher: HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind and StraightFlush</li>
+<li>FlushBeatsFullHouseHandRanker: Rank hands is this order, lower to higher: HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, FullHouse, Flush, FourOfAKind and StraightFlush</li>
+</ul>
 </li>
 </ul>
         </section>
