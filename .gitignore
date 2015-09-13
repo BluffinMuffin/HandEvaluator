@@ -6,3 +6,5 @@
 /C#/*/obj
 *.~vsdx
 /Releases/*
+*.suo
+*.user
