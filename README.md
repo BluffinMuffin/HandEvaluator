@@ -8,10 +8,10 @@ The project will be released using [Semantic Versioning](http://semver.org) and 
  * **[BluffinMuffin.Server 0.10.0](http://ericmas001.github.io/BluffinMuffin.Server)** *(Evaluator v2.1.0)*
 
 
-####Current Version: [3.0.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.0.0) *(2015-09-13)*
- * Changing signature in HandEvaluators with parameters as a way to reduce incompatibilities every versions
- * Adding the FlushBeatsFullHouse support so games with stripped deck can be evaluated correctly
- * Adding the NoStraightNoFlush as a first step to be able to support Ace-to-five lowball poker
+####Current Version: [3.1.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.1.0) *(2015-09-14)*
+ * Bug correction Issue #5: A-2-3-4-5 was too strong !
+ * Bug correction Issue #3: Ace as LowCard on stripped deck !
+ * Enhancement Issue #4: Decide if yes or no ace can be a lowcard in straights !
  * *[Full changelog ...](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/CHANGELOG.md)*
 
 <p align=center><img src="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/Documentation/hands_strength.png?raw=true" alt="Hand Strengths"></p>
@@ -84,22 +84,32 @@ The class "EvaluatedCardHolder" contains the result of the evaluation of a CardH
 The class "EvaluationParams" contains the parameters that you can give to alter the result of the evaluation
  * **`bool UseSuitRanking`**
  
-   * (default) False: Suits don't affect ranking. 3 of clubs and 3 of hearts are exactly the same during evaluation
-   * True: [Suits affect ranking](https://en.wikipedia.org/wiki/High_card_by_suit#Poker). Spades > Hearts > Diamond > Clubs.
+   * *(default)* **False:** Suits don't affect ranking. 3 of clubs and 3 of hearts are exactly the same during evaluation
+   * **True:** [Suits affect ranking](https://en.wikipedia.org/wiki/High_card_by_suit#Poker). Spades > Hearts > Diamond > Clubs.
+
+ * **`bool UseAceForLowStraight`**
+ 
+   * *(default)* **True:** When looking for potential straights, Ace can be used as the lowest card, therefore the lowest straight in a regular deck would be A-2-3-4-5
+   * **False:** When looking for potential straights, Ace will only be used as the highest card, therefore the lowest straight in a regular deck would be 2-3-4-5-6
+   
+ * **`NominalValueEnum[] UsedCardValues`**
+ 
+   * *(default)* **[2,3,4,5,6,7,8,9,10,J,Q,K,A]:** A full 52 cards deck is used. This is important for example for calculating lowest straight, in this case A-2-3-4-5
+   * **Any subset of default:** A subset of the normal 52 cards deck is used. This is important for example for calculating lowest straight, in a 7-to-Ace stripped deck, it would be A-7-8-9-10
    
  * **`AbstractCardsSelector Selector`**
  
-   * (default) UseAllCardsSelector: Use all player cards and comunnity cards and make the best hand out of it.
-   * Use2Player3CommunitySelector: Use any 2 cards of player cards and any 3 cards of comunnity cards and make the best hand out of it.
-   * OnlyHoleCardsSelector: Use only player cards to make the best hand out of it.
+   * *(default)* **UseAllCardsSelector:** Use all player cards and comunnity cards and make the best hand out of it.
+   * **Use2Player3CommunitySelector:** Use any 2 cards of player cards and any 3 cards of comunnity cards and make the best hand out of it.
+   * **OnlyHoleCardsSelector:** Use only player cards to make the best hand out of it.
 
  * **`AbstractEvaluatorFactory EvaluatorFactory`**
  
-   * (default) BasicEvaluatorFactory: Evaluates for HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind and StraightFlush
-   * NoStraightNoFlushEvaluatorFactory: Evaluates for HighCard, OnePair, TwoPair, ThreeOfAKind, FullHouse and FourOfAKind
-   * SingleEvaluatorFactory<T>: Evaluates for T, where T is any Evaluator (Ex: OnePair)
+   * *(default)* **BasicEvaluatorFactory:** Evaluates for HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind and StraightFlush
+   * **NoStraightNoFlushEvaluatorFactory:** Evaluates for HighCard, OnePair, TwoPair, ThreeOfAKind, FullHouse and FourOfAKind
+   * **SingleEvaluatorFactory<T>:** Evaluates for T, where T is any Evaluator (Ex: OnePair)
 
  * **`AbstractHandRanker HandRanker`**
  
-   * (default) BasicHandRanker: Rank hands is this order, lower to higher: HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind and StraightFlush
-   * FlushBeatsFullHouseHandRanker: Rank hands is this order, lower to higher: HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, FullHouse, Flush, FourOfAKind and StraightFlush
+   * *(default)* **BasicHandRanker:** Rank hands is this order, lower to higher: HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind and StraightFlush
+   * **FlushBeatsFullHouseHandRanker:** Rank hands is this order, lower to higher: HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, FullHouse, Flush, FourOfAKind and StraightFlush
