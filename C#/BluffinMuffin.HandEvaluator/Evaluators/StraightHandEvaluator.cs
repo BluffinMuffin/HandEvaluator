@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
 using static System.String;
 
@@ -10,26 +11,33 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
         internal override HandEvaluationResult Evaluation(PlayingCard[] cards, EvaluationParams parms)
         {
-            if (cards.Length < 5)
-                return null;
-
             var res = new HandEvaluationResult(this, parms);
 
-            var distinctCards = cards.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x).ToArray();
+            var straight = GetBestStraight(cards.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x).ToArray(), parms);
 
+            if (straight == null) return null;
+
+            res.Cards.Add(straight);
+            return res;
+        }
+
+        public static PlayingCard[] GetBestStraight(PlayingCard[] distinctCards, EvaluationParams parms)
+        {
+            return GetPotentialHighStraights(distinctCards, parms).Concat(GetPotentialLowStraights(distinctCards, parms)).OrderByDescending(x => x[0]).FirstOrDefault();
+        }
+
+        public static IEnumerable<PlayingCard[]> GetPotentialHighStraights(PlayingCard[] distinctCards, EvaluationParams parms)
+        {
             if (distinctCards.Length < 5)
-                return null;
+                yield break;
 
-            for (int i = 0; (i + 4) < distinctCards.Length; ++i)
-            {
-                if ((int) distinctCards[i].Value - (int) distinctCards[i + 4].Value == 4)
-                {
-                    res.Cards.Add(distinctCards.Skip(i).Take(5).ToArray());
-                    return res;
-                }
+            for (var i = 0; (i + 4) < distinctCards.Length; ++i)
+                if ((int)distinctCards[i].Value - (int)distinctCards[i + 4].Value == 4)
+                    yield return distinctCards.Skip(i).Take(5).ToArray();
+        }
 
-            }
-
+        public static IEnumerable<PlayingCard[]> GetPotentialLowStraights(PlayingCard[] distinctCards, EvaluationParams parms)
+        {
             //Check for A-2-3-4-5 only if no better straight have been found
             var ace = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Ace);
             var two = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Two);
@@ -37,10 +45,10 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
             var four = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Four);
             var five = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Five);
 
-            if (ace == null || two == null || three == null || four == null || five == null) return null;
+            if (ace == null || two == null || three == null || four == null || five == null)
+                return new PlayingCard[0][];
 
-            res.Cards.Add(new[] { five, four, three, two, ace });
-            return res;
+            return new[] { new[] { five, four, three, two, ace } };
         }
 
         public override string ResultToString(HandEvaluationResult res)
