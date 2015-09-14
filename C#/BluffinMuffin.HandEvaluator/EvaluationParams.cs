@@ -13,6 +13,7 @@ namespace BluffinMuffin.HandEvaluator
     public class EvaluationParams
     {
         public bool UseSuitRanking { get; set; } = false;
+        public bool UseAceForLowStraight { get; set; } = true;
 
         public AbstractCardsSelector Selector { get; set; } = new UseAllCardsSelector();
 

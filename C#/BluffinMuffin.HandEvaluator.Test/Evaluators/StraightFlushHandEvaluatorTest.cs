@@ -73,6 +73,13 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         }
 
         [TestMethod]
+        public void FiveCardsWithLowestFlushStraightShouldBeNullIfNoAceForLowStraight()
+        {
+            var res = HandEvaluators.Evaluate(new[] { "5c", "4c", "3c", "2c", "Ac" }, null, new EvaluationParams { Selector = new OnlyHoleCardsSelector(), EvaluatorFactory = m_Evaluator, UseAceForLowStraight = false });
+            Assert.IsNull(res);
+        }
+
+        [TestMethod]
         public void SixCardsWithNoStraightFlushShouldBeNull()
         {
             var res = Evaluate("5c", "4c", "3c", "2c", "3c", "9h");

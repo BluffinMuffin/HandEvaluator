@@ -38,6 +38,9 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
         public static IEnumerable<PlayingCard[]> GetPotentialLowStraights(PlayingCard[] distinctCards, EvaluationParams parms)
         {
+            if (!parms.UseAceForLowStraight)
+                yield break;
+
             //Check for A-2-3-4-5 only if no better straight have been found
             var ace = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Ace);
             var two = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Two);
@@ -46,9 +49,9 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
             var five = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Five);
 
             if (ace == null || two == null || three == null || four == null || five == null)
-                return new PlayingCard[0][];
+                yield break;
 
-            return new[] { new[] { five, four, three, two, ace } };
+            yield return new[] { five, four, three, two, ace };
         }
 
         public override string ResultToString(HandEvaluationResult res)
