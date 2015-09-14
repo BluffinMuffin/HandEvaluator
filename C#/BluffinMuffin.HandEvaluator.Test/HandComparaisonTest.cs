@@ -90,22 +90,28 @@ namespace BluffinMuffin.HandEvaluator.Test
         [TestMethod]
         public void TestsBetweenStraights()
         {
-            var biggest = HandEvaluators.Evaluate( new[] {"Ad", "Ks"}, new[] {"Qh", "Jc", "10d", "5h", "2s"});
-            var big = HandEvaluators.Evaluate( new[] {"9d", "Ks"}, new[] {"Qh", "Jc", "10d", "5h", "2s"});
-            var normal1 = HandEvaluators.Evaluate( new[] {"8d", "9s"}, new[] {"Qh", "Jc", "10d", "5h", "2s"});
-            var normal2 = HandEvaluators.Evaluate( new[] {"8h", "9c"}, new[] {"Qh", "Jc", "10d", "5h", "2s"});
-            var smallest = HandEvaluators.Evaluate( new[] {"3d", "4s"}, new[] {"Ah", "Jc", "10d", "5h", "2s"});
-            Assert.IsTrue(new[] {biggest, big, normal1, normal2, smallest}.All(x => x.Hand == HandEnum.Straight));
+            var biggest = HandEvaluators.Evaluate(new[] { "Ad", "Ks" }, new[] { "Qh", "Jc", "10d", "5h", "2s" });
+            var big = HandEvaluators.Evaluate(new[] { "9d", "Ks" }, new[] { "Qh", "Jc", "10d", "5h", "2s" });
+            var normal1 = HandEvaluators.Evaluate(new[] { "8d", "9s" }, new[] { "Qh", "Jc", "10d", "5h", "2s" });
+            var normal2 = HandEvaluators.Evaluate(new[] { "8h", "9c" }, new[] { "Qh", "Jc", "10d", "5h", "2s" });
+            var small = HandEvaluators.Evaluate(new[] { "3d", "4s" }, new[] { "Ah", "Jc", "6d", "5h", "2s" });
+            var smallest = HandEvaluators.Evaluate(new[] { "3d", "4s" }, new[] { "Ah", "Jc", "10d", "5h", "2s" });
+            Assert.IsTrue(new[] { biggest, big, normal1, normal2, small, smallest }.All(x => x.Hand == HandEnum.Straight));
             Assert.AreEqual(1, biggest.CompareTo(big));
             Assert.AreEqual(1, biggest.CompareTo(normal1));
             Assert.AreEqual(1, biggest.CompareTo(normal2));
+            Assert.AreEqual(1, biggest.CompareTo(small));
             Assert.AreEqual(1, biggest.CompareTo(smallest));
             Assert.AreEqual(1, big.CompareTo(normal1));
             Assert.AreEqual(1, big.CompareTo(normal2));
+            Assert.AreEqual(1, big.CompareTo(small));
             Assert.AreEqual(1, big.CompareTo(smallest));
             Assert.AreEqual(0, normal1.CompareTo(normal2));
+            Assert.AreEqual(1, normal1.CompareTo(small));
             Assert.AreEqual(1, normal1.CompareTo(smallest));
+            Assert.AreEqual(1, normal2.CompareTo(small));
             Assert.AreEqual(1, normal2.CompareTo(smallest));
+            Assert.AreEqual(1, small.CompareTo(smallest));
         }
 
         [TestMethod]
@@ -174,22 +180,28 @@ namespace BluffinMuffin.HandEvaluator.Test
         [TestMethod]
         public void TestsBetweenStraightFlushes()
         {
-            var biggest = HandEvaluators.Evaluate( new[] {"Ad", "Kd"}, new[] {"Qd", "Jd", "10d", "5h", "2s"});
-            var big = HandEvaluators.Evaluate( new[] {"9d", "Kd"}, new[] {"Qd", "Jd", "10d", "5h", "2s"});
-            var normal1 = HandEvaluators.Evaluate( new[] {"8d", "9d"}, new[] {"Qd", "Jd", "10d", "5h", "2s"});
-            var normal2 = HandEvaluators.Evaluate( new[] {"8h", "9h"}, new[] {"Qh", "Jh", "10h", "5h", "2s"});
-            var smallest = HandEvaluators.Evaluate( new[] {"3d", "4d"}, new[] {"Ad", "Jc", "10d", "5d", "2d"});
-            Assert.IsTrue(new[] {biggest, big, normal1, normal2, smallest}.All(x => x.Hand == HandEnum.StraightFlush));
+            var biggest = HandEvaluators.Evaluate(new[] { "Ad", "Kd" }, new[] { "Qd", "Jd", "10d", "5h", "2s" });
+            var big = HandEvaluators.Evaluate(new[] { "9d", "Kd" }, new[] { "Qd", "Jd", "10d", "5h", "2s" });
+            var normal1 = HandEvaluators.Evaluate(new[] { "8d", "9d" }, new[] { "Qd", "Jd", "10d", "5h", "2s" });
+            var normal2 = HandEvaluators.Evaluate(new[] { "8h", "9h" }, new[] { "Qh", "Jh", "10h", "5h", "2s" });
+            var small = HandEvaluators.Evaluate(new[] { "3d", "4d" }, new[] { "Ad", "Jc", "6d", "5d", "2d" });
+            var smallest = HandEvaluators.Evaluate(new[] { "3d", "4d" }, new[] { "Ad", "Jc", "10d", "5d", "2d" });
+            Assert.IsTrue(new[] { biggest, big, normal1, normal2, small, smallest }.All(x => x.Hand == HandEnum.StraightFlush));
             Assert.AreEqual(1, biggest.CompareTo(big));
             Assert.AreEqual(1, biggest.CompareTo(normal1));
             Assert.AreEqual(1, biggest.CompareTo(normal2));
+            Assert.AreEqual(1, biggest.CompareTo(small));
             Assert.AreEqual(1, biggest.CompareTo(smallest));
             Assert.AreEqual(1, big.CompareTo(normal1));
             Assert.AreEqual(1, big.CompareTo(normal2));
+            Assert.AreEqual(1, big.CompareTo(small));
             Assert.AreEqual(1, big.CompareTo(smallest));
             Assert.AreEqual(0, normal1.CompareTo(normal2));
+            Assert.AreEqual(1, normal1.CompareTo(small));
             Assert.AreEqual(1, normal1.CompareTo(smallest));
+            Assert.AreEqual(1, normal2.CompareTo(small));
             Assert.AreEqual(1, normal2.CompareTo(smallest));
+            Assert.AreEqual(1, small.CompareTo(smallest));
         }
 
         [TestMethod]

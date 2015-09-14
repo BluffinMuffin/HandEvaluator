@@ -19,18 +19,6 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
             if (distinctCards.Length < 5)
                 return null;
-            
-            PlayingCard ace = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Ace);
-            PlayingCard two = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Two);
-            PlayingCard three = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Three);
-            PlayingCard four = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Four);
-            PlayingCard five = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Five);
-
-            if (ace != null && two != null && three != null && four != null && five != null)
-            {
-                res.Cards.Add(new[] {five, four, three, two, ace});
-                return res;
-            }
 
             for (int i = 0; (i + 4) < distinctCards.Length; ++i)
             {
@@ -41,7 +29,18 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
                 }
 
             }
-            return null;
+
+            //Check for A-2-3-4-5 only if no better straight have been found
+            var ace = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Ace);
+            var two = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Two);
+            var three = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Three);
+            var four = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Four);
+            var five = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Five);
+
+            if (ace == null || two == null || three == null || four == null || five == null) return null;
+
+            res.Cards.Add(new[] { five, four, three, two, ace });
+            return res;
         }
 
         public override string ResultToString(HandEvaluationResult res)
