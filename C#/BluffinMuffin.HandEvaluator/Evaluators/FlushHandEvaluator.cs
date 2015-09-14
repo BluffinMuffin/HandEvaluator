@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
 using static System.String;
 
@@ -10,14 +11,9 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
         internal override HandEvaluationResult Evaluation(PlayingCard[] cards, EvaluationParams parms)
         {
-            if (cards.Length < 5)
-                return null;
-
             var res = new HandEvaluationResult(this, parms);
 
-            var groupedCards = cards.GroupBy(x => x.Suit).ToArray();
-
-            var flush = groupedCards.FirstOrDefault(x => x.Count() >= 5);
+            var flush = GetPotentialFlushes(cards,parms).FirstOrDefault();
 
             if (flush == null)
                 return null;
@@ -26,6 +22,17 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
                 res.Cards.Add(new[] {c});
 
             return res;
+        }
+
+        public static IEnumerable<PlayingCard[]> GetPotentialFlushes(PlayingCard[] cards, EvaluationParams parms)
+        {
+            if (cards.Length >= 5)
+            {
+                var groupedCards = cards.GroupBy(x => x.Suit).ToArray();
+
+                foreach (var g in groupedCards.Where(x => x.Count() >= 5))
+                    yield return g.ToArray();
+            }
         }
 
         public override string ResultToString(HandEvaluationResult res)

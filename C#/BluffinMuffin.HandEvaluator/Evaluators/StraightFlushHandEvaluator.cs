@@ -10,43 +10,17 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
         internal override HandEvaluationResult Evaluation(PlayingCard[] cards, EvaluationParams parms)
         {
-            if (cards.Length < 5)
-                return null;
-
             var res = new HandEvaluationResult(this, parms);
 
-            var groupedCards = cards.GroupBy(x => x.Suit).ToArray();
-
-            var flush = groupedCards.FirstOrDefault(x => x.Count() >= 5);
-
-            if (flush == null)
-                return null;
-
-            var distinctCards = flush.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x).ToArray();
-
-            if (distinctCards.Length < 5)
-                return null;
-
-            var ace = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Ace);
-            var two = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Two);
-            var three = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Three);
-            var four = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Four);
-            var five = distinctCards.FirstOrDefault(x => x.Value == NominalValueEnum.Five);
-
-            if (ace != null && two != null && three != null && four != null && five != null)
+            foreach (var straight in FlushHandEvaluator.GetPotentialFlushes(cards,parms)
+                .Select(flush => flush.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x).ToArray())
+                .Select(distinctCards => distinctCards.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x).ToArray())
+                .TakeWhile(distinctCards => distinctCards.Length >= 5)
+                .Select(distinctCards => StraightHandEvaluator.GetBestStraight(distinctCards, parms))
+                .Where(straight => straight != null))
             {
-                res.Cards.Add(new[] { five, four, three, two, ace });
+                res.Cards.Add(straight);
                 return res;
-            }
-
-            for (var i = 0; (i + 4) < distinctCards.Length; ++i)
-            {
-                if ((int)distinctCards[i].Value - (int)distinctCards[i + 4].Value == 4)
-                {
-                    res.Cards.Add(distinctCards.Skip(i).Take(5).ToArray());
-                    return res;
-                }
-
             }
             return null;
         }

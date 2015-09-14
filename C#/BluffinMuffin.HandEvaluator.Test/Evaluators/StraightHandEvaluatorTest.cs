@@ -4,6 +4,7 @@ using BluffinMuffin.HandEvaluator.EvaluatorFactories;
 using BluffinMuffin.HandEvaluator.Evaluators;
 using BluffinMuffin.HandEvaluator.Selectors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static BluffinMuffin.HandEvaluator.Enums.NominalValueEnum;
 
 namespace BluffinMuffin.HandEvaluator.Test.Evaluators
 {
@@ -53,6 +54,22 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
             var res = Evaluate("5d", "4c", "3h", "2s", "Ac");
             Assert.IsNotNull(res);
             Assert.AreEqual(NominalValueEnum.Five, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Ace, res.Cards.First().Last().Value);
+        }
+
+        [TestMethod]
+        public void FiveCardsWithLowestStraightShouldBeNullIfNoAceForLowStraight()
+        {
+            var res = HandEvaluators.Evaluate(new[] { "5d", "4c", "3h", "2s", "Ac" }, null, new EvaluationParams { Selector = new OnlyHoleCardsSelector(), EvaluatorFactory = m_Evaluator, UseAceForLowStraight = false });
+            Assert.IsNull(res);
+        }
+
+        [TestMethod]
+        public void FiveCardsWithLowestStraightShouldNotBeNullInStrippedDeck()
+        {
+            var res = HandEvaluators.Evaluate(new[] {"10d", "9c", "8h", "7s", "Ac"}, null, new EvaluationParams {Selector = new OnlyHoleCardsSelector(), EvaluatorFactory = m_Evaluator, UsedCardValues = new[] {Seven, Eight, Nine, Ten, Jack, Queen, King, Ace}});
+            Assert.IsNotNull(res);
+            Assert.AreEqual(NominalValueEnum.Ten, res.Cards.First().First().Value);
             Assert.AreEqual(NominalValueEnum.Ace, res.Cards.First().Last().Value);
         }
 

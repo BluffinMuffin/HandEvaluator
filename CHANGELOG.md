@@ -1,5 +1,12 @@
 # 3.*
 
+## 3.1.*
+
+### [3.1.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.1.0) *(2015-09-14)*
+ * Bug correction Issue #5: A-2-3-4-5 was too strong !
+ * Bug correction Issue #3: Ace as LowCard on stripped deck !
+ * Enhancement Issue #4: Decide if yes or no ace can be a lowcard in straights !
+
 ## 3.0.*
 
 ### [3.0.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.0.0) *(2015-09-13)*

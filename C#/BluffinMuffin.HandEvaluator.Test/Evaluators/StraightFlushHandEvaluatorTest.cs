@@ -73,6 +73,13 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         }
 
         [TestMethod]
+        public void FiveCardsWithLowestFlushStraightShouldBeNullIfNoAceForLowStraight()
+        {
+            var res = HandEvaluators.Evaluate(new[] { "5c", "4c", "3c", "2c", "Ac" }, null, new EvaluationParams { Selector = new OnlyHoleCardsSelector(), EvaluatorFactory = m_Evaluator, UseAceForLowStraight = false });
+            Assert.IsNull(res);
+        }
+
+        [TestMethod]
         public void SixCardsWithNoStraightFlushShouldBeNull()
         {
             var res = Evaluate("5c", "4c", "3c", "2c", "3c", "9h");
@@ -93,6 +100,16 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
         public void SixCardsWithStraightFlushShouldNotBeNull()
         {
             var res = Evaluate("5c", "4c", "3c", "2c", "6c", "7c");
+            Assert.IsNotNull(res);
+            Assert.AreEqual(NominalValueEnum.Seven, res.Cards.First().First().Value);
+            Assert.AreEqual(NominalValueEnum.Three, res.Cards.First().Last().Value);
+            Assert.AreEqual(SuitEnum.Clubs, res.Cards.First().First().Suit);
+        }
+
+        [TestMethod]
+        public void SixCardsWithStraightFlushAndHigherCardSameSuitShouldNotBeNull()
+        {
+            var res = Evaluate("5c", "4c", "3c", "9c", "6c", "7c");
             Assert.IsNotNull(res);
             Assert.AreEqual(NominalValueEnum.Seven, res.Cards.First().First().Value);
             Assert.AreEqual(NominalValueEnum.Three, res.Cards.First().Last().Value);
