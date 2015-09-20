@@ -1,37 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
     <title>Bluffinmuffin.HandEvaluator by Ericmas001</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
-
   <body>
-    <div id="container">
-      <div class="inner">
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-        <header>
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
           <h1>Bluffinmuffin.HandEvaluator</h1>
-          <h2>Poker Hand Evaluator</h2>
-        </header>
+          <p>Poker Hand Evaluator</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/Ericmas001">Ericmas001</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <h1>
+        <h1>
 <a id="bluffinmuffinhandevaluator" class="anchor" href="#bluffinmuffinhandevaluator" aria-hidden="true"><span class="octicon octicon-link"></span></a>BluffinMuffin.HandEvaluator</h1>
 
 <p>BluffinMuffin HandEvaluator is a .Net PokerHand Evaluator that supports <a href="https://en.wikipedia.org/wiki/List_of_poker_hands">standard list of poker hands</a>. This project aims for simplicity of code, simplicity of use and extensibility. If what you are looking for is execution speed, I recommend looking at <a href="http://www.codeproject.com/Articles/12279/Fast-Texas-Holdem-Hand-Evaluation-and-Analysis">this project</a>. But, for most implementations, this library will be fast enough!</p>
@@ -48,13 +55,13 @@
 </ul>
 
 <h4>
-<a id="current-version-300-2015-09-13" class="anchor" href="#current-version-300-2015-09-13" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Version: <a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.0.0">3.0.0</a> <em>(2015-09-13)</em>
+<a id="current-version-310-2015-09-14" class="anchor" href="#current-version-310-2015-09-14" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Version: <a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.1.0">3.1.0</a> <em>(2015-09-14)</em>
 </h4>
 
 <ul>
-<li>Changing signature in HandEvaluators with parameters as a way to reduce incompatibilities every versions</li>
-<li>Adding the FlushBeatsFullHouse support so games with stripped deck can be evaluated correctly</li>
-<li>Adding the NoStraightNoFlush as a first step to be able to support Ace-to-five lowball poker</li>
+<li>Bug correction Issue #5: A-2-3-4-5 was too strong !</li>
+<li>Bug correction Issue #3: Ace as LowCard on stripped deck !</li>
+<li>Enhancement Issue #4: Decide if yes or no ace can be a lowcard in straights !</li>
 <li><em><a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/CHANGELOG.md">Full changelog ...</a></em></li>
 </ul>
 
@@ -156,46 +163,71 @@
 <p><strong><code>bool UseSuitRanking</code></strong></p>
 
 <ul>
-<li>(default) False: Suits don't affect ranking. 3 of clubs and 3 of hearts are exactly the same during evaluation</li>
-<li>True: <a href="https://en.wikipedia.org/wiki/High_card_by_suit#Poker">Suits affect ranking</a>. Spades &gt; Hearts &gt; Diamond &gt; Clubs.</li>
+<li>
+<em>(default)</em> <strong>False:</strong> Suits don't affect ranking. 3 of clubs and 3 of hearts are exactly the same during evaluation</li>
+<li>
+<strong>True:</strong> <a href="https://en.wikipedia.org/wiki/High_card_by_suit#Poker">Suits affect ranking</a>. Spades &gt; Hearts &gt; Diamond &gt; Clubs.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>bool UseAceForLowStraight</code></strong></p>
+
+<ul>
+<li>
+<em>(default)</em> <strong>True:</strong> When looking for potential straights, Ace can be used as the lowest card, therefore the lowest straight in a regular deck would be A-2-3-4-5</li>
+<li>
+<strong>False:</strong> When looking for potential straights, Ace will only be used as the highest card, therefore the lowest straight in a regular deck would be 2-3-4-5-6</li>
+</ul>
+</li>
+<li>
+<p><strong><code>NominalValueEnum[] UsedCardValues</code></strong></p>
+
+<ul>
+<li>
+<em>(default)</em> <strong>[2,3,4,5,6,7,8,9,10,J,Q,K,A]:</strong> A full 52 cards deck is used. This is important for example for calculating lowest straight, in this case A-2-3-4-5</li>
+<li>
+<strong>Any subset of default:</strong> A subset of the normal 52 cards deck is used. This is important for example for calculating lowest straight, in a 7-to-Ace stripped deck, it would be A-7-8-9-10</li>
 </ul>
 </li>
 <li>
 <p><strong><code>AbstractCardsSelector Selector</code></strong></p>
 
 <ul>
-<li>(default) UseAllCardsSelector: Use all player cards and comunnity cards and make the best hand out of it.</li>
-<li>Use2Player3CommunitySelector: Use any 2 cards of player cards and any 3 cards of comunnity cards and make the best hand out of it.</li>
-<li>OnlyHoleCardsSelector: Use only player cards to make the best hand out of it.</li>
+<li>
+<em>(default)</em> <strong>UseAllCardsSelector:</strong> Use all player cards and comunnity cards and make the best hand out of it.</li>
+<li>
+<strong>Use2Player3CommunitySelector:</strong> Use any 2 cards of player cards and any 3 cards of comunnity cards and make the best hand out of it.</li>
+<li>
+<strong>OnlyHoleCardsSelector:</strong> Use only player cards to make the best hand out of it.</li>
 </ul>
 </li>
 <li>
 <p><strong><code>AbstractEvaluatorFactory EvaluatorFactory</code></strong></p>
 
 <ul>
-<li>(default) BasicEvaluatorFactory: Evaluates for HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind and StraightFlush</li>
-<li>NoStraightNoFlushEvaluatorFactory: Evaluates for HighCard, OnePair, TwoPair, ThreeOfAKind, FullHouse and FourOfAKind</li>
-<li>SingleEvaluatorFactory: Evaluates for T, where T is any Evaluator (Ex: OnePair)</li>
+<li>
+<em>(default)</em> <strong>BasicEvaluatorFactory:</strong> Evaluates for HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind and StraightFlush</li>
+<li>
+<strong>NoStraightNoFlushEvaluatorFactory:</strong> Evaluates for HighCard, OnePair, TwoPair, ThreeOfAKind, FullHouse and FourOfAKind</li>
+<li>
+<strong>SingleEvaluatorFactory:</strong> Evaluates for T, where T is any Evaluator (Ex: OnePair)</li>
 </ul>
 </li>
 <li>
 <p><strong><code>AbstractHandRanker HandRanker</code></strong></p>
 
 <ul>
-<li>(default) BasicHandRanker: Rank hands is this order, lower to higher: HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind and StraightFlush</li>
-<li>FlushBeatsFullHouseHandRanker: Rank hands is this order, lower to higher: HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, FullHouse, Flush, FourOfAKind and StraightFlush</li>
+<li>
+<em>(default)</em> <strong>BasicHandRanker:</strong> Rank hands is this order, lower to higher: HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind and StraightFlush</li>
+<li>
+<strong>FlushBeatsFullHouseHandRanker:</strong> Rank hands is this order, lower to higher: HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, FullHouse, Flush, FourOfAKind and StraightFlush</li>
 </ul>
 </li>
 </ul>
-        </section>
+      </section>
 
-        <footer>
-          Bluffinmuffin.HandEvaluator is maintained by <a href="https://github.com/Ericmas001">Ericmas001</a><br>
-          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
-      </div>
     </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
