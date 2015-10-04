@@ -30,7 +30,8 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
             var remaining = cards.Except(triplet).OrderByDescending(x => x);
 
             if (remaining.Any())
-                remaining.Take(Min(2, remaining.Count())).ToList().ForEach(c => res.Cards.Add(new[] { c }));
+                foreach (var c in remaining.Take(Min(2, remaining.Count())))
+                    res.Cards.Add(new[] {c});
 
             return res;
         }

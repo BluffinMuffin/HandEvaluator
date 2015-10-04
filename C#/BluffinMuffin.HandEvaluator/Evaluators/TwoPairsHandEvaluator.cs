@@ -34,7 +34,8 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
             var remaining = cards.Except(higherPair).Except(lowerPair).OrderByDescending(x => x);
 
             if (remaining.Any())
-                remaining.Take(Min(1, remaining.Count())).ToList().ForEach(c => res.Cards.Add(new[] { c }));
+                foreach (var c in remaining.Take(Min(1, remaining.Count())))
+                    res.Cards.Add(new[] { c });
 
             return res;
         }

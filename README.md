@@ -8,10 +8,16 @@ The project will be released using [Semantic Versioning](http://semver.org) and 
  * **[BluffinMuffin.Server 0.11.0](http://ericmas001.github.io/BluffinMuffin.Server)** *(Evaluator v3.1.0)*
 
 
-####Current Version: [3.1.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.1.0) *(2015-09-14)*
- * Bug correction Issue #5: A-2-3-4-5 was too strong !
- * Bug correction Issue #3: Ace as LowCard on stripped deck !
- * Enhancement Issue #4: Decide if yes or no ace can be a lowcard in straights !
+####Current Version: [3.1.1](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.1.1) *(2015-10-04)*
+ * The DLL is now portable
+  * .NET Framework 4
+  * Silverlight 5
+  * Windows 8
+  * Windows Phone 8.1
+  * Windows Phone Silverlight 8
+  * Xamarin.Android
+  * Xamarin.iOS
+  * Xamarin.iOS (Classic)
  * *[Full changelog ...](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/CHANGELOG.md)*
 
 <p align=center><img src="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/blob/master/Documentation/hands_strength.png?raw=true" alt="Hand Strengths"></p>

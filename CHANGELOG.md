@@ -2,6 +2,17 @@
 
 ## 3.1.*
 
+### [3.1.1](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.1.1) *(2015-10-04)*
+ * The DLL is now portable
+  * .NET Framework 4
+  * Silverlight 5
+  * Windows 8
+  * Windows Phone 8.1
+  * Windows Phone Silverlight 8
+  * Xamarin.Android
+  * Xamarin.iOS
+  * Xamarin.iOS (Classic)
+
 ### [3.1.0](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.1.0) *(2015-09-14)*
  * Bug correction Issue #5: A-2-3-4-5 was too strong !
  * Bug correction Issue #3: Ace as LowCard on stripped deck !
