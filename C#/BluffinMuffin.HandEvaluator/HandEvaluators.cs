@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using BluffinMuffin.HandEvaluator.Enums;
-using BluffinMuffin.HandEvaluator.EvaluatorFactories;
-using BluffinMuffin.HandEvaluator.Selectors;
 
 namespace BluffinMuffin.HandEvaluator
 {

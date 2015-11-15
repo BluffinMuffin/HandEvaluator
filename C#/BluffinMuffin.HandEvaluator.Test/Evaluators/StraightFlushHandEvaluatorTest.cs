@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
 using BluffinMuffin.HandEvaluator.EvaluatorFactories;
 using BluffinMuffin.HandEvaluator.Evaluators;
@@ -12,6 +13,7 @@ namespace BluffinMuffin.HandEvaluator.Test.Evaluators
     {
         private readonly AbstractEvaluatorFactory m_Evaluator = new SingleEvaluatorFactory<StraightFlushHandEvaluator>();
 
+        [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private HandEvaluationResult Evaluate(params string[] cards)
         {
             return HandEvaluators.Evaluate(cards, null, new EvaluationParams { Selector = new OnlyHoleCardsSelector(), EvaluatorFactory = m_Evaluator });

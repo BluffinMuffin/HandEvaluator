@@ -2,18 +2,10 @@
 
 namespace BluffinMuffin.HandEvaluator.Exceptions
 {
-    public class NotInEnumScopeException : Exception
-    {
-        public NotInEnumScopeException(object value, Type t)
-            : base($"Value '{value}' not in scope of {t.Name}.")
-        {
-        }
-    }
-
-    public class NotInEnumScopeException<T> : NotInEnumScopeException
+    public class NotInEnumScopeException<T> : Exception
     {
         public NotInEnumScopeException(T value)
-            : base(value, value.GetType())
+            : base($"Value '{value}' not in scope of {value.GetType().Name}.")
         {
         }
     }

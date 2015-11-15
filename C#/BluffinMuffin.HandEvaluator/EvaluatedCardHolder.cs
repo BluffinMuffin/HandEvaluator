@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using BluffinMuffin.HandEvaluator.Enums;
 
 namespace BluffinMuffin.HandEvaluator
 {
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class EvaluatedCardHolder<T> where T : class, IStringCardsHolder
     {
         public T CardsHolder { get;}

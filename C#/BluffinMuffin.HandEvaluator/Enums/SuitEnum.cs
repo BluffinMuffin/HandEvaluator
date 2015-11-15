@@ -1,5 +1,8 @@
-﻿namespace BluffinMuffin.HandEvaluator.Enums
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace BluffinMuffin.HandEvaluator.Enums
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public enum SuitEnum
     {
         Clubs,

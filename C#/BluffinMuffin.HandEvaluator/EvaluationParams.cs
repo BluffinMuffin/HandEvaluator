@@ -8,7 +8,7 @@ namespace BluffinMuffin.HandEvaluator
 {
     public class EvaluationParams
     {
-        public bool UseSuitRanking { get; set; } = false;
+        public bool UseSuitRanking { get; set; }
         public bool UseAceForLowStraight { get; set; } = true;
 
         public NominalValueEnum[] UsedCardValues { get; set; } = { Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace };

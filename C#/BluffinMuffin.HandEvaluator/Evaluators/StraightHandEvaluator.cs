@@ -23,10 +23,10 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
 
         public static PlayingCard[] GetBestStraight(PlayingCard[] distinctCards, EvaluationParams parms)
         {
-            return GetPotentialHighStraights(distinctCards, parms).Concat(GetPotentialLowStraights(distinctCards, parms)).OrderByDescending(x => x[0]).FirstOrDefault();
+            return GetPotentialHighStraights(distinctCards).Concat(GetPotentialLowStraights(distinctCards, parms)).OrderByDescending(x => x[0]).FirstOrDefault();
         }
 
-        public static IEnumerable<PlayingCard[]> GetPotentialHighStraights(PlayingCard[] distinctCards, EvaluationParams parms)
+        private static IEnumerable<PlayingCard[]> GetPotentialHighStraights(PlayingCard[] distinctCards)
         {
             if (distinctCards.Length < 5)
                 yield break;
@@ -36,7 +36,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
                     yield return distinctCards.Skip(i).Take(5).ToArray();
         }
 
-        public static IEnumerable<PlayingCard[]> GetPotentialLowStraights(PlayingCard[] distinctCards, EvaluationParams parms)
+        private static IEnumerable<PlayingCard[]> GetPotentialLowStraights(PlayingCard[] distinctCards, EvaluationParams parms)
         {
             if (!parms.UseAceForLowStraight || parms.UsedCardValues.Length < 4)
                 yield break;

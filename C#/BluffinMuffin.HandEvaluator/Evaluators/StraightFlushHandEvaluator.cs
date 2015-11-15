@@ -12,7 +12,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
         {
             var res = new HandEvaluationResult(this, parms);
 
-            foreach (var straight in FlushHandEvaluator.GetPotentialFlushes(cards,parms)
+            foreach (var straight in FlushHandEvaluator.GetPotentialFlushes(cards)
                 .Select(flush => flush.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x).ToArray())
                 .Select(distinctCards => distinctCards.GroupBy(x => x.Value).Select(g => g.First()).OrderByDescending(x => x).ToArray())
                 .TakeWhile(distinctCards => distinctCards.Length >= 5)

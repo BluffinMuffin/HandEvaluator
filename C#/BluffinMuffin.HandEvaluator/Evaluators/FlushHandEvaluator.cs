@@ -13,7 +13,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
         {
             var res = new HandEvaluationResult(this, parms);
 
-            var flush = GetPotentialFlushes(cards,parms).FirstOrDefault();
+            var flush = GetPotentialFlushes(cards).FirstOrDefault();
 
             if (flush == null)
                 return null;
@@ -24,7 +24,7 @@ namespace BluffinMuffin.HandEvaluator.Evaluators
             return res;
         }
 
-        public static IEnumerable<PlayingCard[]> GetPotentialFlushes(PlayingCard[] cards, EvaluationParams parms)
+        public static IEnumerable<PlayingCard[]> GetPotentialFlushes(PlayingCard[] cards)
         {
             if (cards.Length >= 5)
             {

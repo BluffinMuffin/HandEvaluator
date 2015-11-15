@@ -11,7 +11,7 @@ namespace BluffinMuffin.HandEvaluator
         public static readonly string[] SUITS = { "C", "D", "H", "S" };
 
         public NominalValueEnum Value { get; }
-        public SuitEnum Suit { get; set; }
+        public SuitEnum Suit { get; }
         private EvaluationParams Parms { get; }
 
         public PlayingCard(NominalValueEnum value, SuitEnum suit, EvaluationParams parms = null)
@@ -47,7 +47,7 @@ namespace BluffinMuffin.HandEvaluator
             return $"{VALUES[(int) Value]}{SUITS[(int) Suit]}";
         }
 
-        public virtual int CompareTo(PlayingCard other)
+        public int CompareTo(PlayingCard other)
         {
             int valueCompare = ((int) Value).CompareTo((int) other.Value);
             return valueCompare == 0 && Parms.UseSuitRanking ? ((int) Suit).CompareTo((int) other.Suit) : valueCompare;

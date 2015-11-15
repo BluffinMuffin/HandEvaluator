@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using BluffinMuffin.HandEvaluator.Enums;
 using BluffinMuffin.HandEvaluator.Evaluators;
 
 namespace BluffinMuffin.HandEvaluator
 {
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class HandEvaluationResult : IComparable<HandEvaluationResult>
     {
         public HandEnum Hand { get; }
+
         public EvaluationParams Parms { get; }
 
         public List<PlayingCard[]> Cards { get; }

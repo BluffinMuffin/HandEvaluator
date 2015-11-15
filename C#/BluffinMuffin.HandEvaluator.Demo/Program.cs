@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BluffinMuffin.HandEvaluator.Enums;
 using BluffinMuffin.HandEvaluator.Selectors;
 using static System.String;
 
 namespace BluffinMuffin.HandEvaluator.Demo
 {
-    internal class Program
+    internal static class Program
     {
         private class Player : IStringCardsHolder
         {
