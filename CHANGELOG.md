@@ -2,6 +2,11 @@
 
 ## 3.1.*
 
+### [3.1.2](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.1.2) *(2015-11-15)*
+ * EvaluatedCardHolder now use generics to simplify
+ * EvaluatedCardHoldersExtensions.RankOf is now available
+ * HandEvaluators.Evaluate with CardHolders signature has changed for easier implementation
+
 ### [3.1.1](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.1.1) *(2015-10-04)*
  * The DLL is now portable
   * .NET Framework 4
