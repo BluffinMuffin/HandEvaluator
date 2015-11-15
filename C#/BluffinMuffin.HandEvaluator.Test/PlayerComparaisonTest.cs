@@ -18,14 +18,6 @@ namespace BluffinMuffin.HandEvaluator.Test
         }
     }
 
-    internal static class ResultExtensions
-    {
-        public static int RankOf(this IEnumerable<IGrouping<int, EvaluatedCardHolder>> result, Player p)
-        {
-            return result.SelectMany(x => x).First(x => x.CardsHolder == p).Rank;
-        }
-    }
-
     [TestClass]
     public class PlayerComparaisonTest
     {
@@ -38,7 +30,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("Kd", "5d", "8d", "3c", "7s", "10h", "2s");
             var smallest = new Player("Qs", "5c", "8d", "3c", "7s", "10h", "2s");
 
-            var result = HandEvaluators.Evaluate( new IStringCardsHolder[]{ biggest, normal1, normal2, smallest }).ToArray();
+            var result = HandEvaluators.Evaluate( new []{ biggest, normal1, normal2, smallest }).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(normal1));
@@ -55,7 +47,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8c", "5d", "8d", "3c", "7s", "10h", "2s");
             var smallest = new Player("3s", "5h", "8d", "3c", "7s", "10h", "2s");
 
-            var result = HandEvaluators.Evaluate(new IStringCardsHolder[] { biggest, big, normal1, normal2, smallest }).ToArray();
+            var result = HandEvaluators.Evaluate(new [] { biggest, big, normal1, normal2, smallest }).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -73,7 +65,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8s", "3h", "8d", "3c", "7s", "10h", "2s");
             var smallest = new Player("7h", "2h", "8d", "3c", "7s", "10h", "2s");
 
-            var result = HandEvaluators.Evaluate(new IStringCardsHolder[] { biggest, big, normal1, normal2, smallest }).ToArray();
+            var result = HandEvaluators.Evaluate(new [] { biggest, big, normal1, normal2, smallest }).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -91,7 +83,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8s", "9d", "8d", "8c", "7s", "10h", "2s");
             var smallest = new Player("8s", "3h", "8d", "8c", "7s", "10h", "2s");
 
-            var result = HandEvaluators.Evaluate(new IStringCardsHolder[] { biggest, big, normal1, normal2, smallest }).ToArray();
+            var result = HandEvaluators.Evaluate(new [] { biggest, big, normal1, normal2, smallest }).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -109,7 +101,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8h", "9c", "Qh", "Jc", "10d", "5h", "2s");
             var smallest = new Player("3d", "4s", "Ah", "Jc", "10d", "5h", "2s");
 
-            var result = HandEvaluators.Evaluate(new IStringCardsHolder[] { biggest, big, normal1, normal2, smallest }).ToArray();
+            var result = HandEvaluators.Evaluate(new [] { biggest, big, normal1, normal2, smallest }).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -127,7 +119,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("Kd", "Ac", "8d", "3c", "7d", "10d", "2d");
             var smallest = new Player("Ks", "Ac", "8d", "3d", "7d", "10d", "2d");
 
-            var result = HandEvaluators.Evaluate(new IStringCardsHolder[] { biggest, big, normal1, normal2, smallest }).ToArray();
+            var result = HandEvaluators.Evaluate(new [] { biggest, big, normal1, normal2, smallest }).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -145,7 +137,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8s", "9d", "8d", "8c", "7s", "10h", "9c");
             var smallest = new Player("8s", "3h", "8d", "8c", "7s", "10h", "3s");
 
-            var result = HandEvaluators.Evaluate(new IStringCardsHolder[] { biggest, big, normal1, normal2, smallest }).ToArray();
+            var result = HandEvaluators.Evaluate(new [] { biggest, big, normal1, normal2, smallest }).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -163,7 +155,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8s", "4d", "8d", "8c", "5s", "10h", "8h");
             var smallest = new Player("7h", "3h", "7d", "7c", "7s", "10h", "3s");
 
-            var result = HandEvaluators.Evaluate(new IStringCardsHolder[] { biggest, big, normal1, normal2, smallest }).ToArray();
+            var result = HandEvaluators.Evaluate(new [] { biggest, big, normal1, normal2, smallest }).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -181,7 +173,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var normal2 = new Player("8h", "9h", "Qh", "Jh", "10h", "5h", "2s");
             var smallest = new Player("3d", "4d", "Ad", "Jc", "10d", "5d", "2d");
 
-            var result = HandEvaluators.Evaluate(new IStringCardsHolder[] { biggest, big, normal1, normal2, smallest }).ToArray();
+            var result = HandEvaluators.Evaluate(new [] { biggest, big, normal1, normal2, smallest }).ToArray();
 
             Assert.AreEqual(1, result.RankOf(biggest));
             Assert.AreEqual(2, result.RankOf(big));
@@ -220,7 +212,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             var highCard = new Player("Ks", "Ac", "8d", "3c", "7s", "10h", "2s");
             Assert.AreEqual(HandEnum.HighCard, HandEvaluators.Evaluate( highCard.PlayerCards, highCard.CommunityCards).Hand);
 
-            var result = HandEvaluators.Evaluate(new IStringCardsHolder[] { straightFlush, fourOfAKind, fullHouse, flush, straight, threeOfAKind, twoPairs, onePair, highCard}).ToArray();
+            var result = HandEvaluators.Evaluate(new [] { straightFlush, fourOfAKind, fullHouse, flush, straight, threeOfAKind, twoPairs, onePair, highCard}).ToArray();
 
             Assert.AreEqual(1, result.RankOf(straightFlush));
             Assert.AreEqual(2, result.RankOf(fourOfAKind));
@@ -232,7 +224,7 @@ namespace BluffinMuffin.HandEvaluator.Test
             Assert.AreEqual(8, result.RankOf(onePair));
             Assert.AreEqual(9, result.RankOf(highCard));
 
-            var resultFlushBeatsFullHouse = HandEvaluators.Evaluate(new IStringCardsHolder[] { straightFlush, fourOfAKind, fullHouse, flush, straight, threeOfAKind, twoPairs, onePair, highCard }, new EvaluationParams {HandRanker = new FlushBeatsFullHouseHandRanker()}).ToArray();
+            var resultFlushBeatsFullHouse = HandEvaluators.Evaluate(new [] { straightFlush, fourOfAKind, fullHouse, flush, straight, threeOfAKind, twoPairs, onePair, highCard }, new EvaluationParams {HandRanker = new FlushBeatsFullHouseHandRanker()}).ToArray();
 
             Assert.AreEqual(1, resultFlushBeatsFullHouse.RankOf(straightFlush));
             Assert.AreEqual(2, resultFlushBeatsFullHouse.RankOf(fourOfAKind));
