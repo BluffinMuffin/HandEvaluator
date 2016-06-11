@@ -3,12 +3,40 @@
 BluffinMuffin HandEvaluator is a .Net PokerHand Evaluator that supports [standard list of poker hands](https://en.wikipedia.org/wiki/List_of_poker_hands). This project aims for simplicity of code, simplicity of use and extensibility. If what you are looking for is execution speed, I recommend looking at [this project](http://www.codeproject.com/Articles/12279/Fast-Texas-Holdem-Hand-Evaluation-and-Analysis). But, for most implementations, this library will be fast enough!
 
 The project will be released using [Semantic Versioning](http://semver.org) and developped using [Vincent Driessen's Git Model](http://nvie.com/posts/a-successful-git-branching-model/).
+
+###Current Version: 3.1.2 *(2015-11-15)*
+<table align="center" width="100%">
+    <tbody>
+        <tr>
+            <td rowspan=2>.Net</td>
+            <td align="center">
+            <a href="https://www.nuget.org/packages/BluffinMuffin.HandEvaluator/" target="_blank">
+            BluffinMuffin.HandEvaluator <br />
+            <img src="https://raw.githubusercontent.com/NuGet/Home/master/resources/nuget.png" alt="NuGet" width=150 />
+            </a>
+            </td>
+            <td align="left">
+                <div class="nuget-badge">
+                    <b>PM&gt; Install-Package BluffinMuffin.HandEvaluator </b> <br />
+                    or Install via VS <a href="https://docs.nuget.org/consume/package-manager-dialog" target="_blank">Package Management</a> window.
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" colspan=2>
+                <div class="vs-package-management">
+                <a href="https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.1.2" target="_blank">Download Manually</a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
     
 ####Known Implementations
- * **[BluffinMuffin.Server 0.11.0](http://ericmas001.github.io/BluffinMuffin.Server)** *(Evaluator v3.1.0)*
+ * **[BluffinMuffin.Server 0.11.0](https://github.com/BluffinMuffin/Server)** *(Evaluator v3.1.0)*
 
 
-####Current Version: [3.1.2](https://github.com/Ericmas001/BluffinMuffin.HandEvaluator/releases/tag/v3.1.2) *(2015-11-15)*
+####Changelog
  * EvaluatedCardHolder now use generics to simplify
  * EvaluatedCardHoldersExtensions.RankOf is now available
  * HandEvaluators.Evaluate with CardHolders signature has changed for easier implementation
